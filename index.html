@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="th">
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Lion Air — Bag Care</title>
+<title>Lion Air — Luggage Care</title>
 <!-- นำเข้าฟอนต์ Mitr ทั้งหมดตามความต้องการ -->
 <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -241,17 +241,40 @@ textarea{min-height:120px;resize:vertical}
 .dashboard-status.delivered{background:#dff5ec;color:#176b52;border:1px solid #bbf7d0;cursor:default}
 
 .dashboard-delete{
-  border:1px solid #e3e3e7;background:#fff;font-size:15px;color:#888;padding:8px 10px;border-radius:10px;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;justify-content:center;
+  border:1px solid #e3e3e7;background:#fff;font-size:15px;color:#999;padding:8px 10px;border-radius:10px;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;justify-content:center;
 }
 .dashboard-delete:hover{background:#fff0f2;border-color:#ffd0d8;color:var(--red)}
 
 .dashboard-edit-btn{
-  border:1px solid #e3e3e7;background:#fff;font-size:15px;color:#888;padding:8px 10px;border-radius:10px;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;justify-content:center;
+  border:1px solid #e3e3e7;background:#fff;font-size:15px;color:#999;padding:8px 10px;border-radius:10px;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;justify-content:center;
 }
 .dashboard-edit-btn:hover{background:#fff0f2;border-color:#ffd0d8;color:var(--red)}
 .dashboard-edit-btn.active-edit{background:var(--red);border-color:var(--red);color:#fff}
 
 .dashboard-footer{margin-top:16px;color:#918681;font-size:12px}
+
+/* Custom Modal Styles */
+.custom-modal{
+  position:fixed;inset:0;background:rgba(17,19,24,.48);backdrop-filter:blur(10px);
+  display:none;align-items:center;justify-content:center;padding:24px;z-index:200;
+}
+.custom-modal.show{display:flex}
+.custom-modal-box{
+  width:min(420px,100%);background:#fff;border-radius:32px;padding:34px 28px;text-align:center;
+  box-shadow:0 30px 90px rgba(0,0,0,.22);border:1px solid #eee;animation:popModal .25s ease-out;
+}
+@keyframes popModal{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
+.custom-modal-icon{
+  width:68px;height:68px;border-radius:50%;background:#fcf6e8;display:grid;place-items:center;margin:0 auto 18px;
+}
+.custom-modal-box h3{margin:0 0 8px;font-size:22px;font-weight:700}
+.custom-modal-box p{margin:0 0 24px;color:var(--muted);font-size:14px;line-height:1.5}
+.custom-modal-actions{display:flex;gap:12px}
+.custom-modal-actions button{flex:1;padding:13px;border-radius:16px;font-family:'Mitr',sans-serif;font-weight:700;font-size:14px;cursor:pointer}
+.btn-cancel{border:1px solid #e2e2e5;background:#fff;color:var(--ink)}
+.btn-cancel:hover{background:#fafafa}
+.btn-confirm{border:0;background:var(--red);color:#fff;box-shadow:0 8px 20px rgba(215,25,63,.25)}
+.btn-confirm:hover{background:var(--red2)}
 
 body,
 button,input,select,textarea,
@@ -278,18 +301,18 @@ h1,h2,h3,h4,h5,h6,
 </head>
 <body>
 <nav class="nav">
-  <div class="brand"><div class="lion">✦</div><div>THAI LION AIR<small data-i18n="navSub">BAG CARE • HR Welfare</small></div></div>
+  <div class="brand"><div class="lion">✦</div><div>THAI LION AIR<small data-i18n="navSub">LUGGAGE CARE • HR Welfare</small></div></div>
   <div class="nav-actions">
     <button class="admin-btn" onclick="openStatus()" aria-label="Check Status">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#111318" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
       <span data-i18n="navStatus">Check Status</span>
     </button>
     <button class="admin-btn" onclick="toggleLanguage()" aria-label="Language Toggle">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#111318" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-      <span id="langLabel">TH</span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111318" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+      <span id="langLabel">EN</span>
     </button>
     <button class="admin-btn" onclick="openAdmin()" aria-label="Admin Dashboard">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#111318" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06-.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#111318" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06-.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1 z"></path></svg>
       <span>Admin</span>
     </button>
   </div>
@@ -298,10 +321,10 @@ h1,h2,h3,h4,h5,h6,
 <section class="hero">
   <div class="hero-inner">
     <div>
-      <div class="eyebrow" data-i18n="heroEyebrow">Your luggage care journey starts here.</div>
+      <div class="eyebrow" data-i18n="heroEyebrow">จุดเริ่มต้นการดูแลกระเป๋าเดินทางของคุณ</div>
       <h1 data-i18n="heroTitle">PICK.<br><span style="color:var(--red)">KA.</span><br>CREW.</h1>
-      <p data-i18n="heroDesc">Easy and fast baggage repair service for pilots and cabin crew, with interactive luggage damage marking.</p>
-      <button class="cta" onclick="document.getElementById('repair').scrollIntoView()" data-i18n="heroCta">Start Repair Request →</button>
+      <p data-i18n="heroDesc">แจ้งซ่อมกระเป๋าเดินทางสำหรับนักบินและลูกเรือได้ง่าย รวดเร็ว พร้อมระบุตำแหน่งความเสียหายบนกระเป๋าแบบ Interactive</p>
+      <button class="cta" onclick="document.getElementById('repair').scrollIntoView()" data-i18n="heroCta">เริ่มแจ้งซ่อม →</button>
     </div>
     <div class="hero-card">
       <div class="suitcase">
@@ -316,7 +339,7 @@ h1,h2,h3,h4,h5,h6,
 <section class="section" id="repair">
   <div class="section-inner">
     <div class="section-head">
-      <div><h2 style="margin:0;" data-i18n="formHeading">Start Repair Request</h2></div>
+      <div><h2 style="margin:0;" data-i18n="formHeading">เริ่มต้นการแจ้งซ่อม</h2></div>
     </div>
     <div class="form-card" id="formBox">
       <div class="grid">
@@ -324,20 +347,20 @@ h1,h2,h3,h4,h5,h6,
           <span class="icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
           </span>
-          <input id="inpEmpId" placeholder="Employee ID TLxxxxxx *"/>
+          <input id="inpEmpId" placeholder="รหัสพนักงาน TLxxxxxx *"/>
         </div>
         <div class="input-group">
           <span class="icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
           </span>
-          <input id="inpName" placeholder="Full Name *"/>
+          <input id="inpName" placeholder="ชื่อ-นามสกุล (Name) *"/>
         </div>
         <div class="input-group">
           <span class="icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
           </span>
           <select id="selDept" onchange="onDepartmentChange()">
-            <option value="" disabled selected data-i18n="optDept">Department *</option>
+            <option value="" disabled selected data-i18n="optDept">แผนก (Department) *</option>
           </select>
         </div>
         <div class="input-group">
@@ -345,25 +368,19 @@ h1,h2,h3,h4,h5,h6,
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 3H8a2 2 0 0 0-2 2v2h12V5a2 2 0 0 0-2-2z"></path></svg>
           </span>
           <select id="selPos" disabled>
-            <option value="" disabled selected data-i18n="optPos">Position *</option>
+            <option value="" disabled selected data-i18n="optPos">ตำแหน่ง (Position) *</option>
           </select>
         </div>
         <div class="input-group full">
           <span class="icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
           </span>
-          <input type="email" id="inpEmail" placeholder="Email *"/>
-        </div>
-        <div class="input-group full">
-          <span class="icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
-          </span>
-          <textarea id="inpIssue" placeholder="Issue Details *"></textarea>
+          <input type="email" id="inpEmail" placeholder="อีเมล (Email) *"/>
         </div>
       </div>
       <div class="form-actions">
-        <span style="font-size:13px;color:#777" data-i18n="formNote">Information will be used for internal repair services only.</span>
-        <button class="next" onclick="document.getElementById('damage').scrollIntoView()" data-i18n="formNext">Next →</button>
+        <span style="font-size:13px;color:#777" data-i18n="formNote">ข้อมูลจะถูกใช้สำหรับงานซ่อมภายในเท่านั้น</span>
+        <button class="next" onclick="document.getElementById('damage').scrollIntoView()" data-i18n="formNext">ถัดไป →</button>
       </div>
     </div>
   </div>
@@ -373,13 +390,13 @@ h1,h2,h3,h4,h5,h6,
   <div class="section-inner">
     <div class="section-head" style="margin-bottom:20px;">
       <div>
-        <h2 data-i18n="damageHeading">Mark the damage.</h2>
+        <h2 data-i18n="damageHeading">ทำเครื่องหมายจุดเสียหาย</h2>
       </div>
     </div>
     <div class="damage-layout">
       <div class="viewer">
         <div class="viewer-top">
-          <div class="viewer-title"><strong data-i18n="viewerTitle">Interactive 3D Baggage</strong><br><small data-i18n="viewerSub">Rotate & tap/click luggage</small></div>
+          <div class="viewer-title"><strong data-i18n="viewerTitle">Interactive 3D Baggage</strong><br><small data-i18n="viewerSub">หมุนและแตะเลือกบนกระเป๋า</small></div>
           <div class="view-buttons">
             <button class="active" onclick="setView('front',this)" data-view="front">Front</button>
             <button onclick="setView('left',this)" data-view="left">Left</button>
@@ -417,32 +434,32 @@ h1,h2,h3,h4,h5,h6,
             <div class="face bottom" id="bottomFace"><div class="markers" id="markersBottom"></div></div>
           </div>
         </div>
-        <div class="viewer-hint" id="viewerHint">● Click anywhere on the visible FRONT face to place a damage marker</div>
+        <div class="viewer-hint" id="viewerHint">● คลิกบริเวณใดก็ได้บนด้านหน้าเพื่อปักหมุดหรือเปลี่ยนตำแหน่งจุดเสียหาย</div>
         <img class="viewer-ref" src=""/>
       </div>
       <div class="damage-panel">
-        <h3 data-i18n="panelTitle">What's damaged?</h3>
-        <p data-i18n="panelSub">Select the damage type for the chosen location.</p>
-        <div class="selected" id="selectedList"><span class="chip" data-i18n="noPointSelected">No point selected yet</span></div>
+        <h3 data-i18n="panelTitle">กระเป๋าเสียหายส่วนไหน?</h3>
+        <p data-i18n="panelSub">เลือกประเภทความเสียหายของจุดที่เลือก</p>
+        <div class="selected" id="selectedList"><span class="chip" data-i18n="noPointSelected">ยังไม่ได้เลือกจุด</span></div>
         <div class="damage-grid" id="damageGrid">
-          <button class="damage-option" data-damage-key="wheel">Damaged Wheel</button>
-          <button class="damage-option" data-damage-key="trolley">Damaged Trolley Handle</button>
-          <button class="damage-option" data-damage-key="handle">Damaged Carry Handle</button>
-          <button class="damage-option" data-damage-key="zipper">Damaged Zipper</button>
-          <button class="damage-option" data-damage-key="lock">Damaged Lock</button>
-          <button class="damage-option" data-damage-key="crack">Cracked / Dented</button>
-          <button class="damage-option" data-damage-key="scratch">Scratched</button>
-          <button class="damage-option" data-damage-key="other">Other</button>
+          <button class="damage-option" data-damage-key="wheel">ล้อเสียหาย</button>
+          <button class="damage-option" data-damage-key="trolley">หูลากเสียหาย</button>
+          <button class="damage-option" data-damage-key="handle">หูจับเสียหาย</button>
+          <button class="damage-option" data-damage-key="zipper">ซิปเสียหาย</button>
+          <button class="damage-option" data-damage-key="lock">ตัวล็อกเสียหาย</button>
+          <button class="damage-option" data-damage-key="crack">แตก / บุบ</button>
+          <button class="damage-option" data-damage-key="scratch">เป็นรอย</button>
+          <button class="damage-option" data-damage-key="other">อื่น ๆ</button>
         </div>
         
         <div style="margin-top:22px;" class="input-group full">
           <span class="icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
           </span>
-          <textarea id="inpDetail" placeholder="Describe issue e.g. left wheel stuck, cannot rotate..."></textarea>
+          <textarea id="inpDetail" placeholder="อธิบายอาการ เช่น ล้อฝั่งซ้ายติด หมุนไม่ได้..."></textarea>
         </div>
 
-        <button class="save-marker" onclick="submitDemo()" data-i18n="saveMarker">Save Damage Points →</button>
+        <button class="save-marker" onclick="submitDemo()" data-i18n="saveMarker">บันทึกจุดเสียหาย →</button>
       </div>
     </div>
   </div>
@@ -452,8 +469,8 @@ h1,h2,h3,h4,h5,h6,
   <div class="section-inner">
     <div class="form-card success" id="success">
       <div class="success-icon">✓</div>
-      <h2 data-i18n="successTitle">Request sent.</h2>
-      <p data-i18n="successSub">Your repair request has been successfully received.</p>
+      <h2 data-i18n="successTitle">ส่งคำขอสำเร็จ</h2>
+      <p data-i18n="successSub">ระบบได้รับรายการแจ้งซ่อมของคุณแล้ว</p>
       <div class="code" id="successCodeDisplay">BG-000241</div>
       <p style="margin-top:22px" data-i18n="successFlow">Submitted → Inspection → Repair → Completed</p>
     </div>
@@ -466,20 +483,20 @@ h1,h2,h3,h4,h5,h6,
       <div class="admin-title">
         <div class="admin-title-icon">✓</div>
         <div>
-          <strong style="font-size:20px" data-i18n="statusModalTitle">Check Repair Status</strong>
-          <div style="font-size:12px;color:#777" data-i18n="statusModalSub">Track your repair request item</div>
+          <strong style="font-size:20px" data-i18n="statusModalTitle">เช็คสถานะการซ่อม</strong>
+          <div style="font-size:12px;color:#777" data-i18n="statusModalSub">ตรวจสอบรายการแจ้งซ่อมของคุณ</div>
         </div>
       </div>
       <button class="admin-close" onclick="closeStatus()">×</button>
     </div>
     <div class="admin-body">
       <div class="input-group" style="max-width:520px;margin:auto">
-        <input id="statusCodeInput" placeholder="Enter request ID e.g. BG-000241" style="padding-left:16px">
+        <input id="statusCodeInput" placeholder="กรอกรหัสแจ้งซ่อม เช่น BG-000241" style="padding-left:16px">
       </div>
-      <button class="save-marker" style="max-width:520px;display:block;margin:14px auto 0" onclick="checkStatus()" data-i18n="checkStatusBtn">Check Status →</button>
+      <button class="save-marker" style="max-width:520px;display:block;margin:14px auto 0" onclick="checkStatus()" data-i18n="checkStatusBtn">ตรวจสอบสถานะ →</button>
       <div id="statusResult" style="display:none;max-width:520px;margin:22px auto 0;padding:20px;border:1px solid #e7e7ea;border-radius:18px;background:#fafafa">
         <strong id="resId">BG-000241</strong>
-        <p style="margin:8px 0;color:#777" data-i18n="currentStatusLabel">Current Status</p>
+        <p style="margin:8px 0;color:#777" data-i18n="currentStatusLabel">สถานะปัจจุบัน</p>
         <span class="status" id="resStatusBadge">Repairing</span>
         <p style="margin:14px 0 0;color:#777;font-size:13px" data-i18n="successFlow">Submitted → Inspection → Repair → Completed</p>
       </div>
@@ -491,31 +508,31 @@ h1,h2,h3,h4,h5,h6,
   <div class="admin-login-box" role="dialog" aria-modal="true">
     <div class="admin-login-icon">⚙</div>
     <h2>Admin Login</h2>
-    <p data-i18n="adminLoginSub">Please enter password to access admin system</p>
-    <input id="adminPassword" class="admin-password" type="password" placeholder="Password" maxlength="20"
+    <p data-i18n="adminLoginSub">กรุณากรอกรหัสผ่านเพื่อเข้าสู่ระบบผู้ดูแล</p>
+    <input id="adminPassword" class="admin-password" type="password" placeholder="รหัสผ่าน" maxlength="20"
            onkeydown="if(event.key==='Enter') verifyAdmin()">
     <div class="admin-login-actions">
-      <button class="admin-login-cancel" onclick="closeAdminLogin()" data-i18n="cancelBtn">Cancel</button>
-      <button class="admin-login-submit" onclick="verifyAdmin()" data-i18n="loginBtn">Login →</button>
+      <button class="admin-login-cancel" onclick="closeAdminLogin()" data-i18n="cancelBtn">ยกเลิก</button>
+      <button class="admin-login-submit" onclick="verifyAdmin()" data-i18n="loginBtn">เข้าสู่ระบบ →</button>
     </div>
-    <div class="login-error" id="loginError" data-i18n="loginErrorMsg">Incorrect password. Please try again.</div>
+    <div class="login-error" id="loginError" data-i18n="loginErrorMsg">รหัสผ่านไม่ถูกต้อง กรุณาลองใหม่</div>
   </div>
 </div>
 
 <!-- ===== ADMIN DASHBOARD MODAL ===== -->
 <div class="admin-dashboard-modal" id="adminDashboard">
   <nav class="nav">
-    <div class="brand"><div class="lion">✦</div><div>THAI LION AIR<small data-i18n="navSub">BAG CARE • HR Welfare</small></div></div>
+    <div class="brand"><div class="lion">✦</div><div>THAI LION AIR<small data-i18n="navSub">LUGGAGE CARE • HR Welfare</small></div></div>
     <div class="nav-actions">
-      <button class="dashboard-btn" onclick="openDeptSettings()" style="border-color:var(--red);color:var(--red)" data-i18n="btnDeptSettings">⚙ Dept Settings</button>
-      <button class="dashboard-btn danger" onclick="logoutAdmin()" data-i18n="logoutBtn">Logout</button>
+      <button class="dashboard-btn" onclick="openDeptSettings()" style="border-color:var(--red);color:var(--red)" data-i18n="btnDeptSettings">⚙ ตั้งค่าแผนก</button>
+      <button class="dashboard-btn danger" onclick="logoutAdmin()" data-i18n="logoutBtn">ออกจากระบบ</button>
     </div>
   </nav>
 
   <div class="admin-dashboard">
     <div class="dashboard-title">
       <h1>Admin Dashboard</h1>
-      <p data-i18n="dashSub">Manage and track pilot and cabin crew baggage repair requests</p>
+      <p data-i18n="dashSub">จัดการและติดตามรายการแจ้งซ่อมกระเป๋าของนักบินและลูกเรือ</p>
     </div>
 
     <div class="dashboard-stats">
@@ -530,7 +547,7 @@ h1,h2,h3,h4,h5,h6,
         <h2 data-i18n="tableHeadTitle">ALL REPAIR REQUESTS</h2>
         <div class="dashboard-tools">
           <div id="paginationContainer" style="display:flex;gap:4px;align-items:center;"></div>
-          <input id="adminSearch" class="dashboard-search" placeholder="⌕ Search ID TLxxxxxx / Name" oninput="filterAdminRows()">
+          <input id="adminSearch" class="dashboard-search" placeholder="⌕ ค้นหารหัส TLxxxxxx / ชื่อ" oninput="filterAdminRows()">
         </div>
       </div>
 
@@ -538,14 +555,14 @@ h1,h2,h3,h4,h5,h6,
         <table class="dashboard-table">
           <thead>
             <tr>
-              <th data-i18n="thId">ID</th>
-              <th data-i18n="thName">NAME</th>
-              <th data-i18n="thEmail">EMAIL</th>
-              <th data-i18n="thDept">DEPT &amp; POSITION</th>
-              <th data-i18n="thIssue">ISSUE</th>
-              <th data-i18n="thDate">DATE</th>
-              <th data-i18n="thStatus">STATUS</th>
-              <th data-i18n="thAction">ACTION</th>
+              <th data-i18n="thId">รหัส</th>
+              <th data-i18n="thName">ชื่อ</th>
+              <th data-i18n="thEmail">อีเมล</th>
+              <th data-i18n="thDept">แผนกและตำแหน่ง</th>
+              <th data-i18n="thIssue">ปัญหา</th>
+              <th data-i18n="thDate">วันที่</th>
+              <th data-i18n="thStatus">สถานะ</th>
+              <th data-i18n="thAction">จัดการ</th>
             </tr>
           </thead>
           <tbody id="adminTableBody">
@@ -561,16 +578,16 @@ h1,h2,h3,h4,h5,h6,
 <!-- ===== DEPARTMENT SETTINGS PAGE MODAL ===== -->
 <div class="admin-dashboard-modal" id="deptModal">
   <nav class="nav">
-    <div class="brand"><div class="lion">✦</div><div>THAI LION AIR<small>BAG CARE • HR Welfare</small></div></div>
+    <div class="brand"><div class="lion">✦</div><div>THAI LION AIR<small>LUGGAGE CARE • HR Welfare</small></div></div>
     <div class="nav-actions">
-      <button class="dashboard-btn" onclick="closeDeptSettings()" style="border-color:var(--red);color:var(--red)" data-i18n="btnBackDash">← Back to Dashboard</button>
+      <button class="dashboard-btn" onclick="closeDeptSettings()" style="border-color:var(--red);color:var(--red)" data-i18n="btnBackDash">← กลับหน้าแดชบอร์ด</button>
     </div>
   </nav>
 
   <div class="admin-dashboard">
     <div class="dashboard-title">
-      <h1 style="color:var(--red);" data-i18n="deptSettingsTitle">Departments & Positions</h1>
-      <p data-i18n="deptSettingsSub">Manage departments and their available positions</p>
+      <h1 style="color:var(--red);" data-i18n="deptSettingsTitle">แผนกและตำแหน่ง</h1>
+      <p data-i18n="deptSettingsSub">จัดการแผนก และกำหนดตำแหน่งที่มีในแต่ละแผนก (ลากวางเพื่อสลับลำดับ)</p>
     </div>
 
     <div class="dashboard-panel">
@@ -580,15 +597,30 @@ h1,h2,h3,h4,h5,h6,
 
       <div style="display:flex;gap:12px;align-items:center;background:#fafafa;padding:16px;border:1px solid #eadfd9;border-radius:20px;">
         <input id="newDeptInput" placeholder="Add new department name..." style="flex:1;border:1px solid #dedee3;background:#fff;border-radius:16px;padding:14px 16px;outline:none;font-family:'Mitr',sans-serif;"/>
-        <button onclick="addNewDept()" style="border:0;background:var(--ink);color:#fff;border-radius:16px;padding:14px 26px;font-weight:700;font-family:'Mitr',sans-serif;white-space:nowrap;" data-i18n="btnAddDept">+ Add Department</button>
+        <button onclick="addNewDept()" style="border:0;background:var(--ink);color:#fff;border-radius:16px;padding:14px 26px;font-weight:700;font-family:'Mitr',sans-serif;white-space:nowrap;" data-i18n="btnAddDept">+ เพิ่มแผนก</button>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CUSTOM CONFIRMATION MODAL ===== -->
+<div class="custom-modal" id="customModal">
+  <div class="custom-modal-box">
+    <div class="custom-modal-icon">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b7791f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+    </div>
+    <h3 id="modalTitle">ยืนยันการลบ</h3>
+    <p id="modalDesc">คุณแน่ใจหรือไม่ที่จะลบรายการนี้?</p>
+    <div class="custom-modal-actions">
+      <button class="btn-cancel" id="modalCancelBtn" onclick="closeCustomModal()">ยกเลิก</button>
+      <button class="btn-confirm" id="modalConfirmBtn">ยืนยัน</button>
     </div>
   </div>
 </div>
 
 <footer class="footer">
   <div class="footer-inner">
-    <div><strong>THAI LION AIR</strong><br><small data-i18n="footerSub">BAG CARE • HR Welfare</small></div>
+    <div><strong>THAI LION AIR</strong><br><small data-i18n="footerSub">LUGGAGE CARE • HR Welfare</small></div>
     <small data-i18n="footerCopy">Internal Service Prototype • 2026</small>
   </div>
 </footer>
@@ -598,7 +630,7 @@ const API_URL = "";
 
 const translations = {
   en: {
-    navSub: "BAG CARE • HR Welfare",
+    navSub: "LUGGAGE CARE • HR Welfare",
     navStatus: "Check Status",
     heroEyebrow: "Your luggage care journey starts here.",
     heroTitle: 'PICK.<br><span style="color:var(--red)">KA.</span><br>CREW.',
@@ -610,7 +642,6 @@ const translations = {
     optDept: "Department *",
     optPos: "Position *",
     inpEmail: "Email *",
-    inpIssue: "Issue Details *",
     formNote: "Information will be used for internal repair services only.",
     formNext: "Next →",
     damageHeading: "Mark the damage.",
@@ -646,7 +677,7 @@ const translations = {
     btnDeptSettings: "⚙ Dept Settings",
     btnBackDash: "← Back to Dashboard",
     deptSettingsTitle: "Departments & Positions",
-    deptSettingsSub: "Manage departments and their available positions",
+    deptSettingsSub: "Manage departments and their available positions (Drag & Drop to reorder)",
     btnAddDept: "+ Add Department",
     dashSub: "Manage and track pilot and cabin crew baggage repair requests",
     statTotal: "Total Requests",
@@ -665,11 +696,11 @@ const translations = {
     thStatus: "STATUS",
     thAction: "ACTION",
     dashFooter: "Internal Service • 2026 • Bag Care Administration",
-    footerSub: "BAG CARE • HR Welfare",
+    footerSub: "LUGGAGE CARE • HR Welfare",
     footerCopy: "Internal Service Prototype • 2026"
   },
   th: {
-    navSub: "BAG CARE • HR Welfare",
+    navSub: "LUGGAGE CARE • HR Welfare",
     navStatus: "เช็คสถานะ",
     heroEyebrow: "จุดเริ่มต้นการดูแลกระเป๋าเดินทางของคุณ",
     heroTitle: 'PICK.<br><span style="color:var(--red)">KA.</span><br>CREW.',
@@ -681,7 +712,6 @@ const translations = {
     optDept: "แผนก (Department) *",
     optPos: "ตำแหน่ง (Position) *",
     inpEmail: "อีเมล (Email) *",
-    inpIssue: "รายละเอียดปัญหา (Issue) *",
     formNote: "ข้อมูลจะถูกใช้สำหรับงานซ่อมภายในเท่านั้น",
     formNext: "ถัดไป →",
     damageHeading: "ทำเครื่องหมายจุดเสียหาย",
@@ -717,7 +747,7 @@ const translations = {
     btnDeptSettings: "⚙ ตั้งค่าแผนก",
     btnBackDash: "← กลับหน้าแดชบอร์ด",
     deptSettingsTitle: "แผนกและตำแหน่ง",
-    deptSettingsSub: "จัดการแผนก และกำหนดตำแหน่งที่มีในแต่ละแผนก",
+    deptSettingsSub: "จัดการแผนก และกำหนดตำแหน่งที่มีในแต่ละแผนก (ลากวางเพื่อสลับลำดับ)",
     btnAddDept: "+ เพิ่มแผนก",
     dashSub: "จัดการและติดตามรายการแจ้งซ่อมกระเป๋าของนักบินและลูกเรือ",
     statTotal: "Total Requests",
@@ -736,12 +766,12 @@ const translations = {
     thStatus: "สถานะ",
     thAction: "จัดการ",
     dashFooter: "Internal Service • 2026 • Bag Care Administration",
-    footerSub: "BAG CARE • HR Welfare",
+    footerSub: "LUGGAGE CARE • HR Welfare",
     footerCopy: "Internal Service Prototype • 2026"
   }
 };
 
-let currentLang = 'en';
+let currentLang = 'th';
 
 // ===== DEPARTMENT & POSITION DATA =====
 let departmentsData = [
@@ -814,7 +844,6 @@ function setLanguage(lang) {
   document.getElementById('inpEmpId').placeholder = translations[lang].inpEmpId;
   document.getElementById('inpName').placeholder = translations[lang].inpName;
   document.getElementById('inpEmail').placeholder = translations[lang].inpEmail;
-  document.getElementById('inpIssue').placeholder = translations[lang].inpIssue;
   document.getElementById('statusCodeInput').placeholder = translations[lang].statusCodeInput;
   document.getElementById('adminPassword').placeholder = lang === 'en' ? 'Password' : 'รหัสผ่าน';
   document.getElementById('adminSearch').placeholder = lang === 'en' ? '⌕ Search ID TLxxxxxx / Name' : '⌕ ค้นหารหัส TLxxxxxx / ชื่อ';
@@ -1000,7 +1029,7 @@ function submitDemo() {
   const email = document.getElementById('inpEmail').value.trim() || 'crew@lionair.com';
   const dept = document.getElementById('selDept').value || 'Cabin Crew';
   const pos = document.getElementById('selPos').value || 'Flight Attendant';
-  const issue = document.getElementById('inpIssue').value.trim() || activePoint.damageKey;
+  const issue = activePoint.damageKey;
 
   const newReq = {
     id: empId,
@@ -1165,8 +1194,8 @@ function renderAdminTable() {
       <td>${r.date}</td>
       <td>${statusBadgeHTML}</td>
       <td>
-        <button class="dashboard-delete" onclick="deleteRequest('${r.id}')" title="Delete" style="border:0;background:transparent;font-size:16px;color:#888;padding:6px 10px;border-radius:10px;cursor:pointer;transition:.2s;" onmouseover="this.style.color='#d7193f';this.style.background='#fff0f2'" onmouseout="this.style.color='#888';this.style.background='transparent'">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+        <button class="dashboard-delete" onclick="confirmDeleteRequest('${r.id}')" title="Delete">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
         </button>
       </td>
     `;
@@ -1200,12 +1229,29 @@ function cycleStatus(id) {
   renderAdminTable();
 }
 
-function deleteRequest(id) {
-  if (confirm(currentLang === 'en' ? 'Do you want to delete this record?' : 'ต้องการลบรายการนี้หรือไม่?')) {
+// ===== CUSTOM MODAL CONTROLS =====
+function showCustomModal(title, desc, confirmCallback) {
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalDesc').textContent = desc;
+  const confirmBtn = document.getElementById('modalConfirmBtn');
+  const newBtn = confirmBtn.cloneNode(true);
+  confirmBtn.parentNode.replaceChild(newBtn, confirmBtn);
+  newBtn.addEventListener('click', () => {
+    closeCustomModal();
+    confirmCallback();
+  });
+  document.getElementById('customModal').classList.add('show');
+}
+function closeCustomModal() {
+  document.getElementById('customModal').classList.remove('show');
+}
+
+function confirmDeleteRequest(id) {
+  showCustomModal('ยืนยันการลบรายการ', `คุณแน่ใจหรือไม่ที่จะลบรายการแจ้งซ่อมรหัส ${id}?`, () => {
     requestsData = requestsData.filter(r => r.id !== id);
     updateDashboardStats();
     renderAdminTable();
-  }
+  });
 }
 
 function updateDashboardStats() {
@@ -1264,9 +1310,9 @@ function renderDeptSettings() {
           <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;">
             ${tagsHTML || '<span style="color:#777;font-size:13px;">ยังไม่มีตำแหน่งในแผนกนี้ (ลากวางเพื่อสลับลำดับได้)</span>'}
           </div>
-          <div style="display:flex;gap:8px;align-items:center;background:#fff;padding:10px 14px;border:1px solid #dedee3;border-radius:16px;">
-            <input id="newPosInput_${dIndex}" placeholder="พิมพ์ชื่อตำแหน่งใหม่ แล้วกดเพิ่ม" style="flex:1;border:0;outline:none;font-family:'Mitr',sans-serif;font-size:13px;background:transparent;" onkeydown="if(event.key==='Enter') addPosition(${dIndex})"/>
-            <button onclick="addPosition(${dIndex})" style="border:0;background:var(--ink);color:#fff;border-radius:12px;padding:8px 18px;font-weight:700;font-family:'Mitr',sans-serif;font-size:13px;white-space:nowrap;">+ เพิ่มตำแหน่ง</button>
+          <div style="display:flex;gap:12px;align-items:center;background:#fff;padding:16px;border:1px solid #dedee3;border-radius:20px;">
+            <input id="newPosInput_${dIndex}" placeholder="พิมพ์ชื่อตำแหน่งใหม่ แล้วกดเพิ่ม" style="flex:1;border:0;outline:none;font-family:'Mitr',sans-serif;font-size:14px;background:transparent;" onkeydown="if(event.key==='Enter') addPosition(${dIndex})"/>
+            <button onclick="addPosition(${dIndex})" style="border:0;background:var(--ink);color:#fff;border-radius:16px;padding:14px 26px;font-weight:700;font-family:'Mitr',sans-serif;font-size:14px;white-space:nowrap;">+ เพิ่มตำแหน่ง</button>
           </div>
         </div>
       `;
@@ -1282,7 +1328,7 @@ function renderDeptSettings() {
           <button class="dashboard-edit-btn ${isExpanded ? 'active-edit' : ''}" onclick="toggleExpandDept(${dIndex})" title="Edit Positions">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
           </button>
-          <button class="dashboard-delete" onclick="deleteDept(${dIndex})" title="Delete Department">
+          <button class="dashboard-delete" onclick="confirmDeleteDept(${dIndex})" title="Delete Department">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
           </button>
         </div>
@@ -1311,12 +1357,13 @@ function addNewDept() {
   renderDeptSettings();
 }
 
-function deleteDept(dIndex) {
-  if(confirm('ต้องการลบแผนกนี้ใช่หรือไม่?')) {
+function confirmDeleteDept(dIndex) {
+  const deptName = departmentsData[dIndex].name;
+  showCustomModal('ยืนยันการลบแผนก', `คุณแน่ใจหรือไม่ที่จะลบแผนก "${deptName}"? ตำแหน่งทั้งหมดในแผนกจะถูกลบไปด้วย`, () => {
     departmentsData.splice(dIndex, 1);
     if(expandedDeptIndex === dIndex) expandedDeptIndex = null;
     renderDeptSettings();
-  }
+  });
 }
 
 function addPosition(dIndex) {
@@ -1358,7 +1405,7 @@ document.addEventListener('keydown', e => {
 });
 
 window.onload = function() {
-  setLanguage('en');
+  setLanguage('th');
   updateDashboardStats();
   renderAdminTable();
   document.getElementById('statCard-all').classList.add('active-filter');
