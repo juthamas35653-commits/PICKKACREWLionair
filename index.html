@@ -185,24 +185,18 @@ textarea{min-height:120px;resize:vertical}
   display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:28px;
 }
 .dashboard-stat{
-  min-height:108px;background:#fff;border:1px solid #eadfd9;border-top:4px solid var(--red);
+  min-height:108px;background:#fff;border:1px solid #eadfd9;border-top:4px solid transparent;
   border-radius:22px;padding:18px 22px;box-shadow:0 12px 32px rgba(80,40,20,.07);
   cursor:pointer;transition:.2s;
 }
 .dashboard-stat:hover{transform:translateY(-2px);box-shadow:0 15px 40px rgba(215,25,63,.12)}
 .dashboard-stat.active-filter{
-  border-color:var(--red);background:#fff5f6;box-shadow:0 10px 30px rgba(215,25,63,.18);
-}
-.dashboard-stat.primary{
-  background:linear-gradient(145deg,#d7193f,#b70829);color:#fff;border-color:#9f071f;
+  background:linear-gradient(145deg,#d7193f,#b70829);color:#fff;border-color:#9f071f;border-top:4px solid #9f071f;
   box-shadow:0 15px 35px rgba(215,25,63,.24);
 }
-.dashboard-stat.primary.active-filter{
-  background:linear-gradient(145deg,#b70829,#9f071f);
-}
+.dashboard-stat.active-filter .label{opacity:.95}
 .dashboard-stat .num{font-size:34px;font-weight:800;line-height:1;margin-bottom:8px}
 .dashboard-stat .label{font-size:13px;font-weight:700;opacity:.72}
-.dashboard-stat.primary .label{opacity:.95}
 .dashboard-panel{
   background:#fff;border:1px solid #eadfd9;border-radius:28px;padding:25px 26px;
   box-shadow:0 15px 45px rgba(80,40,20,.06);
@@ -241,13 +235,22 @@ textarea{min-height:120px;resize:vertical}
   display:inline-flex;align-items:center;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:800;cursor:pointer;user-select:none;transition:.15s;
 }
 .dashboard-status.repair{background:#fff0bf;color:#d27b00;border:1px solid #ffe69c}
+.dashboard-status.repair:hover{filter:brightness(0.95)}
 .dashboard-status.repaired{background:#e0f2fe;color:#0369a1;border:1px solid #bae6fd}
+.dashboard-status.repaired:hover{filter:brightness(0.95)}
 .dashboard-status.delivered{background:#dff5ec;color:#176b52;border:1px solid #bbf7d0;cursor:default}
 
 .dashboard-delete{
-  border:0;background:transparent;font-size:18px;color:#756b66;padding:6px 10px;border-radius:10px;cursor:pointer;transition:.2s;
+  border:1px solid #e3e3e7;background:#fff;font-size:15px;color:#888;padding:8px 10px;border-radius:10px;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;justify-content:center;
 }
-.dashboard-delete:hover{background:#fff0f2;color:var(--red)}
+.dashboard-delete:hover{background:#fff0f2;border-color:#ffd0d8;color:var(--red)}
+
+.dashboard-edit-btn{
+  border:1px solid #e3e3e7;background:#fff;font-size:15px;color:#888;padding:8px 10px;border-radius:10px;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;justify-content:center;
+}
+.dashboard-edit-btn:hover{background:#fff0f2;border-color:#ffd0d8;color:var(--red)}
+.dashboard-edit-btn.active-edit{background:var(--red);border-color:var(--red);color:#fff}
+
 .dashboard-footer{margin-top:16px;color:#918681;font-size:12px}
 
 body,
@@ -275,7 +278,7 @@ h1,h2,h3,h4,h5,h6,
 </head>
 <body>
 <nav class="nav">
-  <div class="brand"><div class="lion">✦</div><div>THAI LION AIR<small data-i18n="navSub">HR Welfare</small></div></div>
+  <div class="brand"><div class="lion">✦</div><div>THAI LION AIR<small data-i18n="navSub">BAG CARE • HR Welfare</small></div></div>
   <div class="nav-actions">
     <button class="admin-btn" onclick="openStatus()" aria-label="Check Status">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#111318" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -372,7 +375,6 @@ h1,h2,h3,h4,h5,h6,
       <div>
         <h2 data-i18n="damageHeading">Mark the damage.</h2>
       </div>
-      <p data-i18n="damageSub">Tap or click on the baggage to place damage point, drag to rotate freely or select view angles above.</p>
     </div>
     <div class="damage-layout">
       <div class="viewer">
@@ -503,10 +505,9 @@ h1,h2,h3,h4,h5,h6,
 <!-- ===== ADMIN DASHBOARD MODAL ===== -->
 <div class="admin-dashboard-modal" id="adminDashboard">
   <nav class="nav">
-    <div class="brand"><div class="lion">✦</div><div>THAI LION AIR<small data-i18n="navSub">HR Welfare</small></div></div>
+    <div class="brand"><div class="lion">✦</div><div>THAI LION AIR<small data-i18n="navSub">BAG CARE • HR Welfare</small></div></div>
     <div class="nav-actions">
       <button class="dashboard-btn" onclick="openDeptSettings()" style="border-color:var(--red);color:var(--red)" data-i18n="btnDeptSettings">⚙ Dept Settings</button>
-      <button class="dashboard-btn" onclick="refreshDashboard()" data-i18n="refreshBtn">↻ Refresh</button>
       <button class="dashboard-btn danger" onclick="logoutAdmin()" data-i18n="logoutBtn">Logout</button>
     </div>
   </nav>
@@ -518,7 +519,7 @@ h1,h2,h3,h4,h5,h6,
     </div>
 
     <div class="dashboard-stats">
-      <div class="dashboard-stat primary" id="statCard-all" onclick="filterByStatus('all')"><div class="num" id="statNum-all">7</div><div class="label" data-i18n="statTotal">Total Requests</div></div>
+      <div class="dashboard-stat" id="statCard-all" onclick="filterByStatus('all')"><div class="num" id="statNum-all">7</div><div class="label" data-i18n="statTotal">Total Requests</div></div>
       <div class="dashboard-stat" id="statCard-repair" onclick="filterByStatus('repair')"><div class="num" id="statNum-repair">5</div><div class="label" data-i18n="statRepairing">Repairing</div></div>
       <div class="dashboard-stat" id="statCard-repaired" onclick="filterByStatus('repaired')"><div class="num" id="statNum-repaired">0</div><div class="label" data-i18n="statRepaired">Repaired</div></div>
       <div class="dashboard-stat" id="statCard-delivered" onclick="filterByStatus('delivered')"><div class="num" id="statNum-delivered">2</div><div class="label" data-i18n="statDelivered">Delivered to Crew</div></div>
@@ -528,10 +529,7 @@ h1,h2,h3,h4,h5,h6,
       <div class="dashboard-panel-head">
         <h2 data-i18n="tableHeadTitle">ALL REPAIR REQUESTS</h2>
         <div class="dashboard-tools">
-          <button class="page-btn" data-i18n="prevBtn">Prev</button>
-          <button class="page-btn active">1</button>
-          <button class="page-btn">2</button>
-          <button class="page-btn" data-i18n="nextBtn">Next</button>
+          <div id="paginationContainer" style="display:flex;gap:4px;align-items:center;"></div>
           <input id="adminSearch" class="dashboard-search" placeholder="⌕ Search ID TLxxxxxx / Name" oninput="filterAdminRows()">
         </div>
       </div>
@@ -563,7 +561,7 @@ h1,h2,h3,h4,h5,h6,
 <!-- ===== DEPARTMENT SETTINGS PAGE MODAL ===== -->
 <div class="admin-dashboard-modal" id="deptModal">
   <nav class="nav">
-    <div class="brand"><div class="lion">✦</div><div>THAI LION AIR<small>HR Welfare</small></div></div>
+    <div class="brand"><div class="lion">✦</div><div>THAI LION AIR<small>BAG CARE • HR Welfare</small></div></div>
     <div class="nav-actions">
       <button class="dashboard-btn" onclick="closeDeptSettings()" style="border-color:var(--red);color:var(--red)" data-i18n="btnBackDash">← Back to Dashboard</button>
     </div>
@@ -572,7 +570,7 @@ h1,h2,h3,h4,h5,h6,
   <div class="admin-dashboard">
     <div class="dashboard-title">
       <h1 style="color:var(--red);" data-i18n="deptSettingsTitle">Departments & Positions</h1>
-      <p data-i18n="deptSettingsSub">Manage departments and their available positions (Drag & Drop to reorder)</p>
+      <p data-i18n="deptSettingsSub">Manage departments and their available positions</p>
     </div>
 
     <div class="dashboard-panel">
@@ -590,15 +588,17 @@ h1,h2,h3,h4,h5,h6,
 
 <footer class="footer">
   <div class="footer-inner">
-    <div><strong>THAI LION AIR</strong><br><small data-i18n="footerSub">HR Welfare</small></div>
+    <div><strong>THAI LION AIR</strong><br><small data-i18n="footerSub">BAG CARE • HR Welfare</small></div>
     <small data-i18n="footerCopy">Internal Service Prototype • 2026</small>
   </div>
 </footer>
 
 <script>
+const API_URL = "";
+
 const translations = {
   en: {
-    navSub: "HR Welfare",
+    navSub: "BAG CARE • HR Welfare",
     navStatus: "Check Status",
     heroEyebrow: "Your luggage care journey starts here.",
     heroTitle: 'PICK.<br><span style="color:var(--red)">KA.</span><br>CREW.',
@@ -614,7 +614,6 @@ const translations = {
     formNote: "Information will be used for internal repair services only.",
     formNext: "Next →",
     damageHeading: "Mark the damage.",
-    damageSub: "Tap or click on the baggage to place damage point, drag to rotate freely or select view angles above.",
     viewerTitle: "Interactive 3D Baggage",
     viewerSub: "Rotate & tap/click luggage",
     panelTitle: "What's damaged?",
@@ -643,12 +642,11 @@ const translations = {
     cancelBtn: "Cancel",
     loginBtn: "Login →",
     loginErrorMsg: "Incorrect password. Please try again.",
-    refreshBtn: "↻ Refresh",
     logoutBtn: "Logout",
     btnDeptSettings: "⚙ Dept Settings",
     btnBackDash: "← Back to Dashboard",
     deptSettingsTitle: "Departments & Positions",
-    deptSettingsSub: "Manage departments and their available positions (Drag & Drop to reorder)",
+    deptSettingsSub: "Manage departments and their available positions",
     btnAddDept: "+ Add Department",
     dashSub: "Manage and track pilot and cabin crew baggage repair requests",
     statTotal: "Total Requests",
@@ -667,11 +665,11 @@ const translations = {
     thStatus: "STATUS",
     thAction: "ACTION",
     dashFooter: "Internal Service • 2026 • Bag Care Administration",
-    footerSub: "HR Welfare",
+    footerSub: "BAG CARE • HR Welfare",
     footerCopy: "Internal Service Prototype • 2026"
   },
   th: {
-    navSub: "HR Welfare",
+    navSub: "BAG CARE • HR Welfare",
     navStatus: "เช็คสถานะ",
     heroEyebrow: "จุดเริ่มต้นการดูแลกระเป๋าเดินทางของคุณ",
     heroTitle: 'PICK.<br><span style="color:var(--red)">KA.</span><br>CREW.',
@@ -687,7 +685,6 @@ const translations = {
     formNote: "ข้อมูลจะถูกใช้สำหรับงานซ่อมภายในเท่านั้น",
     formNext: "ถัดไป →",
     damageHeading: "ทำเครื่องหมายจุดเสียหาย",
-    damageSub: "คลิกหรือแตะบนกระเป๋าเพื่อปักหมุดจุดเสียหาย ลากเพื่อหมุนกระเป๋าดูรอบด้าน หรือเลือกมุมมองด้านบน",
     viewerTitle: "Interactive 3D Baggage",
     viewerSub: "หมุนและแตะเลือกบนกระเป๋า",
     panelTitle: "กระเป๋าเสียหายส่วนไหน?",
@@ -716,12 +713,11 @@ const translations = {
     cancelBtn: "ยกเลิก",
     loginBtn: "เข้าสู่ระบบ →",
     loginErrorMsg: "รหัสผ่านไม่ถูกต้อง กรุณาลองใหม่",
-    refreshBtn: "↻ รีเฟรช",
     logoutBtn: "ออกจากระบบ",
     btnDeptSettings: "⚙ ตั้งค่าแผนก",
     btnBackDash: "← กลับหน้าแดชบอร์ด",
     deptSettingsTitle: "แผนกและตำแหน่ง",
-    deptSettingsSub: "จัดการแผนก และกำหนดตำแหน่งที่มีในแต่ละแผนก (ลากวางเพื่อสลับลำดับ)",
+    deptSettingsSub: "จัดการแผนก และกำหนดตำแหน่งที่มีในแต่ละแผนก",
     btnAddDept: "+ เพิ่มแผนก",
     dashSub: "จัดการและติดตามรายการแจ้งซ่อมกระเป๋าของนักบินและลูกเรือ",
     statTotal: "Total Requests",
@@ -740,19 +736,21 @@ const translations = {
     thStatus: "สถานะ",
     thAction: "จัดการ",
     dashFooter: "Internal Service • 2026 • Bag Care Administration",
-    footerSub: "HR Welfare",
+    footerSub: "BAG CARE • HR Welfare",
     footerCopy: "Internal Service Prototype • 2026"
   }
 };
 
 let currentLang = 'en';
 
+// ===== DEPARTMENT & POSITION DATA =====
 let departmentsData = [
   { name: 'Flight Operations (Pilot)', positions: ['Captain', 'First Officer'] },
-  { name: 'Cabin Crew', positions: ['Purser', 'Flight Attendant'] },
+  { name: 'Cabin Crew', positions: ['Purser', 'Flight Attendant', 'Senior Cabin Crew Member', 'Cabin Crew (Batch 7)', 'Cabin Crew (Batch 10)', 'Cabin Crew (Batch 11)', 'Cabin Crew (Batch 12)', 'Cabin Crew (Batch 14)', 'Cabin Crew (Batch 15)', 'Cabin Crew (Batch 16)', 'Cabin Crew (Batch 19)', 'Cabin Crew (Batch 24)', 'Cabin Crew (Batch 27)', 'Cabin Crew (Batch 28)', 'Cabin Crew (Batch 31)', 'Cabin Crew (Batch 34)', 'Cabin Crew (Batch 35)', 'Cabin Crew (Batch 36)', 'Cabin Crew (Batch 38)', 'Cabin Crew (Batch 39)', 'Cabin Crew (Batch 40)', 'Cabin Crew (Batch 43)', 'Cabin Crew (Batch 44)', 'Cabin Crew (Batch 45)', 'Cabin Crew (Batch 46)', 'Cabin Crew (Batch 47)', 'Cabin Crew (Batch 48)', 'Cabin Crew (Batch 49)', 'Cabin Crew (Batch 50)', 'Cabin Crew (Batch 51)', 'Cabin Crew (Batch 52)', 'Cabin Crew (Batch 53)', 'Cabin Crew (Batch 54)', 'Cabin Crew (Batch 55)', 'Cabin Crew (Batch 56)', 'Cabin Crew (Batch 57)', 'Cabin Crew (Batch 58)', 'Cabin Crew (Batch 59)', 'Cabin Crew (Batch 60)', 'Cabin Crew (Batch 61)', 'Cabin Crew (Batch 62)', 'Cabin Crew (Batch 63)', 'Cabin Crew (Batch 64)', 'Cabin Crew (Batch 65)', 'Cabin Crew (Batch 66)', 'Cabin Crew (Batch 67)', 'Cabin Crew (Batch 68)', 'Cabin Crew (Batch 69)', 'Cabin Crew (Batch 70)', 'Cabin Crew (Batch 71)', 'Cabin Crew (Batch 72)'] },
   { name: 'Ground Services', positions: ['Ground Supervisor', 'Customer Service Agent'] }
 ];
 
+// ===== REQUESTS DATA =====
 let requestsData = [
   { id: 'TL678900', name: 'Apichaya L', email: 'apichayalhts@gmail.com', dept: 'Cabin Crew', pos: 'Cabin Crew (Batch 60)', issue: 'Handle broken', date: '14/09/2026', status: 'repair' },
   { id: 'TL111111', name: 'Somchai P', email: 'somchai@gmail.com', dept: 'Flight Operations (Pilot)', pos: 'Captain', issue: 'Wheel stuck', date: '12/09/2026', status: 'delivered' },
@@ -765,6 +763,7 @@ let requestsData = [
 
 function updateDepartmentDropdowns() {
   const selDept = document.getElementById('selDept');
+  const selPos = document.getElementById('selPos');
   const currentVal = selDept.value;
   selDept.innerHTML = `<option value="" disabled selected data-i18n="optDept">${translations[currentLang].optDept}</option>`;
   departmentsData.forEach(dept => {
@@ -773,7 +772,12 @@ function updateDepartmentDropdowns() {
     opt.textContent = dept.name;
     selDept.appendChild(opt);
   });
-  if(currentVal) selDept.value = currentVal;
+  if(currentVal) {
+    selDept.value = currentVal;
+  } else {
+    selPos.innerHTML = `<option value="" disabled selected data-i18n="optPos">${translations[currentLang].optPos}</option>`;
+    selPos.setAttribute('disabled', 'true');
+  }
 }
 
 function onDepartmentChange() {
@@ -1010,6 +1014,16 @@ function submitDemo() {
   };
 
   requestsData.unshift(newReq);
+  
+  if (API_URL) {
+    fetch(API_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newReq)
+    }).catch(err => console.log(err));
+  }
+
   updateDashboardStats();
   renderAdminTable();
 
@@ -1079,6 +1093,7 @@ function verifyAdmin() {
     document.getElementById('adminDashboard').classList.add('show');
     document.body.style.overflow = 'hidden';
     updateDashboardStats();
+    currentPage = 1;
     renderAdminTable();
   } else {
     error.style.display = 'block';
@@ -1090,22 +1105,26 @@ function logoutAdmin() {
   document.getElementById('adminDashboard').classList.remove('show');
   document.body.style.overflow = '';
 }
-function refreshDashboard() {
-  const btn = event.currentTarget;
-  btn.textContent = currentLang === 'en' ? '✓ Updated' : '✓ อัปเดตแล้ว';
-  setTimeout(() => btn.textContent = translations[currentLang].refreshBtn, 900);
-}
 
 let currentFilterStatus = 'all';
+let currentPage = 1;
+const itemsPerPage = 10;
 
 function filterByStatus(status) {
   currentFilterStatus = status;
+  currentPage = 1;
   document.querySelectorAll('.dashboard-stat').forEach(card => card.classList.remove('active-filter'));
   document.getElementById('statCard-' + status).classList.add('active-filter');
   renderAdminTable();
 }
 
 function filterAdminRows() {
+  currentPage = 1;
+  renderAdminTable();
+}
+
+function changePage(page) {
+  currentPage = page;
   renderAdminTable();
 }
 
@@ -1116,11 +1135,17 @@ function renderAdminTable() {
 
   const filtered = requestsData.filter(r => {
     const matchesStatus = currentFilterStatus === 'all' || r.status === currentFilterStatus;
-    const matchesSearch = !q || r.id.toLowerCase().includes(q) || r.name.toLowerCase().includes(q) || r.email.toLowerCase().includes(q);
+    const matchesSearch = !q || r.id.toLowerCase().startsWith(q) || r.name.toLowerCase().startsWith(q);
     return matchesStatus && matchesSearch;
   });
 
-  filtered.forEach((r) => {
+  const totalPages = Math.ceil(filtered.length / itemsPerPage) || 1;
+  if(currentPage > totalPages) currentPage = totalPages;
+
+  const startIdx = (currentPage - 1) * itemsPerPage;
+  const paginatedItems = filtered.slice(startIdx, startIdx + itemsPerPage);
+
+  paginatedItems.forEach((r) => {
     let statusBadgeHTML = '';
     if(r.status === 'repair') {
       statusBadgeHTML = `<span class="dashboard-status repair" onclick="cycleStatus('${r.id}')">Repairing</span>`;
@@ -1139,10 +1164,28 @@ function renderAdminTable() {
       <td>${r.issue}</td>
       <td>${r.date}</td>
       <td>${statusBadgeHTML}</td>
-      <td><button class="dashboard-delete" onclick="deleteRequest('${r.id}')" title="Delete">🗑️</button></td>
+      <td>
+        <button class="dashboard-delete" onclick="deleteRequest('${r.id}')" title="Delete" style="border:0;background:transparent;font-size:16px;color:#888;padding:6px 10px;border-radius:10px;cursor:pointer;transition:.2s;" onmouseover="this.style.color='#d7193f';this.style.background='#fff0f2'" onmouseout="this.style.color='#888';this.style.background='transparent'">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+        </button>
+      </td>
     `;
     tbody.appendChild(tr);
   });
+
+  const paginationContainer = document.getElementById('paginationContainer');
+  if(filtered.length > itemsPerPage) {
+    let pagHTML = `<button class="page-btn" ${currentPage === 1 ? 'disabled style="opacity:0.5"' : ''} onclick="changePage(${currentPage - 1})">${translations[currentLang].prevBtn}</button>`;
+    for(let i = 1; i <= totalPages; i++) {
+      pagHTML += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</button>`;
+    }
+    pagHTML += `<button class="page-btn" ${currentPage === totalPages ? 'disabled style="opacity:0.5"' : ''} onclick="changePage(${currentPage + 1})">${translations[currentLang].nextBtn}</button>`;
+    paginationContainer.innerHTML = pagHTML;
+    paginationContainer.style.display = 'flex';
+  } else {
+    paginationContainer.innerHTML = '';
+    paginationContainer.style.display = 'none';
+  }
 }
 
 function cycleStatus(id) {
@@ -1184,6 +1227,8 @@ function updateDashboardStats() {
 }
 
 // ===== DEPARTMENT & POSITION MANAGEMENT LOGIC =====
+let expandedDeptIndex = null;
+
 function openDeptSettings() {
   document.getElementById('deptModal').classList.add('show');
   renderDeptSettings();
@@ -1197,75 +1242,89 @@ function renderDeptSettings() {
   const container = document.getElementById('deptListContainer');
   container.innerHTML = '';
   departmentsData.forEach((dept, dIndex) => {
+    const isExpanded = (expandedDeptIndex === dIndex);
     const card = document.createElement('div');
     card.style.cssText = 'border:1px solid #e7e7ea;border-radius:20px;padding:18px 22px;background:#fafafa;';
     
     let posHTML = '';
-    dept.positions.forEach((pos, pIndex) => {
-      posHTML += `
-        <div draggable="true" ondragstart="dragStart(event, ${dIndex}, ${pIndex})" ondragover="allowDrop(event)" ondrop="dropPos(event, ${dIndex}, ${pIndex})" style="display:flex;align-items:center;justify-content:space-between;background:#fff;border:1px solid #e3e3e7;border-radius:12px;padding:10px 14px;margin-bottom:8px;cursor:grab;">
-          <div style="display:flex;align-items:center;gap:10px;">
-            <span style="color:#aaa;cursor:grab;">☰</span>
-            <span style="font-weight:600;">${pos}</span>
+    if (isExpanded) {
+      let tagsHTML = '';
+      dept.positions.forEach((pos, pIndex) => {
+        tagsHTML += `
+          <div draggable="true" ondragstart="dragStart(event, ${dIndex}, ${pIndex})" ondragover="allowDrop(event)" ondrop="dropPos(event, ${dIndex}, ${pIndex})" style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #e3e3e7;border-radius:999px;padding:6px 14px;font-size:13px;font-weight:600;cursor:grab;">
+            <span style="color:#bbb;font-size:11px;">⋮⋮</span>
+            <span>${pos}</span>
+            <button onclick="removePosition(${dIndex}, ${pIndex})" style="border:0;background:none;color:var(--red);cursor:pointer;font-size:15px;line-height:1;padding:0;" title="Remove">×</button>
           </div>
-          <button onclick="removePosition(${dIndex}, ${pIndex})" style="border:0;background:none;color:#d7193f;font-weight:700;cursor:pointer;">×</button>
+        `;
+      });
+
+      posHTML = `
+        <div style="margin-top:16px;padding-top:16px;border-top:1px solid #eadfd9;">
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;">
+            ${tagsHTML || '<span style="color:#777;font-size:13px;">ยังไม่มีตำแหน่งในแผนกนี้ (ลากวางเพื่อสลับลำดับได้)</span>'}
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;background:#fff;padding:10px 14px;border:1px solid #dedee3;border-radius:16px;">
+            <input id="newPosInput_${dIndex}" placeholder="พิมพ์ชื่อตำแหน่งใหม่ แล้วกดเพิ่ม" style="flex:1;border:0;outline:none;font-family:'Mitr',sans-serif;font-size:13px;background:transparent;" onkeydown="if(event.key==='Enter') addPosition(${dIndex})"/>
+            <button onclick="addPosition(${dIndex})" style="border:0;background:var(--ink);color:#fff;border-radius:12px;padding:8px 18px;font-weight:700;font-family:'Mitr',sans-serif;font-size:13px;white-space:nowrap;">+ เพิ่มตำแหน่ง</button>
+          </div>
         </div>
       `;
-    });
+    }
 
     card.innerHTML = `
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
         <div style="display:flex;align-items:center;gap:12px;">
           <strong style="font-size:16px;">${dept.name}</strong>
           <span style="background:#fff1f3;color:var(--red);border:1px solid #ffd0d8;border-radius:999px;padding:2px 10px;font-size:12px;font-weight:700;">${dept.positions.length}</span>
         </div>
         <div style="display:flex;gap:8px;">
-          <button onclick="editDeptName(${dIndex})" style="border:1px solid #e3e3e7;background:#fff;border-radius:10px;padding:6px 12px;font-family:'Mitr',sans-serif;font-size:12px;cursor:pointer;">✎ Edit</button>
-          <button onclick="deleteDept(${dIndex})" style="border:1px solid #ffd0d8;background:#fff1f3;color:var(--red);border-radius:10px;padding:6px 12px;font-family:'Mitr',sans-serif;font-size:12px;cursor:pointer;">🗑 Delete</button>
+          <button class="dashboard-edit-btn ${isExpanded ? 'active-edit' : ''}" onclick="toggleExpandDept(${dIndex})" title="Edit Positions">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+          </button>
+          <button class="dashboard-delete" onclick="deleteDept(${dIndex})" title="Delete Department">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+          </button>
         </div>
       </div>
-      <div style="margin-top:12px;padding-left:14px;border-left:2px solid #ddd;">
-        ${posHTML}
-        <div style="display:flex;gap:8px;margin-top:10px;">
-          <input id="newPosInput_${dIndex}" placeholder="Add new position..." style="flex:1;border:1px solid #dedee3;background:#fff;border-radius:12px;padding:10px 14px;outline:none;font-family:'Mitr',sans-serif;font-size:13px;"/>
-          <button onclick="addPosition(${dIndex})" style="border:0;background:var(--red);color:#fff;border-radius:12px;padding:10px 16px;font-family:'Mitr',sans-serif;font-size:13px;font-weight:700;cursor:pointer;">+ Add</button>
-        </div>
-      </div>
+      ${posHTML}
     `;
     container.appendChild(card);
   });
 }
 
+function toggleExpandDept(dIndex) {
+  if (expandedDeptIndex === dIndex) {
+    expandedDeptIndex = null;
+  } else {
+    expandedDeptIndex = dIndex;
+  }
+  renderDeptSettings();
+}
+
 function addNewDept() {
   const input = document.getElementById('newDeptInput');
   const name = input.value.trim();
-  if(!name) return alert('Please enter department name');
+  if(!name) return alert('กรุณากรอกชื่อแผนก');
   departmentsData.push({ name, positions: [] });
   input.value = '';
   renderDeptSettings();
 }
 
 function deleteDept(dIndex) {
-  if(confirm('Are you sure to delete this department?')) {
+  if(confirm('ต้องการลบแผนกนี้ใช่หรือไม่?')) {
     departmentsData.splice(dIndex, 1);
-    renderDeptSettings();
-  }
-}
-
-function editDeptName(dIndex) {
-  const newName = prompt('Edit department name:', departmentsData[dIndex].name);
-  if(newName) {
-    departmentsData[dIndex].name = newName.trim();
+    if(expandedDeptIndex === dIndex) expandedDeptIndex = null;
     renderDeptSettings();
   }
 }
 
 function addPosition(dIndex) {
   const input = document.getElementById('newPosInput_' + dIndex);
+  if(!input) return;
   const posName = input.value.trim();
-  if(!posName) return alert('Please enter position name');
+  if(!posName) return alert('กรุณากรอกชื่อตำแหน่ง');
   departmentsData[dIndex].positions.push(posName);
-  input.value = '';
   renderDeptSettings();
 }
 
