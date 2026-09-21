@@ -1,0 +1,1368 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lion Air — Bag Care</title>
+<!-- นำเข้าฟอนต์ Mitr ทั้งหมดตามความต้องการ -->
+<link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--red:#d7193f;--red2:#a9072b;--ink:#111318;--muted:#6b6f78;--line:#e7e7ea;--bg:#f7f7f8;--card:#fff;--green:#16845b;--blue:#1d6fa5;--shadow:0 24px 70px rgba(18,20,28,.10);}
+*{box-sizing:border-box} html{scroll-behavior:smooth} 
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Mitr',sans-serif;} 
+button,input,select,textarea{font:inherit} button{cursor:pointer}
+.nav{height:68px;background:rgba(255,255,255,.82);backdrop-filter:blur(18px);border-bottom:1px solid rgba(0,0,0,.06);display:flex;align-items:center;justify-content:space-between;padding:0 5vw;position:sticky;top:0;z-index:30} .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:-.02em} .lion{width:34px;height:34px;border-radius:50%;background:var(--red);display:grid;place-items:center;color:#fff;font-size:16px} .brand small{display:block;color:#8a8d95;font-size:10px;font-weight:600;letter-spacing:.12em;margin-top:1px}
+.hero{min-height:650px;background:radial-gradient(circle at 80% 20%,rgba(215,25,63,.12),transparent 35%),linear-gradient(180deg,#fff 0%,#f7f7f8 100%);display:grid;place-items:center;padding:70px 6vw 80px;overflow:hidden} .hero-inner{width:min(1180px,100%);display:grid;grid-template-columns:1.05fr .95fr;gap:50px;align-items:center} .eyebrow{color:var(--red);font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px} h1{font-size:clamp(38px,6vw,76px);line-height:1.1;font-weight:700;margin:0 0 24px;max-width:760px} .hero p{font-size:18px;line-height:1.7;color:var(--muted);max-width:590px;margin:0 0 30px} .cta{border:0;border-radius:999px;padding:15px 24px;background:var(--red);color:#fff;font-weight:700;box-shadow:0 12px 30px rgba(215,25,63,.25)}
+.hero-card{background:linear-gradient(145deg,#fff,#f0f0f2);border:1px solid #e9e9ec;border-radius:36px;box-shadow:var(--shadow);min-height:430px;display:grid;place-items:center;position:relative;overflow:hidden} .hero-card:before{content:"";position:absolute;width:350px;height:350px;border-radius:50%;background:rgba(215,25,63,.09);filter:blur(12px)}
+
+/* 3D Suitcase */
+.suitcase{width:200px;height:290px;background:#18191d;border:3px solid #2e2f36;border-radius:32px;position:relative;box-shadow:0 25px 40px rgba(0,0,0,.22),inset 0 0 0 1px rgba(255,255,255,.08);transform:perspective(900px) rotateY(-12deg) rotateX(3deg);z-index:1} 
+.suitcase:before{content:"";position:absolute;inset:20px 18px;border:1.5px solid #3a3b42;border-radius:22px} 
+.wheel{position:absolute;width:24px;height:24px;border-radius:50%;background:#111215;border:4px solid #4a4b52;bottom:-14px;z-index:2} 
+.w1{left:18px} .w2{right:18px} 
+
+.bag-top-panel{position:absolute;top:20px;left:18px;right:18px;height:65px;border-bottom:1.5px solid #3a3b42;display:grid;place-items:center}
+.bag-logo{width:28px;height:28px;background:var(--red);border-radius:50%;display:grid;place-items:center;color:#fff;font-size:12px;box-shadow:0 2px 6px rgba(215,25,63,.4)}
+.bag-vertical-pocket{position:absolute;left:34px;top:100px;width:12px;height:130px;border:1.5px solid #3a3b42;border-radius:6px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:6px 0}
+.bag-vertical-pocket span{width:6px;height:2px;background:#3a3b42;border-radius:1px}
+
+.section{padding:80px 6vw} .section-inner{width:min(1180px,100%);margin:auto} .section-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:34px} .section h2{font-size:clamp(30px,3.5vw,46px);font-weight:700;margin:0} .section-head p{max-width:480px;color:var(--muted);line-height:1.6;margin:0}
+
+.form-card{background:#fff;border:1px solid #e5e5e8;border-radius:32px;box-shadow:0 18px 50px rgba(0,0,0,.06);padding:clamp(22px,4vw,44px)} 
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px} 
+
+.input-group{position:relative}
+.input-group span.icon{position:absolute;left:18px;top:50%;transform:translateY(-50%);color:#111318;font-size:16px;pointer-events:none}
+.input-group textarea ~ span.icon{top:22px;transform:none}
+
+.input-group input, .input-group select, .input-group textarea{
+  width:100%;border:1px solid #dedee3;background:#fafafa;border-radius:16px;padding:15px 16px 15px 46px;outline:none;transition:.2s;color:var(--ink);font-family:'Mitr',sans-serif;
+}
+.input-group select{appearance:none;background-image:url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww%2Ew3%2Eorg%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23111318%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");background-repeat:no-repeat;background-position:right 16px center;background-size:10px;padding-right:36px}
+.input-group input:focus, .input-group select:focus, .input-group textarea:focus{border-color:var(--red);background:#fff;box-shadow:0 0 0 4px rgba(215,25,63,.08)} 
+.full{grid-column:1/-1} 
+textarea{min-height:120px;resize:vertical} 
+
+.form-actions{display:flex;justify-content:space-between;align-items:center;margin-top:26px;gap:15px} 
+.next{border:0;background:var(--ink);color:#fff;border-radius:999px;padding:14px 28px;font-weight:700;font-family:'Mitr',sans-serif;} 
+
+.damage-layout{display:grid;grid-template-columns:1.15fr .85fr;gap:24px;align-items:stretch} 
+.viewer{min-height:620px;background:radial-gradient(circle at 50% 40%,#33363c,#151619 70%);border-radius:32px;position:relative;overflow:hidden;color:#fff;padding:25px} 
+.viewer-top{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:5;flex-wrap:wrap;gap:10px} 
+.viewer-title small{color:#aeb1b8} 
+.view-buttons{display:flex;gap:6px;flex-wrap:wrap} 
+.view-buttons button{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.07);color:#fff;border-radius:12px;padding:8px 11px;font-size:13px;font-family:'Mitr',sans-serif;} 
+.view-buttons button.active{background:var(--red);border-color:var(--red)}
+
+.stage{height:510px;display:grid;place-items:center;perspective:1200px;position:relative;cursor:grab;touch-action:none}
+.stage:active{cursor:grabbing} 
+
+.cube{width:200px;height:290px;position:relative;transform-style:preserve-3d;transition:transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);transform:rotateX(4deg) rotateY(-18deg)} 
+
+.face{position:absolute;border:3px solid #35363d;background:linear-gradient(135deg,#1c1d22,#0d0e11);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);cursor:pointer} 
+.front{width:200px;height:290px;transform:translateZ(40px);border-radius:32px} 
+.back{width:200px;height:290px;transform:rotateY(180deg) translateZ(40px);background:#131417;border-radius:32px} 
+.left{width:80px;height:290px;transform:rotateY(-90deg) translateZ(40px);background:#101114;border-radius:24px} 
+.right{width:80px;height:290px;transform:rotateY(90deg) translateZ(160px);background:#101114;border-radius:24px} 
+.top{width:200px;height:80px;transform:rotateX(90deg) translateZ(40px);background:#16171b;border-radius:24px}
+.bottom{width:200px;height:80px;transform:rotateX(-90deg) translateZ(250px);background:#101114;border-radius:24px}
+
+.front:before{content:"";position:absolute;inset:20px 18px;border:1.5px solid rgba(255,255,255,.12);border-radius:22px} 
+.back:before{content:"";position:absolute;inset:20px 18px;border:1.5px solid rgba(255,255,255,.08);border-radius:22px}
+
+.markers{position:absolute;inset:0;z-index:10;pointer-events:none} 
+.marker{position:absolute;width:24px;height:24px;border-radius:50%;background:var(--red);border:2px solid #fff;box-shadow:0 0 0 5px rgba(215,25,63,.25);transform:translate(-50%,-50%);animation:pop .2s ease-out;display:grid;place-items:center;font-size:11px;color:#fff;font-weight:700} 
+@keyframes pop{from{transform:translate(-50%,-50%) scale(.2)}to{transform:translate(-50%,-50%) scale(1)}} 
+
+.viewer-hint{position:absolute;bottom:22px;left:25px;color:#aeb1b8;font-size:12px} 
+.viewer-ref{position:absolute;bottom:18px;right:22px;opacity:.13;width:150px;filter:grayscale(1)}
+
+.damage-panel{background:#fff;border:1px solid #e5e5e8;border-radius:32px;padding:28px;box-shadow:0 18px 50px rgba(0,0,0,.06)} 
+.damage-panel h3{font-size:24px;font-weight:700;margin:0 0 5px} 
+.damage-panel p{color:var(--muted);font-size:14px;margin:0 0 20px} 
+.selected{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 20px} 
+.chip{background:#fff1f3;color:var(--red);border:1px solid #ffd0d8;border-radius:999px;padding:7px 14px;font-size:13px;font-weight:700;display:inline-flex;align-items:center;gap:8px} 
+.chip button{background:none;border:0;color:var(--red);cursor:pointer;font-size:15px;padding:0;line-height:1}
+.damage-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px} 
+.damage-option{border:1px solid #e3e3e7;background:#fafafa;border-radius:14px;padding:12px;text-align:left;font-size:13px;font-weight:700;font-family:'Mitr',sans-serif;} 
+.damage-option.selected-option{border-color:var(--red);background:#fff3f5;color:var(--red)} 
+.save-marker{width:100%;margin-top:16px;border:0;background:var(--red);color:#fff;border-radius:16px;padding:14px;font-weight:700;font-family:'Mitr',sans-serif;}
+
+.success{display:none;text-align:center;padding:60px 20px} .success-icon{width:76px;height:76px;border-radius:50%;display:grid;place-items:center;background:#eaf8f1;color:var(--green);font-size:35px;margin:0 auto 18px} .success h2{font-size:42px;font-weight:700;margin:0 0 10px} .success p{color:var(--muted)} .code{display:inline-block;background:#f2f2f4;padding:10px 15px;border-radius:12px;font-weight:700;margin:8px}
+.footer{padding:50px 6vw;background:#111318;color:#fff} .footer-inner{width:min(1180px,100%);margin:auto;display:flex;justify-content:space-between;gap:30px} .footer small{color:#8f929a}
+@media(max-width:800px){.nav{padding:0 20px} .hero{padding:55px 20px} .hero-inner{grid-template-columns:1fr;gap:35px} .hero-card{min-height:340px} .section{padding:60px 20px} .grid,.damage-layout{grid-template-columns:1fr} .form-actions{position:sticky;bottom:12px;background:rgba(255,255,255,.88);backdrop-filter:blur(14px);padding:10px;border-radius:20px} .viewer{min-height:590px} .stage{height:490px} h1{font-size:44px}}
+
+/* ===== ADMIN ACCESS ===== */
+.admin-btn{
+  height:42px;
+  padding:0 16px;
+  border:1px solid #e6e6e8;
+  background:#fff;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:var(--ink);
+  font-size:14px;
+  font-weight:700;
+  font-family:'Mitr',sans-serif;
+  transition:.2s;
+}
+.admin-btn:hover{
+  border-color:var(--red);
+  color:var(--red);
+  box-shadow:0 8px 20px rgba(215,25,63,.10);
+}
+.nav-actions{display:flex;align-items:center;gap:8px}
+
+/* ===== STATUS & LOGIN MODALS ===== */
+.admin-modal{
+  position:fixed;inset:0;background:rgba(17,19,24,.48);backdrop-filter:blur(10px);
+  display:none;align-items:center;justify-content:center;padding:24px;z-index:100;
+}
+.admin-modal.show{display:flex}
+.admin-box{
+  width:min(1080px,100%);max-height:min(760px,calc(100vh - 48px));overflow:auto;
+  background:#fff;border:1px solid #e5e5e8;border-radius:28px;box-shadow:0 30px 90px rgba(0,0,0,.20);
+}
+.admin-head{
+  padding:22px 26px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:16px;position:sticky;top:0;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);z-index:2;
+}
+.admin-title{display:flex;align-items:center;gap:12px}
+.admin-title-icon{width:40px;height:40px;border-radius:12px;background:var(--red);color:#fff;display:grid;place-items:center}
+.admin-close{width:40px;height:40px;border:1px solid #e6e6e8;background:#fff;border-radius:12px;font-size:20px}
+.admin-body{padding:26px}
+.status{display:inline-flex;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:700;background:#fff4d8;color:#9a6a00}
+.status.done{background:#eaf8f1;color:var(--green)}
+
+/* ===== ADMIN LOGIN MODAL ===== */
+.admin-login-modal{
+  position:fixed;inset:0;background:rgba(17,19,24,.48);backdrop-filter:blur(10px);
+  display:none;align-items:center;justify-content:center;padding:24px;z-index:120;
+}
+.admin-login-modal.show{display:flex}
+.admin-login-box{
+  width:min(430px,100%);background:#fff;border-radius:28px;padding:34px;
+  box-shadow:0 30px 90px rgba(0,0,0,.22);border:1px solid #eee;text-align:center;
+}
+.admin-login-icon{
+  width:58px;height:58px;border-radius:18px;background:var(--red);color:#fff;
+  display:grid;place-items:center;margin:0 auto 18px;font-size:25px;
+}
+.admin-login-box h2{margin:0 0 7px;font-size:27px}
+.admin-login-box p{margin:0 0 22px;color:var(--muted);font-size:14px}
+.admin-password{
+  width:100%;border:1px solid #dedee3;background:#fafafa;border-radius:15px;
+  padding:15px 17px;outline:none;text-align:center;letter-spacing:.18em;
+}
+.admin-password:focus{border-color:var(--red);background:#fff;box-shadow:0 0 0 4px rgba(215,25,63,.08)}
+.admin-login-actions{display:flex;gap:10px;margin-top:14px}
+.admin-login-actions button{flex:1;padding:13px;border-radius:14px;font-family:'Mitr',sans-serif;font-weight:700}
+.admin-login-cancel{border:1px solid #e2e2e5;background:#fff}
+.admin-login-submit{border:0;background:var(--red);color:#fff}
+.login-error{color:var(--red);font-size:13px;margin-top:12px;display:none}
+
+/* ===== ADMIN DASHBOARD MODAL ===== */
+.admin-dashboard-modal{
+  position:fixed;inset:0;background:#fffaf6;display:none;z-index:110;overflow:auto;
+}
+.admin-dashboard-modal.show{display:block}
+.admin-dashboard{
+  min-height:100vh;padding:30px 3.5vw 42px;
+  background:radial-gradient(circle at 5% 0%,rgba(215,25,63,.07),transparent 28%),#fffaf6;
+}
+.dashboard-actions{display:flex;gap:9px}
+.dashboard-btn{
+  border:1px solid #e8ded8;background:#fff;border-radius:13px;padding:10px 15px;
+  font-family:'Mitr',sans-serif;font-weight:700;color:#4b4745;
+}
+.dashboard-btn:hover{border-color:var(--red);color:#d7193f}
+.dashboard-btn.danger{background:var(--red);color:#fff;border-color:var(--red)}
+.dashboard-title{margin:15px 0 20px}
+.dashboard-title h1{font-size:clamp(28px,3vw,42px);line-height:1.1;margin:0 0 5px}
+.dashboard-title p{color:var(--muted);margin:0;font-size:14px}
+.dashboard-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:28px;
+}
+.dashboard-stat{
+  min-height:108px;background:#fff;border:1px solid #eadfd9;border-top:4px solid transparent;
+  border-radius:22px;padding:18px 22px;box-shadow:0 12px 32px rgba(80,40,20,.07);
+  cursor:pointer;transition:.2s;
+}
+.dashboard-stat:hover{transform:translateY(-2px);box-shadow:0 15px 40px rgba(215,25,63,.12)}
+.dashboard-stat.active-filter{
+  background:linear-gradient(145deg,#d7193f,#b70829);color:#fff;border-color:#9f071f;border-top:4px solid #9f071f;
+  box-shadow:0 15px 35px rgba(215,25,63,.24);
+}
+.dashboard-stat.active-filter .label{opacity:.95}
+.dashboard-stat .num{font-size:34px;font-weight:800;line-height:1;margin-bottom:8px}
+.dashboard-stat .label{font-size:13px;font-weight:700;opacity:.72}
+.dashboard-panel{
+  background:#fff;border:1px solid #eadfd9;border-radius:28px;padding:25px 26px;
+  box-shadow:0 15px 45px rgba(80,40,20,.06);
+}
+.dashboard-panel-head{
+  display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;margin-bottom:18px;
+}
+.dashboard-panel-head h2{margin:0;color:var(--red);font-size:20px}
+.dashboard-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.dashboard-search{
+  width:290px;border:1px solid #eadfd9;background:#fff;border-radius:13px;padding:11px 14px;
+  outline:none;font-family:'Mitr',sans-serif;
+}
+.dashboard-search:focus{border-color:var(--red);box-shadow:0 0 0 4px rgba(215,25,63,.07)}
+.page-btn{
+  border:1px solid #eadfd9;background:#fff;border-radius:10px;padding:8px 12px;font-weight:700;
+  font-family:'Mitr',sans-serif;
+}
+.page-btn.active,.page-btn:hover{background:var(--red);color:#fff;border-color:var(--red)}
+.dashboard-table-wrap{overflow:auto}
+.dashboard-table{width:100%;border-collapse:collapse;min-width:1050px}
+.dashboard-table th{
+  padding:13px 14px;text-align:left;font-size:12px;color:#756b66;
+  background:#fffcfa;border-bottom:2px solid #eadfd9;white-space:nowrap;
+}
+.dashboard-table td{
+  padding:17px 14px;border-bottom:1px solid #eee4df;font-size:14px;vertical-align:middle;
+}
+.dashboard-table tbody tr:hover{background:#fffaf8}
+.dashboard-id{font-weight:800}
+.dashboard-dept small{display:block;color:#8b817c;font-size:11px;margin-bottom:2px}
+.dashboard-dept strong{font-size:13px}
+
+/* Status Badges */
+.dashboard-status{
+  display:inline-flex;align-items:center;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:800;cursor:pointer;user-select:none;transition:.15s;
+}
+.dashboard-status.repair{background:#fff0bf;color:#d27b00;border:1px solid #ffe69c}
+.dashboard-status.repair:hover{filter:brightness(0.95)}
+.dashboard-status.repaired{background:#e0f2fe;color:#0369a1;border:1px solid #bae6fd}
+.dashboard-status.repaired:hover{filter:brightness(0.95)}
+.dashboard-status.delivered{background:#dff5ec;color:#176b52;border:1px solid #bbf7d0;cursor:default}
+
+.dashboard-delete{
+  border:1px solid #e3e3e7;background:#fff;font-size:15px;color:#888;padding:8px 10px;border-radius:10px;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;justify-content:center;
+}
+.dashboard-delete:hover{background:#fff0f2;border-color:#ffd0d8;color:var(--red)}
+
+.dashboard-edit-btn{
+  border:1px solid #e3e3e7;background:#fff;font-size:15px;color:#888;padding:8px 10px;border-radius:10px;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;justify-content:center;
+}
+.dashboard-edit-btn:hover{background:#fff0f2;border-color:#ffd0d8;color:var(--red)}
+.dashboard-edit-btn.active-edit{background:var(--red);border-color:var(--red);color:#fff}
+
+.dashboard-footer{margin-top:16px;color:#918681;font-size:12px}
+
+body,
+button,input,select,textarea,
+.nav,
+.admin-modal,
+.admin-btn,
+.admin-tab,
+.admin-table,
+.status,
+.chip,
+.viewer,
+.damage-panel,
+.form-card,
+.footer,
+h1,h2,h3,h4,h5,h6,
+.eyebrow,
+.brand,
+.admin-title strong,
+.section-head h2,
+.hero h1{
+  font-family:'Mitr',sans-serif;
+}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="brand"><div class="lion">✦</div><div>THAI LION AIR<small data-i18n="navSub">BAG CARE • HR Welfare</small></div></div>
+  <div class="nav-actions">
+    <button class="admin-btn" onclick="openStatus()" aria-label="Check Status">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#111318" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <span data-i18n="navStatus">Check Status</span>
+    </button>
+    <button class="admin-btn" onclick="toggleLanguage()" aria-label="Language Toggle">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#111318" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+      <span id="langLabel">TH</span>
+    </button>
+    <button class="admin-btn" onclick="openAdmin()" aria-label="Admin Dashboard">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#111318" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06-.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+      <span>Admin</span>
+    </button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="eyebrow" data-i18n="heroEyebrow">Your luggage care journey starts here.</div>
+      <h1 data-i18n="heroTitle">PICK.<br><span style="color:var(--red)">KA.</span><br>CREW.</h1>
+      <p data-i18n="heroDesc">Easy and fast baggage repair service for pilots and cabin crew, with interactive luggage damage marking.</p>
+      <button class="cta" onclick="document.getElementById('repair').scrollIntoView()" data-i18n="heroCta">Start Repair Request →</button>
+    </div>
+    <div class="hero-card">
+      <div class="suitcase">
+        <div class="bag-top-panel"><div class="bag-logo">✦</div></div>
+        <div class="bag-vertical-pocket"><span></span><span></span></div>
+        <div class="wheel w1"></div><div class="wheel w2"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="repair">
+  <div class="section-inner">
+    <div class="section-head">
+      <div><h2 style="margin:0;" data-i18n="formHeading">Start Repair Request</h2></div>
+    </div>
+    <div class="form-card" id="formBox">
+      <div class="grid">
+        <div class="input-group">
+          <span class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          </span>
+          <input id="inpEmpId" placeholder="Employee ID TLxxxxxx *"/>
+        </div>
+        <div class="input-group">
+          <span class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          </span>
+          <input id="inpName" placeholder="Full Name *"/>
+        </div>
+        <div class="input-group">
+          <span class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+          </span>
+          <select id="selDept" onchange="onDepartmentChange()">
+            <option value="" disabled selected data-i18n="optDept">Department *</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <span class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 3H8a2 2 0 0 0-2 2v2h12V5a2 2 0 0 0-2-2z"></path></svg>
+          </span>
+          <select id="selPos" disabled>
+            <option value="" disabled selected data-i18n="optPos">Position *</option>
+          </select>
+        </div>
+        <div class="input-group full">
+          <span class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          </span>
+          <input type="email" id="inpEmail" placeholder="Email *"/>
+        </div>
+        <div class="input-group full">
+          <span class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+          </span>
+          <textarea id="inpIssue" placeholder="Issue Details *"></textarea>
+        </div>
+      </div>
+      <div class="form-actions">
+        <span style="font-size:13px;color:#777" data-i18n="formNote">Information will be used for internal repair services only.</span>
+        <button class="next" onclick="document.getElementById('damage').scrollIntoView()" data-i18n="formNext">Next →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="damage">
+  <div class="section-inner">
+    <div class="section-head" style="margin-bottom:20px;">
+      <div>
+        <h2 data-i18n="damageHeading">Mark the damage.</h2>
+      </div>
+    </div>
+    <div class="damage-layout">
+      <div class="viewer">
+        <div class="viewer-top">
+          <div class="viewer-title"><strong data-i18n="viewerTitle">Interactive 3D Baggage</strong><br><small data-i18n="viewerSub">Rotate & tap/click luggage</small></div>
+          <div class="view-buttons">
+            <button class="active" onclick="setView('front',this)" data-view="front">Front</button>
+            <button onclick="setView('left',this)" data-view="left">Left</button>
+            <button onclick="setView('back',this)" data-view="back">Back</button>
+            <button onclick="setView('right',this)" data-view="right">Right</button>
+            <button onclick="setView('top',this)" data-view="top">Top</button>
+            <button onclick="setView('bottom',this)" data-view="bottom">Bottom</button>
+          </div>
+        </div>
+        <div class="stage" id="stage">
+          <div class="cube" id="cube">
+            <!-- FRONT FACE -->
+            <div class="face front" id="frontFace">
+              <div class="bag-top-panel"><div class="bag-logo">✦</div></div>
+              <div class="bag-vertical-pocket"><span></span><span></span></div>
+              <div class="wheel w1"></div><div class="wheel w2"></div>
+              <div class="markers" id="markersFront"></div>
+            </div>
+            <!-- BACK FACE -->
+            <div class="face back" id="backFace">
+              <div class="bag-handle-assembly" style="position:absolute;top:-42px;left:50%;transform:translateX(-50%);width:70px;height:45px;z-index:5">
+                <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:50px;height:10px;background:#5a5b62;border:2px solid #777880;border-radius:5px"></div>
+                <div style="position:absolute;bottom:0;width:100%;height:35px;display:flex;justify-content:space-between;padding:0 10px"><span style="width:4px;height:100%;background:linear-gradient(90deg,#777,#aaa,#555);border-radius:2px"></span><span style="width:4px;height:100%;background:linear-gradient(90deg,#777,#aaa,#555);border-radius:2px"></span></div>
+              </div>
+              <div class="wheel w1"></div><div class="wheel w2"></div>
+              <div class="markers" id="markersBack"></div>
+            </div>
+            <!-- LEFT FACE -->
+            <div class="face left" id="leftFace"><div class="markers" id="markersLeft"></div></div>
+            <!-- RIGHT FACE -->
+            <div class="face right" id="rightFace"><div class="markers" id="markersRight"></div></div>
+            <!-- TOP FACE -->
+            <div class="face top" id="topFace"><div class="markers" id="markersTop"></div></div>
+            <!-- BOTTOM FACE -->
+            <div class="face bottom" id="bottomFace"><div class="markers" id="markersBottom"></div></div>
+          </div>
+        </div>
+        <div class="viewer-hint" id="viewerHint">● Click anywhere on the visible FRONT face to place a damage marker</div>
+        <img class="viewer-ref" src=""/>
+      </div>
+      <div class="damage-panel">
+        <h3 data-i18n="panelTitle">What's damaged?</h3>
+        <p data-i18n="panelSub">Select the damage type for the chosen location.</p>
+        <div class="selected" id="selectedList"><span class="chip" data-i18n="noPointSelected">No point selected yet</span></div>
+        <div class="damage-grid" id="damageGrid">
+          <button class="damage-option" data-damage-key="wheel">Damaged Wheel</button>
+          <button class="damage-option" data-damage-key="trolley">Damaged Trolley Handle</button>
+          <button class="damage-option" data-damage-key="handle">Damaged Carry Handle</button>
+          <button class="damage-option" data-damage-key="zipper">Damaged Zipper</button>
+          <button class="damage-option" data-damage-key="lock">Damaged Lock</button>
+          <button class="damage-option" data-damage-key="crack">Cracked / Dented</button>
+          <button class="damage-option" data-damage-key="scratch">Scratched</button>
+          <button class="damage-option" data-damage-key="other">Other</button>
+        </div>
+        
+        <div style="margin-top:22px;" class="input-group full">
+          <span class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+          </span>
+          <textarea id="inpDetail" placeholder="Describe issue e.g. left wheel stuck, cannot rotate..."></textarea>
+        </div>
+
+        <button class="save-marker" onclick="submitDemo()" data-i18n="saveMarker">Save Damage Points →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+    <div class="form-card success" id="success">
+      <div class="success-icon">✓</div>
+      <h2 data-i18n="successTitle">Request sent.</h2>
+      <p data-i18n="successSub">Your repair request has been successfully received.</p>
+      <div class="code" id="successCodeDisplay">BG-000241</div>
+      <p style="margin-top:22px" data-i18n="successFlow">Submitted → Inspection → Repair → Completed</p>
+    </div>
+  </div>
+</section>
+
+<div class="admin-modal" id="statusModal" onclick="closeStatusByBackdrop(event)">
+  <div class="admin-box" role="dialog" aria-modal="true">
+    <div class="admin-head">
+      <div class="admin-title">
+        <div class="admin-title-icon">✓</div>
+        <div>
+          <strong style="font-size:20px" data-i18n="statusModalTitle">Check Repair Status</strong>
+          <div style="font-size:12px;color:#777" data-i18n="statusModalSub">Track your repair request item</div>
+        </div>
+      </div>
+      <button class="admin-close" onclick="closeStatus()">×</button>
+    </div>
+    <div class="admin-body">
+      <div class="input-group" style="max-width:520px;margin:auto">
+        <input id="statusCodeInput" placeholder="Enter request ID e.g. BG-000241" style="padding-left:16px">
+      </div>
+      <button class="save-marker" style="max-width:520px;display:block;margin:14px auto 0" onclick="checkStatus()" data-i18n="checkStatusBtn">Check Status →</button>
+      <div id="statusResult" style="display:none;max-width:520px;margin:22px auto 0;padding:20px;border:1px solid #e7e7ea;border-radius:18px;background:#fafafa">
+        <strong id="resId">BG-000241</strong>
+        <p style="margin:8px 0;color:#777" data-i18n="currentStatusLabel">Current Status</p>
+        <span class="status" id="resStatusBadge">Repairing</span>
+        <p style="margin:14px 0 0;color:#777;font-size:13px" data-i18n="successFlow">Submitted → Inspection → Repair → Completed</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="admin-login-modal" id="adminLoginModal" onclick="closeAdminLoginByBackdrop(event)">
+  <div class="admin-login-box" role="dialog" aria-modal="true">
+    <div class="admin-login-icon">⚙</div>
+    <h2>Admin Login</h2>
+    <p data-i18n="adminLoginSub">Please enter password to access admin system</p>
+    <input id="adminPassword" class="admin-password" type="password" placeholder="Password" maxlength="20"
+           onkeydown="if(event.key==='Enter') verifyAdmin()">
+    <div class="admin-login-actions">
+      <button class="admin-login-cancel" onclick="closeAdminLogin()" data-i18n="cancelBtn">Cancel</button>
+      <button class="admin-login-submit" onclick="verifyAdmin()" data-i18n="loginBtn">Login →</button>
+    </div>
+    <div class="login-error" id="loginError" data-i18n="loginErrorMsg">Incorrect password. Please try again.</div>
+  </div>
+</div>
+
+<!-- ===== ADMIN DASHBOARD MODAL ===== -->
+<div class="admin-dashboard-modal" id="adminDashboard">
+  <nav class="nav">
+    <div class="brand"><div class="lion">✦</div><div>THAI LION AIR<small data-i18n="navSub">BAG CARE • HR Welfare</small></div></div>
+    <div class="nav-actions">
+      <button class="dashboard-btn" onclick="openDeptSettings()" style="border-color:var(--red);color:var(--red)" data-i18n="btnDeptSettings">⚙ Dept Settings</button>
+      <button class="dashboard-btn danger" onclick="logoutAdmin()" data-i18n="logoutBtn">Logout</button>
+    </div>
+  </nav>
+
+  <div class="admin-dashboard">
+    <div class="dashboard-title">
+      <h1>Admin Dashboard</h1>
+      <p data-i18n="dashSub">Manage and track pilot and cabin crew baggage repair requests</p>
+    </div>
+
+    <div class="dashboard-stats">
+      <div class="dashboard-stat" id="statCard-all" onclick="filterByStatus('all')"><div class="num" id="statNum-all">7</div><div class="label" data-i18n="statTotal">Total Requests</div></div>
+      <div class="dashboard-stat" id="statCard-repair" onclick="filterByStatus('repair')"><div class="num" id="statNum-repair">5</div><div class="label" data-i18n="statRepairing">Repairing</div></div>
+      <div class="dashboard-stat" id="statCard-repaired" onclick="filterByStatus('repaired')"><div class="num" id="statNum-repaired">0</div><div class="label" data-i18n="statRepaired">Repaired</div></div>
+      <div class="dashboard-stat" id="statCard-delivered" onclick="filterByStatus('delivered')"><div class="num" id="statNum-delivered">2</div><div class="label" data-i18n="statDelivered">Delivered to Crew</div></div>
+    </div>
+
+    <div class="dashboard-panel">
+      <div class="dashboard-panel-head">
+        <h2 data-i18n="tableHeadTitle">ALL REPAIR REQUESTS</h2>
+        <div class="dashboard-tools">
+          <div id="paginationContainer" style="display:flex;gap:4px;align-items:center;"></div>
+          <input id="adminSearch" class="dashboard-search" placeholder="⌕ Search ID TLxxxxxx / Name" oninput="filterAdminRows()">
+        </div>
+      </div>
+
+      <div class="dashboard-table-wrap">
+        <table class="dashboard-table">
+          <thead>
+            <tr>
+              <th data-i18n="thId">ID</th>
+              <th data-i18n="thName">NAME</th>
+              <th data-i18n="thEmail">EMAIL</th>
+              <th data-i18n="thDept">DEPT &amp; POSITION</th>
+              <th data-i18n="thIssue">ISSUE</th>
+              <th data-i18n="thDate">DATE</th>
+              <th data-i18n="thStatus">STATUS</th>
+              <th data-i18n="thAction">ACTION</th>
+            </tr>
+          </thead>
+          <tbody id="adminTableBody">
+            <!-- Dynamic rows injected via JS -->
+          </tbody>
+        </table>
+      </div>
+      <div class="dashboard-footer" data-i18n="dashFooter">Internal Service • 2026 • Bag Care Administration</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DEPARTMENT SETTINGS PAGE MODAL ===== -->
+<div class="admin-dashboard-modal" id="deptModal">
+  <nav class="nav">
+    <div class="brand"><div class="lion">✦</div><div>THAI LION AIR<small>BAG CARE • HR Welfare</small></div></div>
+    <div class="nav-actions">
+      <button class="dashboard-btn" onclick="closeDeptSettings()" style="border-color:var(--red);color:var(--red)" data-i18n="btnBackDash">← Back to Dashboard</button>
+    </div>
+  </nav>
+
+  <div class="admin-dashboard">
+    <div class="dashboard-title">
+      <h1 style="color:var(--red);" data-i18n="deptSettingsTitle">Departments & Positions</h1>
+      <p data-i18n="deptSettingsSub">Manage departments and their available positions</p>
+    </div>
+
+    <div class="dashboard-panel">
+      <div id="deptListContainer" style="display:flex;flex-direction:column;gap:16px;margin-bottom:24px;">
+        <!-- Dynamic Department Cards -->
+      </div>
+
+      <div style="display:flex;gap:12px;align-items:center;background:#fafafa;padding:16px;border:1px solid #eadfd9;border-radius:20px;">
+        <input id="newDeptInput" placeholder="Add new department name..." style="flex:1;border:1px solid #dedee3;background:#fff;border-radius:16px;padding:14px 16px;outline:none;font-family:'Mitr',sans-serif;"/>
+        <button onclick="addNewDept()" style="border:0;background:var(--ink);color:#fff;border-radius:16px;padding:14px 26px;font-weight:700;font-family:'Mitr',sans-serif;white-space:nowrap;" data-i18n="btnAddDept">+ Add Department</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div><strong>THAI LION AIR</strong><br><small data-i18n="footerSub">BAG CARE • HR Welfare</small></div>
+    <small data-i18n="footerCopy">Internal Service Prototype • 2026</small>
+  </div>
+</footer>
+
+<script>
+const API_URL = "";
+
+const translations = {
+  en: {
+    navSub: "BAG CARE • HR Welfare",
+    navStatus: "Check Status",
+    heroEyebrow: "Your luggage care journey starts here.",
+    heroTitle: 'PICK.<br><span style="color:var(--red)">KA.</span><br>CREW.',
+    heroDesc: "Easy and fast baggage repair service for pilots and cabin crew, with interactive luggage damage marking.",
+    heroCta: "Start Repair Request →",
+    formHeading: "Start Repair Request",
+    inpEmpId: "Employee ID TLxxxxxx *",
+    inpName: "Full Name *",
+    optDept: "Department *",
+    optPos: "Position *",
+    inpEmail: "Email *",
+    inpIssue: "Issue Details *",
+    formNote: "Information will be used for internal repair services only.",
+    formNext: "Next →",
+    damageHeading: "Mark the damage.",
+    viewerTitle: "Interactive 3D Baggage",
+    viewerSub: "Rotate & tap/click luggage",
+    panelTitle: "What's damaged?",
+    panelSub: "Select the damage type for the chosen location.",
+    noPointSelected: "No point selected yet",
+    d_wheel: "Damaged Wheel",
+    d_trolley: "Damaged Trolley Handle",
+    d_handle: "Damaged Carry Handle",
+    d_zipper: "Damaged Zipper",
+    d_lock: "Damaged Lock",
+    d_crack: "Cracked / Dented",
+    d_scratch: "Scratched",
+    d_other: "Other",
+    inpDetail: "Describe issue e.g. left wheel stuck, cannot rotate...",
+    saveMarker: "Save Damage Points →",
+    successTitle: "Request sent.",
+    successSub: "Your repair request has been successfully received.",
+    successFlow: "Submitted → Inspection → Repair → Completed",
+    statusModalTitle: "Check Repair Status",
+    statusModalSub: "Track your repair request item",
+    statusCodeInput: "Enter request ID e.g. BG-000241",
+    checkStatusBtn: "Check Status →",
+    currentStatusLabel: "Current Status",
+    statusInspecting: "Repairing",
+    adminLoginSub: "Please enter password to access admin system",
+    cancelBtn: "Cancel",
+    loginBtn: "Login →",
+    loginErrorMsg: "Incorrect password. Please try again.",
+    logoutBtn: "Logout",
+    btnDeptSettings: "⚙ Dept Settings",
+    btnBackDash: "← Back to Dashboard",
+    deptSettingsTitle: "Departments & Positions",
+    deptSettingsSub: "Manage departments and their available positions",
+    btnAddDept: "+ Add Department",
+    dashSub: "Manage and track pilot and cabin crew baggage repair requests",
+    statTotal: "Total Requests",
+    statRepairing: "Repairing",
+    statRepaired: "Repaired",
+    statDelivered: "Delivered to Crew",
+    tableHeadTitle: "ALL REPAIR REQUESTS",
+    prevBtn: "Prev",
+    nextBtn: "Next",
+    thId: "ID",
+    thName: "NAME",
+    thEmail: "EMAIL",
+    thDept: "DEPT & POSITION",
+    thIssue: "ISSUE",
+    thDate: "DATE",
+    thStatus: "STATUS",
+    thAction: "ACTION",
+    dashFooter: "Internal Service • 2026 • Bag Care Administration",
+    footerSub: "BAG CARE • HR Welfare",
+    footerCopy: "Internal Service Prototype • 2026"
+  },
+  th: {
+    navSub: "BAG CARE • HR Welfare",
+    navStatus: "เช็คสถานะ",
+    heroEyebrow: "จุดเริ่มต้นการดูแลกระเป๋าเดินทางของคุณ",
+    heroTitle: 'PICK.<br><span style="color:var(--red)">KA.</span><br>CREW.',
+    heroDesc: "แจ้งซ่อมกระเป๋าเดินทางสำหรับนักบินและลูกเรือได้ง่าย รวดเร็ว พร้อมระบุตำแหน่งความเสียหายบนกระเป๋าแบบ Interactive",
+    heroCta: "เริ่มแจ้งซ่อม →",
+    formHeading: "เริ่มต้นการแจ้งซ่อม",
+    inpEmpId: "รหัสพนักงาน TLxxxxxx *",
+    inpName: "ชื่อ-นามสกุล (Name) *",
+    optDept: "แผนก (Department) *",
+    optPos: "ตำแหน่ง (Position) *",
+    inpEmail: "อีเมล (Email) *",
+    inpIssue: "รายละเอียดปัญหา (Issue) *",
+    formNote: "ข้อมูลจะถูกใช้สำหรับงานซ่อมภายในเท่านั้น",
+    formNext: "ถัดไป →",
+    damageHeading: "ทำเครื่องหมายจุดเสียหาย",
+    viewerTitle: "Interactive 3D Baggage",
+    viewerSub: "หมุนและแตะเลือกบนกระเป๋า",
+    panelTitle: "กระเป๋าเสียหายส่วนไหน?",
+    panelSub: "เลือกประเภทความเสียหายของจุดที่เลือก",
+    noPointSelected: "ยังไม่ได้เลือกจุด",
+    d_wheel: "ล้อเสียหาย",
+    d_trolley: "หูลากเสียหาย",
+    d_handle: "หูจับเสียหาย",
+    d_zipper: "ซิปเสียหาย",
+    d_lock: "ตัวล็อกเสียหาย",
+    d_crack: "แตก / บุบ",
+    d_scratch: "เป็นรอย",
+    d_other: "อื่น ๆ",
+    inpDetail: "อธิบายอาการ เช่น ล้อฝั่งซ้ายติด หมุนไม่ได้...",
+    saveMarker: "บันทึกจุดเสียหาย →",
+    successTitle: "ส่งคำขอสำเร็จ",
+    successSub: "ระบบได้รับรายการแจ้งซ่อมของคุณแล้ว",
+    successFlow: "Submitted → Inspection → Repair → Completed",
+    statusModalTitle: "เช็คสถานะการซ่อม",
+    statusModalSub: "ตรวจสอบรายการแจ้งซ่อมของคุณ",
+    statusCodeInput: "กรอกรหัสแจ้งซ่อม เช่น BG-000241",
+    checkStatusBtn: "ตรวจสอบสถานะ →",
+    currentStatusLabel: "สถานะปัจจุบัน",
+    statusInspecting: "กำลังซ่อมแซม",
+    adminLoginSub: "กรุณากรอกรหัสผ่านเพื่อเข้าสู่ระบบผู้ดูแล",
+    cancelBtn: "ยกเลิก",
+    loginBtn: "เข้าสู่ระบบ →",
+    loginErrorMsg: "รหัสผ่านไม่ถูกต้อง กรุณาลองใหม่",
+    logoutBtn: "ออกจากระบบ",
+    btnDeptSettings: "⚙ ตั้งค่าแผนก",
+    btnBackDash: "← กลับหน้าแดชบอร์ด",
+    deptSettingsTitle: "แผนกและตำแหน่ง",
+    deptSettingsSub: "จัดการแผนก และกำหนดตำแหน่งที่มีในแต่ละแผนก",
+    btnAddDept: "+ เพิ่มแผนก",
+    dashSub: "จัดการและติดตามรายการแจ้งซ่อมกระเป๋าของนักบินและลูกเรือ",
+    statTotal: "Total Requests",
+    statRepairing: "Repairing",
+    statRepaired: "Repaired",
+    statDelivered: "Delivered to Crew",
+    tableHeadTitle: "ALL REPAIR REQUESTS",
+    prevBtn: "ก่อนหน้า",
+    nextBtn: "ถัดไป",
+    thId: "รหัส",
+    thName: "ชื่อ",
+    thEmail: "อีเมล",
+    thDept: "แผนกและตำแหน่ง",
+    thIssue: "ปัญหา",
+    thDate: "วันที่",
+    thStatus: "สถานะ",
+    thAction: "จัดการ",
+    dashFooter: "Internal Service • 2026 • Bag Care Administration",
+    footerSub: "BAG CARE • HR Welfare",
+    footerCopy: "Internal Service Prototype • 2026"
+  }
+};
+
+let currentLang = 'en';
+
+// ===== DEPARTMENT & POSITION DATA =====
+let departmentsData = [
+  { name: 'Flight Operations (Pilot)', positions: ['Captain', 'First Officer'] },
+  { name: 'Cabin Crew', positions: ['Purser', 'Flight Attendant', 'Senior Cabin Crew Member', 'Cabin Crew (Batch 7)', 'Cabin Crew (Batch 10)', 'Cabin Crew (Batch 11)', 'Cabin Crew (Batch 12)', 'Cabin Crew (Batch 14)', 'Cabin Crew (Batch 15)', 'Cabin Crew (Batch 16)', 'Cabin Crew (Batch 19)', 'Cabin Crew (Batch 24)', 'Cabin Crew (Batch 27)', 'Cabin Crew (Batch 28)', 'Cabin Crew (Batch 31)', 'Cabin Crew (Batch 34)', 'Cabin Crew (Batch 35)', 'Cabin Crew (Batch 36)', 'Cabin Crew (Batch 38)', 'Cabin Crew (Batch 39)', 'Cabin Crew (Batch 40)', 'Cabin Crew (Batch 43)', 'Cabin Crew (Batch 44)', 'Cabin Crew (Batch 45)', 'Cabin Crew (Batch 46)', 'Cabin Crew (Batch 47)', 'Cabin Crew (Batch 48)', 'Cabin Crew (Batch 49)', 'Cabin Crew (Batch 50)', 'Cabin Crew (Batch 51)', 'Cabin Crew (Batch 52)', 'Cabin Crew (Batch 53)', 'Cabin Crew (Batch 54)', 'Cabin Crew (Batch 55)', 'Cabin Crew (Batch 56)', 'Cabin Crew (Batch 57)', 'Cabin Crew (Batch 58)', 'Cabin Crew (Batch 59)', 'Cabin Crew (Batch 60)', 'Cabin Crew (Batch 61)', 'Cabin Crew (Batch 62)', 'Cabin Crew (Batch 63)', 'Cabin Crew (Batch 64)', 'Cabin Crew (Batch 65)', 'Cabin Crew (Batch 66)', 'Cabin Crew (Batch 67)', 'Cabin Crew (Batch 68)', 'Cabin Crew (Batch 69)', 'Cabin Crew (Batch 70)', 'Cabin Crew (Batch 71)', 'Cabin Crew (Batch 72)'] },
+  { name: 'Ground Services', positions: ['Ground Supervisor', 'Customer Service Agent'] }
+];
+
+// ===== REQUESTS DATA =====
+let requestsData = [
+  { id: 'TL678900', name: 'Apichaya L', email: 'apichayalhts@gmail.com', dept: 'Cabin Crew', pos: 'Cabin Crew (Batch 60)', issue: 'Handle broken', date: '14/09/2026', status: 'repair' },
+  { id: 'TL111111', name: 'Somchai P', email: 'somchai@gmail.com', dept: 'Flight Operations (Pilot)', pos: 'Captain', issue: 'Wheel stuck', date: '12/09/2026', status: 'delivered' },
+  { id: 'TL464564', name: 'Juthamas S', email: 'juthamas35653@gmail.com', dept: 'Flight Operations (Pilot)', pos: 'Captain', issue: 'Zipper broken', date: '11/09/2026', status: 'delivered' },
+  { id: 'TL565656', name: 'Narong K', email: 'narong@gmail.com', dept: 'Flight Operations (Pilot)', pos: 'Captain', issue: 'Cracked case', date: '11/09/2026', status: 'repair' },
+  { id: 'TL989898', name: 'Chanya M', email: 'chanya@gmail.com', dept: 'Cabin Crew', pos: 'Cabin Crew (Batch 39)', issue: 'Trolley handle jammed', date: '11/09/2026', status: 'repair' },
+  { id: 'TL484848', name: 'Kanya W', email: 'kanya@gmail.com', dept: 'Cabin Crew', pos: 'Cabin Crew (Batch 39)', issue: 'Scratched badly', date: '11/09/2026', status: 'repair' },
+  { id: 'TL565789', name: 'Anurak T', email: 'anurak@gmail.com', dept: 'Flight Operations (Pilot)', pos: 'First Officer', issue: 'Lock broken', date: '11/09/2026', status: 'repair' }
+];
+
+function updateDepartmentDropdowns() {
+  const selDept = document.getElementById('selDept');
+  const selPos = document.getElementById('selPos');
+  const currentVal = selDept.value;
+  selDept.innerHTML = `<option value="" disabled selected data-i18n="optDept">${translations[currentLang].optDept}</option>`;
+  departmentsData.forEach(dept => {
+    const opt = document.createElement('option');
+    opt.value = dept.name;
+    opt.textContent = dept.name;
+    selDept.appendChild(opt);
+  });
+  if(currentVal) {
+    selDept.value = currentVal;
+  } else {
+    selPos.innerHTML = `<option value="" disabled selected data-i18n="optPos">${translations[currentLang].optPos}</option>`;
+    selPos.setAttribute('disabled', 'true');
+  }
+}
+
+function onDepartmentChange() {
+  const selDept = document.getElementById('selDept').value;
+  const selPos = document.getElementById('selPos');
+  selPos.innerHTML = `<option value="" disabled selected data-i18n="optPos">${translations[currentLang].optPos}</option>`;
+  
+  const foundDept = departmentsData.find(d => d.name === selDept);
+  if (foundDept && foundDept.positions.length > 0) {
+    selPos.removeAttribute('disabled');
+    foundDept.positions.forEach(pos => {
+      const opt = document.createElement('option');
+      opt.value = pos;
+      opt.textContent = pos;
+      selPos.appendChild(opt);
+    });
+  } else {
+    selPos.setAttribute('disabled', 'true');
+  }
+}
+
+function setLanguage(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.getElementById('langLabel').textContent = lang === 'en' ? 'TH' : 'EN';
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (translations[lang][key]) {
+      el.innerHTML = translations[lang][key];
+    }
+  });
+
+  document.getElementById('inpEmpId').placeholder = translations[lang].inpEmpId;
+  document.getElementById('inpName').placeholder = translations[lang].inpName;
+  document.getElementById('inpEmail').placeholder = translations[lang].inpEmail;
+  document.getElementById('inpIssue').placeholder = translations[lang].inpIssue;
+  document.getElementById('statusCodeInput').placeholder = translations[lang].statusCodeInput;
+  document.getElementById('adminPassword').placeholder = lang === 'en' ? 'Password' : 'รหัสผ่าน';
+  document.getElementById('adminSearch').placeholder = lang === 'en' ? '⌕ Search ID TLxxxxxx / Name' : '⌕ ค้นหารหัส TLxxxxxx / ชื่อ';
+  document.getElementById('inpDetail').placeholder = translations[lang].inpDetail;
+
+  updateDepartmentDropdowns();
+  if(document.getElementById('selDept').value) {
+    onDepartmentChange();
+  }
+
+  const damageKeys = ['wheel', 'trolley', 'handle', 'zipper', 'lock', 'crack', 'scratch', 'other'];
+  const damageBtns = document.querySelectorAll('.damage-option');
+  damageBtns.forEach((btn, idx) => {
+    const key = damageKeys[idx];
+    btn.setAttribute('data-damage-key', key);
+    btn.textContent = translations[lang]['d_' + key];
+  });
+  updateViewerHint();
+}
+
+function toggleLanguage() {
+  setLanguage(currentLang === 'en' ? 'th' : 'en');
+}
+
+const cube = document.getElementById('cube');
+const front = document.getElementById('frontFace');
+const back = document.getElementById('backFace');
+const left = document.getElementById('leftFace');
+const right = document.getElementById('rightFace');
+const topFace = document.getElementById('topFace');
+const bottomFace = document.getElementById('bottomFace');
+const selectedList = document.getElementById('selectedList');
+const viewerHint = document.getElementById('viewerHint');
+
+let currentView = 'front', activePoint = null;
+let rotX = 4, rotY = -18;
+let isDragging = false, startX = 0, startY = 0;
+
+const stage = document.getElementById('stage');
+
+stage.addEventListener('mousedown', (e) => {
+  if (e.target.closest('.marker') || e.target.tagName === 'BUTTON') return;
+  isDragging = true;
+  startX = e.clientX;
+  startY = e.clientY;
+});
+
+window.addEventListener('mousemove', (e) => {
+  if (!isDragging) return;
+  const dx = e.clientX - startX;
+  const dy = e.clientY - startY;
+  startX = e.clientX;
+  startY = e.clientY;
+  rotY += dx * 0.6;
+  rotX -= dy * 0.6;
+  cube.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+});
+
+window.addEventListener('mouseup', () => {
+  isDragging = false;
+});
+
+stage.addEventListener('touchstart', (e) => {
+  if (e.target.closest('.marker') || e.target.tagName === 'BUTTON') return;
+  isDragging = true;
+  startX = e.touches[0].clientX;
+  startY = e.touches[0].clientY;
+});
+
+window.addEventListener('touchmove', (e) => {
+  if (!isDragging) return;
+  const dx = e.touches[0].clientX - startX;
+  const dy = e.touches[0].clientY - startY;
+  startX = e.touches[0].clientX;
+  startY = e.touches[0].clientY;
+  rotY += dx * 0.6;
+  rotX -= dy * 0.6;
+  cube.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+});
+
+window.addEventListener('touchend', () => {
+  isDragging = false;
+});
+
+function setView(v, btn) {
+  currentView = v; 
+  document.querySelectorAll('.view-buttons button').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active'); 
+  
+  const map = {
+    front: {x: 4, y: -18},
+    left: {x: 4, y: 72},
+    back: {x: 4, y: 162},
+    right: {x: 4, y: -108},
+    top: {x: -90, y: 0},
+    bottom: {x: 90, y: 0}
+  }; 
+  rotX = map[v].x;
+  rotY = map[v].y;
+  cube.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+  updateViewerHint();
+}
+
+function updateViewerHint() {
+  const faceName = currentLang === 'en' ? currentView.toUpperCase() : (currentView === 'front' ? 'ด้านหน้า' : currentView === 'back' ? 'ด้านหลัง' : currentView === 'left' ? 'ด้านซ้าย' : currentView === 'right' ? 'ด้านขวา' : currentView === 'top' ? 'ด้านบน' : 'ด้านล่าง');
+  if (currentLang === 'en') {
+    viewerHint.textContent = '● Click anywhere on the visible ' + currentView.toUpperCase() + ' face to place/change damage marker';
+  } else {
+    viewerHint.textContent = '● คลิกบริเวณใดก็ได้บน' + faceName + 'เพื่อปักหมุดหรือเปลี่ยนตำแหน่งจุดเสียหาย';
+  }
+}
+
+function clearAllMarkers() {
+  ['markersFront', 'markersBack', 'markersLeft', 'markersRight', 'markersTop', 'markersBottom'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.innerHTML = '';
+  });
+}
+
+function handleFaceClick(e, faceEl, faceName) {
+  e.stopPropagation();
+  const r = faceEl.getBoundingClientRect();
+  const x = ((e.clientX - r.left) / r.width) * 100;
+  const y = ((e.clientY - r.top) / r.height) * 100;
+  
+  activePoint = {x, y, face: faceName, damageKey: null};
+  
+  clearAllMarkers();
+  const markerContainer = document.getElementById('markers' + faceName.charAt(0).toUpperCase() + faceName.slice(1));
+  if(markerContainer) {
+    const m = document.createElement('div');
+    m.className = 'marker';
+    m.style.left = x + '%';
+    m.style.top = y + '%';
+    m.textContent = '1';
+    markerContainer.appendChild(m);
+  }
+
+  renderSelected();
+}
+
+front.addEventListener('click', e => handleFaceClick(e, front, 'front'));
+back.addEventListener('click', e => handleFaceClick(e, back, 'back'));
+left.addEventListener('click', e => handleFaceClick(e, left, 'left'));
+right.addEventListener('click', e => handleFaceClick(e, right, 'right'));
+topFace.addEventListener('click', e => handleFaceClick(e, topFace, 'top'));
+bottomFace.addEventListener('click', e => handleFaceClick(e, bottomFace, 'bottom'));
+
+document.querySelectorAll('.damage-option').forEach(b => b.addEventListener('click', () => {
+  if (!activePoint) {
+    alert(currentLang === 'en' ? 'Please tap on the suitcase to select a damage point first' : 'แตะบนกระเป๋าเพื่อเลือกจุดเสียหายก่อน');
+    return;
+  }
+  document.querySelectorAll('.damage-option').forEach(opt => opt.classList.remove('selected-option'));
+  b.classList.add('selected-option');
+  activePoint.damageKey = b.getAttribute('data-damage-key');
+  renderSelected();
+}));
+
+function removePoint() {
+  activePoint = null;
+  clearAllMarkers();
+  document.querySelectorAll('.damage-option').forEach(opt => opt.classList.remove('selected-option'));
+  renderSelected();
+}
+
+function renderSelected() {
+  if (!activePoint) {
+    selectedList.innerHTML = `<span class="chip" data-i18n="noPointSelected">${translations[currentLang].noPointSelected}</span>`;
+    return;
+  } 
+  const damageText = activePoint.damageKey ? translations[currentLang]['d_' + activePoint.damageKey] : (currentLang === 'en' ? 'Select damage type' : 'เลือกความเสียหาย');
+  selectedList.innerHTML = `<span class="chip">#1 (${activePoint.face.toUpperCase()}) • ${damageText} <button onclick="removePoint()" title="Remove">×</button></span>`;
+}
+
+function submitDemo() {
+  if(!activePoint) {
+    alert(currentLang === 'en' ? 'Please select a damage point on the suitcase' : 'กรุณาแตะเลือกจุดเสียหายบนกระเป๋าก่อน');
+    return;
+  }
+  const empId = document.getElementById('inpEmpId').value.trim() || 'TL' + Math.floor(100000 + Math.random() * 900000);
+  const name = document.getElementById('inpName').value.trim() || 'Crew Member';
+  const email = document.getElementById('inpEmail').value.trim() || 'crew@lionair.com';
+  const dept = document.getElementById('selDept').value || 'Cabin Crew';
+  const pos = document.getElementById('selPos').value || 'Flight Attendant';
+  const issue = document.getElementById('inpIssue').value.trim() || activePoint.damageKey;
+
+  const newReq = {
+    id: empId,
+    name: name,
+    email: email,
+    dept: dept,
+    pos: pos,
+    issue: issue,
+    date: new Date().toLocaleDateString('en-GB'),
+    status: 'repair'
+  };
+
+  requestsData.unshift(newReq);
+  
+  if (API_URL) {
+    fetch(API_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newReq)
+    }).catch(err => console.log(err));
+  }
+
+  updateDashboardStats();
+  renderAdminTable();
+
+  document.getElementById('successCodeDisplay').textContent = empId;
+  document.getElementById('success').style.display = 'block';
+  document.getElementById('success').scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+function openStatus() {
+  document.getElementById('statusModal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeStatus() {
+  document.getElementById('statusModal').classList.remove('show');
+  document.body.style.overflow = '';
+}
+function closeStatusByBackdrop(e) {
+  if (e.target.id === 'statusModal') closeStatus();
+}
+function checkStatus() {
+  const code = document.getElementById('statusCodeInput').value.trim();
+  if (!code) {
+    alert(currentLang === 'en' ? 'Please enter repair request ID' : 'กรุณากรอกรหัสแจ้งซ่อม');
+    return;
+  }
+  const found = requestsData.find(r => r.id.toLowerCase() === code.toLowerCase());
+  document.getElementById('statusResult').style.display = 'block';
+  document.getElementById('resId').textContent = code;
+  const badge = document.getElementById('resStatusBadge');
+  if(found) {
+    if(found.status === 'repair') {
+      badge.textContent = 'Repairing';
+      badge.className = 'status repair';
+    } else if(found.status === 'repaired') {
+      badge.textContent = 'Repaired';
+      badge.className = 'status repaired';
+    } else {
+      badge.textContent = 'Delivered';
+      badge.className = 'status done';
+    }
+  } else {
+    badge.textContent = 'Repairing';
+    badge.className = 'status repair';
+  }
+}
+
+function openAdmin() {
+  document.getElementById('adminLoginModal').classList.add('show');
+  document.getElementById('adminPassword').value = '';
+  document.getElementById('loginError').style.display = 'none';
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => document.getElementById('adminPassword').focus(), 120);
+}
+function closeAdminLogin() {
+  document.getElementById('adminLoginModal').classList.remove('show');
+  if (!document.getElementById('adminDashboard').classList.contains('show')) document.body.style.overflow = '';
+}
+function closeAdminLoginByBackdrop(e) {
+  if (e.target.id === 'adminLoginModal') closeAdminLogin();
+}
+function verifyAdmin() {
+  const pass = document.getElementById('adminPassword').value;
+  const error = document.getElementById('loginError');
+  if (pass === '123456') {
+    error.style.display = 'none';
+    document.getElementById('adminLoginModal').classList.remove('show');
+    document.getElementById('adminDashboard').classList.add('show');
+    document.body.style.overflow = 'hidden';
+    updateDashboardStats();
+    currentPage = 1;
+    renderAdminTable();
+  } else {
+    error.style.display = 'block';
+    document.getElementById('adminPassword').value = '';
+    document.getElementById('adminPassword').focus();
+  }
+}
+function logoutAdmin() {
+  document.getElementById('adminDashboard').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+let currentFilterStatus = 'all';
+let currentPage = 1;
+const itemsPerPage = 10;
+
+function filterByStatus(status) {
+  currentFilterStatus = status;
+  currentPage = 1;
+  document.querySelectorAll('.dashboard-stat').forEach(card => card.classList.remove('active-filter'));
+  document.getElementById('statCard-' + status).classList.add('active-filter');
+  renderAdminTable();
+}
+
+function filterAdminRows() {
+  currentPage = 1;
+  renderAdminTable();
+}
+
+function changePage(page) {
+  currentPage = page;
+  renderAdminTable();
+}
+
+function renderAdminTable() {
+  const tbody = document.getElementById('adminTableBody');
+  const q = document.getElementById('adminSearch') ? document.getElementById('adminSearch').value.toLowerCase().trim() : '';
+  tbody.innerHTML = '';
+
+  const filtered = requestsData.filter(r => {
+    const matchesStatus = currentFilterStatus === 'all' || r.status === currentFilterStatus;
+    const matchesSearch = !q || r.id.toLowerCase().startsWith(q) || r.name.toLowerCase().startsWith(q);
+    return matchesStatus && matchesSearch;
+  });
+
+  const totalPages = Math.ceil(filtered.length / itemsPerPage) || 1;
+  if(currentPage > totalPages) currentPage = totalPages;
+
+  const startIdx = (currentPage - 1) * itemsPerPage;
+  const paginatedItems = filtered.slice(startIdx, startIdx + itemsPerPage);
+
+  paginatedItems.forEach((r) => {
+    let statusBadgeHTML = '';
+    if(r.status === 'repair') {
+      statusBadgeHTML = `<span class="dashboard-status repair" onclick="cycleStatus('${r.id}')">Repairing</span>`;
+    } else if(r.status === 'repaired') {
+      statusBadgeHTML = `<span class="dashboard-status repaired" onclick="cycleStatus('${r.id}')">Repaired</span>`;
+    } else {
+      statusBadgeHTML = `<span class="dashboard-status delivered">Delivered</span>`;
+    }
+
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="dashboard-id">${r.id}</td>
+      <td>${r.name}</td>
+      <td>${r.email}</td>
+      <td class="dashboard-dept"><small>${r.dept}</small><strong>${r.pos}</strong></td>
+      <td>${r.issue}</td>
+      <td>${r.date}</td>
+      <td>${statusBadgeHTML}</td>
+      <td>
+        <button class="dashboard-delete" onclick="deleteRequest('${r.id}')" title="Delete" style="border:0;background:transparent;font-size:16px;color:#888;padding:6px 10px;border-radius:10px;cursor:pointer;transition:.2s;" onmouseover="this.style.color='#d7193f';this.style.background='#fff0f2'" onmouseout="this.style.color='#888';this.style.background='transparent'">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+        </button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  const paginationContainer = document.getElementById('paginationContainer');
+  if(filtered.length > itemsPerPage) {
+    let pagHTML = `<button class="page-btn" ${currentPage === 1 ? 'disabled style="opacity:0.5"' : ''} onclick="changePage(${currentPage - 1})">${translations[currentLang].prevBtn}</button>`;
+    for(let i = 1; i <= totalPages; i++) {
+      pagHTML += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</button>`;
+    }
+    pagHTML += `<button class="page-btn" ${currentPage === totalPages ? 'disabled style="opacity:0.5"' : ''} onclick="changePage(${currentPage + 1})">${translations[currentLang].nextBtn}</button>`;
+    paginationContainer.innerHTML = pagHTML;
+    paginationContainer.style.display = 'flex';
+  } else {
+    paginationContainer.innerHTML = '';
+    paginationContainer.style.display = 'none';
+  }
+}
+
+function cycleStatus(id) {
+  const req = requestsData.find(r => r.id === id);
+  if(!req) return;
+  if(req.status === 'repair') {
+    req.status = 'repaired';
+  } else if(req.status === 'repaired') {
+    req.status = 'delivered';
+  }
+  updateDashboardStats();
+  renderAdminTable();
+}
+
+function deleteRequest(id) {
+  if (confirm(currentLang === 'en' ? 'Do you want to delete this record?' : 'ต้องการลบรายการนี้หรือไม่?')) {
+    requestsData = requestsData.filter(r => r.id !== id);
+    updateDashboardStats();
+    renderAdminTable();
+  }
+}
+
+function updateDashboardStats() {
+  let total = requestsData.length;
+  let repair = 0;
+  let repaired = 0;
+  let delivered = 0;
+
+  requestsData.forEach(r => {
+    if (r.status === 'repair') repair++;
+    else if (r.status === 'repaired') repaired++;
+    else if (r.status === 'delivered') delivered++;
+  });
+
+  document.getElementById('statNum-all').textContent = total;
+  document.getElementById('statNum-repair').textContent = repair;
+  document.getElementById('statNum-repaired').textContent = repaired;
+  document.getElementById('statNum-delivered').textContent = delivered;
+}
+
+// ===== DEPARTMENT & POSITION MANAGEMENT LOGIC =====
+let expandedDeptIndex = null;
+
+function openDeptSettings() {
+  document.getElementById('deptModal').classList.add('show');
+  renderDeptSettings();
+}
+function closeDeptSettings() {
+  document.getElementById('deptModal').classList.remove('show');
+  updateDepartmentDropdowns();
+}
+
+function renderDeptSettings() {
+  const container = document.getElementById('deptListContainer');
+  container.innerHTML = '';
+  departmentsData.forEach((dept, dIndex) => {
+    const isExpanded = (expandedDeptIndex === dIndex);
+    const card = document.createElement('div');
+    card.style.cssText = 'border:1px solid #e7e7ea;border-radius:20px;padding:18px 22px;background:#fafafa;';
+    
+    let posHTML = '';
+    if (isExpanded) {
+      let tagsHTML = '';
+      dept.positions.forEach((pos, pIndex) => {
+        tagsHTML += `
+          <div draggable="true" ondragstart="dragStart(event, ${dIndex}, ${pIndex})" ondragover="allowDrop(event)" ondrop="dropPos(event, ${dIndex}, ${pIndex})" style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #e3e3e7;border-radius:999px;padding:6px 14px;font-size:13px;font-weight:600;cursor:grab;">
+            <span style="color:#bbb;font-size:11px;">⋮⋮</span>
+            <span>${pos}</span>
+            <button onclick="removePosition(${dIndex}, ${pIndex})" style="border:0;background:none;color:var(--red);cursor:pointer;font-size:15px;line-height:1;padding:0;" title="Remove">×</button>
+          </div>
+        `;
+      });
+
+      posHTML = `
+        <div style="margin-top:16px;padding-top:16px;border-top:1px solid #eadfd9;">
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;">
+            ${tagsHTML || '<span style="color:#777;font-size:13px;">ยังไม่มีตำแหน่งในแผนกนี้ (ลากวางเพื่อสลับลำดับได้)</span>'}
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;background:#fff;padding:10px 14px;border:1px solid #dedee3;border-radius:16px;">
+            <input id="newPosInput_${dIndex}" placeholder="พิมพ์ชื่อตำแหน่งใหม่ แล้วกดเพิ่ม" style="flex:1;border:0;outline:none;font-family:'Mitr',sans-serif;font-size:13px;background:transparent;" onkeydown="if(event.key==='Enter') addPosition(${dIndex})"/>
+            <button onclick="addPosition(${dIndex})" style="border:0;background:var(--ink);color:#fff;border-radius:12px;padding:8px 18px;font-weight:700;font-family:'Mitr',sans-serif;font-size:13px;white-space:nowrap;">+ เพิ่มตำแหน่ง</button>
+          </div>
+        </div>
+      `;
+    }
+
+    card.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <strong style="font-size:16px;">${dept.name}</strong>
+          <span style="background:#fff1f3;color:var(--red);border:1px solid #ffd0d8;border-radius:999px;padding:2px 10px;font-size:12px;font-weight:700;">${dept.positions.length}</span>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="dashboard-edit-btn ${isExpanded ? 'active-edit' : ''}" onclick="toggleExpandDept(${dIndex})" title="Edit Positions">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+          </button>
+          <button class="dashboard-delete" onclick="deleteDept(${dIndex})" title="Delete Department">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+          </button>
+        </div>
+      </div>
+      ${posHTML}
+    `;
+    container.appendChild(card);
+  });
+}
+
+function toggleExpandDept(dIndex) {
+  if (expandedDeptIndex === dIndex) {
+    expandedDeptIndex = null;
+  } else {
+    expandedDeptIndex = dIndex;
+  }
+  renderDeptSettings();
+}
+
+function addNewDept() {
+  const input = document.getElementById('newDeptInput');
+  const name = input.value.trim();
+  if(!name) return alert('กรุณากรอกชื่อแผนก');
+  departmentsData.push({ name, positions: [] });
+  input.value = '';
+  renderDeptSettings();
+}
+
+function deleteDept(dIndex) {
+  if(confirm('ต้องการลบแผนกนี้ใช่หรือไม่?')) {
+    departmentsData.splice(dIndex, 1);
+    if(expandedDeptIndex === dIndex) expandedDeptIndex = null;
+    renderDeptSettings();
+  }
+}
+
+function addPosition(dIndex) {
+  const input = document.getElementById('newPosInput_' + dIndex);
+  if(!input) return;
+  const posName = input.value.trim();
+  if(!posName) return alert('กรุณากรอกชื่อตำแหน่ง');
+  departmentsData[dIndex].positions.push(posName);
+  renderDeptSettings();
+}
+
+function removePosition(dIndex, pIndex) {
+  departmentsData[dIndex].positions.splice(pIndex, 1);
+  renderDeptSettings();
+}
+
+let draggedPos = null;
+function dragStart(e, dIndex, pIndex) {
+  draggedPos = { dIndex, pIndex };
+}
+function allowDrop(e) {
+  e.preventDefault();
+}
+function dropPos(e, targetDIndex, targetPIndex) {
+  e.preventDefault();
+  if(draggedPos.dIndex !== targetDIndex) return;
+  const positions = departmentsData[draggedPos.dIndex].positions;
+  const [movedItem] = positions.splice(draggedPos.pIndex, 1);
+  positions.splice(targetPIndex, 0, movedItem);
+  renderDeptSettings();
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    if (document.getElementById('deptModal').classList.contains('show')) closeDeptSettings();
+    else if (document.getElementById('adminDashboard').classList.contains('show')) logoutAdmin();
+    else closeAdminLogin();
+  }
+});
+
+window.onload = function() {
+  setLanguage('en');
+  updateDashboardStats();
+  renderAdminTable();
+  document.getElementById('statCard-all').classList.add('active-filter');
+};
+</script>
+</body>
+</html>
