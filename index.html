@@ -4,37 +4,45 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Lion Air — Luggage Care</title>
-<!-- นำเข้าฟอนต์ Mitr ทั้งหมดตามความต้องการ -->
 <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--red:#d7193f;--red2:#a9072b;--ink:#111318;--muted:#6b6f78;--line:#e7e7ea;--bg:#f7f7f8;--card:#fff;--green:#16845b;--blue:#1d6fa5;--shadow:0 24px 70px rgba(18,20,28,.10);}
 *{box-sizing:border-box} html{scroll-behavior:smooth} 
 body{margin:0;background:var(--bg);color:var(--ink);font-family:'Mitr',sans-serif;} 
 button,input,select,textarea{font:inherit} button{cursor:pointer}
-.nav{height:68px;background:rgba(255,255,255,.82);backdrop-filter:blur(18px);border-bottom:1px solid rgba(0,0,0,.06);display:flex;align-items:center;justify-content:space-between;padding:0 5vw;position:sticky;top:0;z-index:30} .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:-.02em} .lion{width:34px;height:34px;border-radius:50%;background:var(--red);display:grid;place-items:center;color:#fff;font-size:16px} .brand small{display:block;color:#8a8d95;font-size:10px;font-weight:600;letter-spacing:.12em;margin-top:1px}
-.hero{min-height:650px;background:radial-gradient(circle at 80% 20%,rgba(215,25,63,.12),transparent 35%),linear-gradient(180deg,#fff 0%,#f7f7f8 100%);display:grid;place-items:center;padding:70px 6vw 80px;overflow:hidden} .hero-inner{width:min(1180px,100%);display:grid;grid-template-columns:1.05fr .95fr;gap:50px;align-items:center} .eyebrow{color:var(--red);font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px} h1{font-size:clamp(38px,6vw,76px);line-height:1.1;font-weight:700;margin:0 0 24px;max-width:760px} .hero p{font-size:18px;line-height:1.7;color:var(--muted);max-width:590px;margin:0 0 30px} .cta{border:0;border-radius:999px;padding:15px 24px;background:var(--red);color:#fff;font-weight:700;box-shadow:0 12px 30px rgba(215,25,63,.25)}
-.hero-card{background:linear-gradient(145deg,#fff,#f0f0f2);border:1px solid #e9e9ec;border-radius:36px;box-shadow:var(--shadow);min-height:430px;display:grid;place-items:center;position:relative;overflow:hidden} .hero-card:before{content:"";position:absolute;width:350px;height:350px;border-radius:50%;background:rgba(215,25,63,.09);filter:blur(12px)}
 
-/* 3D Suitcase */
+.nav{height:68px;background:rgba(255,255,255,.82);backdrop-filter:blur(18px);border-bottom:1px solid rgba(0,0,0,.06);display:flex;align-items:center;justify-content:space-between;padding:0 5vw;position:sticky;top:0;z-index:30} 
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:-.02em} 
+.logo-img-wrap{height:36px;display:flex;align-items:center;flex-shrink:0}
+.logo-img-wrap img{height:32px;width:auto;object-fit:contain}
+.brand small{display:block;color:#8a8d95;font-size:10px;font-weight:600;letter-spacing:.12em;margin-top:1px}
+
+.hero{min-height:650px;background:radial-gradient(circle at 80% 20%,rgba(215,25,63,.12),transparent 35%),linear-gradient(180deg,#fff 0%,#f7f7f8 100%);display:grid;place-items:center;padding:70px 6vw 80px;overflow:hidden} 
+.hero-inner{width:min(1180px,100%);display:grid;grid-template-columns:1.05fr .95fr;gap:50px;align-items:center} 
+.eyebrow{color:var(--red);font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px} 
+h1{font-size:clamp(38px,6vw,76px);line-height:1.1;font-weight:700;margin:0 0 24px;max-width:760px} 
+.hero p{font-size:18px;line-height:1.7;color:var(--muted);max-width:590px;margin:0 0 30px} 
+.cta{border:0;border-radius:999px;padding:15px 24px;background:var(--red);color:#fff;font-weight:700;box-shadow:0 12px 30px rgba(215,25,63,.25)}
+.hero-card{background:linear-gradient(145deg,#fff,#f0f0f2);border:1px solid #e9e9ec;border-radius:36px;box-shadow:var(--shadow);min-height:430px;display:grid;place-items:center;position:relative;overflow:hidden} 
+.hero-card:before{content:"";position:absolute;width:350px;height:350px;border-radius:50%;background:rgba(215,25,63,.09);filter:blur(12px)}
+
 .suitcase{width:200px;height:290px;background:#18191d;border:3px solid #2e2f36;border-radius:32px;position:relative;box-shadow:0 25px 40px rgba(0,0,0,.22),inset 0 0 0 1px rgba(255,255,255,.08);transform:perspective(900px) rotateY(-12deg) rotateX(3deg);z-index:1} 
 .suitcase:before{content:"";position:absolute;inset:20px 18px;border:1.5px solid #3a3b42;border-radius:22px} 
 .wheel{position:absolute;width:24px;height:24px;border-radius:50%;background:#111215;border:4px solid #4a4b52;bottom:-14px;z-index:2} 
 .w1{left:18px} .w2{right:18px} 
 
 .bag-top-panel{position:absolute;top:20px;left:18px;right:18px;height:65px;border-bottom:1.5px solid #3a3b42;display:grid;place-items:center}
-.bag-logo{width:28px;height:28px;background:var(--red);border-radius:50%;display:grid;place-items:center;color:#fff;font-size:12px;box-shadow:0 2px 6px rgba(215,25,63,.4)}
+.bag-logo{width:28px;height:28px;display:grid;place-items:center;overflow:hidden}
+.bag-logo img{height:22px;width:auto;object-fit:contain}
 .bag-vertical-pocket{position:absolute;left:34px;top:100px;width:12px;height:130px;border:1.5px solid #3a3b42;border-radius:6px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:6px 0}
 .bag-vertical-pocket span{width:6px;height:2px;background:#3a3b42;border-radius:1px}
 
 .section{padding:80px 6vw} .section-inner{width:min(1180px,100%);margin:auto} .section-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:34px} .section h2{font-size:clamp(30px,3.5vw,46px);font-weight:700;margin:0} .section-head p{max-width:480px;color:var(--muted);line-height:1.6;margin:0}
-
 .form-card{background:#fff;border:1px solid #e5e5e8;border-radius:32px;box-shadow:0 18px 50px rgba(0,0,0,.06);padding:clamp(22px,4vw,44px)} 
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px} 
-
 .input-group{position:relative}
 .input-group span.icon{position:absolute;left:18px;top:50%;transform:translateY(-50%);color:#111318;font-size:16px;pointer-events:none}
 .input-group textarea ~ span.icon{top:22px;transform:none}
-
 .input-group input, .input-group select, .input-group textarea{
   width:100%;border:1px solid #dedee3;background:#fafafa;border-radius:16px;padding:15px 16px 15px 46px;outline:none;transition:.2s;color:var(--ink);font-family:'Mitr',sans-serif;
 }
@@ -42,7 +50,6 @@ button,input,select,textarea{font:inherit} button{cursor:pointer}
 .input-group input:focus, .input-group select:focus, .input-group textarea:focus{border-color:var(--red);background:#fff;box-shadow:0 0 0 4px rgba(215,25,63,.08)} 
 .full{grid-column:1/-1} 
 textarea{min-height:120px;resize:vertical} 
-
 .form-actions{display:flex;justify-content:space-between;align-items:center;margin-top:26px;gap:15px} 
 .next{border:0;background:var(--ink);color:#fff;border-radius:999px;padding:14px 28px;font-weight:700;font-family:'Mitr',sans-serif;} 
 
@@ -56,7 +63,6 @@ textarea{min-height:120px;resize:vertical}
 
 .stage{height:510px;display:grid;place-items:center;perspective:1200px;position:relative;cursor:grab;touch-action:none}
 .stage:active{cursor:grabbing} 
-
 .cube{width:200px;height:290px;position:relative;transform-style:preserve-3d;transition:transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);transform:rotateX(4deg) rotateY(-18deg)} 
 
 .face{position:absolute;border:3px solid #35363d;background:linear-gradient(135deg,#1c1d22,#0d0e11);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);cursor:pointer} 
@@ -71,7 +77,7 @@ textarea{min-height:120px;resize:vertical}
 .back:before{content:"";position:absolute;inset:20px 18px;border:1.5px solid rgba(255,255,255,.08);border-radius:22px}
 
 .markers{position:absolute;inset:0;z-index:10;pointer-events:none} 
-.marker{position:absolute;width:24px;height:24px;border-radius:50%;background:var(--red);border:2px solid #fff;box-shadow:0 0 0 5px rgba(215,25,63,.25);transform:translate(-50%,-50%);animation:pop .2s ease-out;display:grid;place-items:center;font-size:11px;color:#fff;font-weight:700} 
+.marker{position:absolute;width:18px;height:18px;border-radius:50%;background:var(--red);border:2px solid #fff;box-shadow:0 0 0 5px rgba(215,25,63,.3);transform:translate(-50%,-50%);animation:pop .2s ease-out;}
 @keyframes pop{from{transform:translate(-50%,-50%) scale(.2)}to{transform:translate(-50%,-50%) scale(1)}} 
 
 .viewer-hint{position:absolute;bottom:22px;left:25px;color:#aeb1b8;font-size:12px} 
@@ -90,279 +96,121 @@ textarea{min-height:120px;resize:vertical}
 
 .success{display:none;text-align:center;padding:60px 20px} .success-icon{width:76px;height:76px;border-radius:50%;display:grid;place-items:center;background:#eaf8f1;color:var(--green);font-size:35px;margin:0 auto 18px} .success h2{font-size:42px;font-weight:700;margin:0 0 10px} .success p{color:var(--muted)} .code{display:inline-block;background:#f2f2f4;padding:10px 15px;border-radius:12px;font-weight:700;margin:8px}
 .footer{padding:50px 6vw;background:#111318;color:#fff} .footer-inner{width:min(1180px,100%);margin:auto;display:flex;justify-content:space-between;gap:30px} .footer small{color:#8f929a}
-@media(max-width:800px){.nav{padding:0 20px} .hero{padding:55px 20px} .hero-inner{grid-template-columns:1fr;gap:35px} .hero-card{min-height:340px} .section{padding:60px 20px} .grid,.damage-layout{grid-template-columns:1fr} .form-actions{position:sticky;bottom:12px;background:rgba(255,255,255,.88);backdrop-filter:blur(14px);padding:10px;border-radius:20px} .viewer{min-height:590px} .stage{height:490px} h1{font-size:44px}}
 
-/* ===== ADMIN ACCESS (COMPACT BUTTONS) ===== */
-.admin-btn{
-  height:32px;
-  padding:0 10px;
-  border:1px solid #e6e6e8;
-  background:#fff;
-  border-radius:10px;
-  display:flex;
-  align-items:center;
-  gap:5px;
-  color:var(--ink);
-  font-size:12px;
-  font-weight:700;
-  font-family:'Mitr',sans-serif;
-  transition:.2s;
-}
-.admin-btn svg {
-  width:13px;
-  height:13px;
-}
-.admin-btn:hover{
-  border-color:var(--red);
-  color:var(--red);
-  box-shadow:0 4px 12px rgba(215,25,63,.10);
-}
-.nav-actions{display:flex;align-items:center;gap:6px}
+.admin-btn{height:42px;padding:0 16px;border:1px solid #e6e6e8;background:#fff;border-radius:14px;display:flex;align-items:center;gap:8px;color:var(--ink);font-size:14px;font-weight:700;font-family:'Mitr',sans-serif;transition:.2s}
+.admin-btn:hover{border-color:var(--red);color:#d7193f;box-shadow:0 8px 20px rgba(215,25,63,.10)}
+.nav-actions{display:flex;align-items:center;gap:8px}
 
-/* ===== STATUS & LOGIN MODALS ===== */
-.admin-modal{
-  position:fixed;inset:0;background:rgba(17,19,24,.48);backdrop-filter:blur(10px);
-  display:none;align-items:center;justify-content:center;padding:24px;z-index:100;
-}
+.admin-modal{position:fixed;inset:0;background:rgba(17,19,24,.48);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:24px;z-index:100}
 .admin-modal.show{display:flex}
-.admin-box{
-  width:min(520px,100%);background:#fff;border:1px solid #e5e5e8;border-radius:32px;box-shadow:0 30px 90px rgba(0,0,0,.22);padding:36px;text-align:center;position:relative;
-}
-.admin-head{
-  display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;
-}
-.admin-close{position:absolute;top:22px;right:22px;width:36px;height:36px;border:1px solid #e6e6e8;background:#fff;border-radius:12px;font-size:18px;cursor:pointer}
-.status{display:inline-flex;padding:5px 12px;border-radius:999px;font-size:12px;font-weight:700;background:#fff4d8;color:#9a6a00}
-.status.done{background:#dff5ec;color:var(--green)}
-.status.repaired{background:#e0f2fe;color:#0369a1}
+.admin-box{width:min(1080px,100%);max-height:min(760px,calc(100vh - 48px));overflow:auto;background:#fff;border:1px solid #e5e5e8;border-radius:28px;box-shadow:0 30px 90px rgba(0,0,0,.20)}
+.admin-head{padding:22px 26px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:16px;position:sticky;top:0;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);z-index:2}
+.admin-title{display:flex;align-items:center;gap:12px}
+.admin-title-icon{width:40px;height:40px;border-radius:12px;background:var(--red);color:#fff;display:grid;place-items:center}
+.admin-close{width:40px;height:40px;border:1px solid #e6e6e8;background:#fff;border-radius:12px;font-size:20px}
+.admin-body{padding:26px}
+.status{display:inline-flex;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:700;background:#fff4d8;color:#9a6a00}
+.status.done{background:#eaf8f1;color:var(--green)}
 
-/* ===== ADMIN LOGIN MODAL ===== */
-.admin-login-modal{
-  position:fixed;inset:0;background:rgba(17,19,24,.48);backdrop-filter:blur(10px);
-  display:none;align-items:center;justify-content:center;padding:24px;z-index:120;
-}
+.admin-login-modal{position:fixed;inset:0;background:rgba(17,19,24,.48);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:24px;z-index:120}
 .admin-login-modal.show{display:flex}
-.admin-login-box{
-  width:min(430px,100%);background:#fff;border-radius:28px;padding:34px;
-  box-shadow:0 30px 90px rgba(0,0,0,.22);border:1px solid #eee;text-align:center;
-}
-.admin-login-icon{
-  width:58px;height:58px;border-radius:18px;background:var(--red);color:#fff;
-  display:grid;place-items:center;margin:0 auto 18px;font-size:25px;
-}
+.admin-login-box{width:min(430px,100%);background:#fff;border-radius:28px;padding:34px;box-shadow:0 30px 90px rgba(0,0,0,.22);border:1px solid #eee;text-align:center}
+.admin-login-icon{width:58px;height:58px;border-radius:18px;background:var(--red);color:#fff;display:grid;place-items:center;margin:0 auto 18px;font-size:25px}
 .admin-login-box h2{margin:0 0 7px;font-size:27px}
 .admin-login-box p{margin:0 0 22px;color:var(--muted);font-size:14px}
-.admin-password{
-  width:100%;border:1px solid #dedee3;background:#fafafa;border-radius:15px;
-  padding:15px 17px;outline:none;text-align:center;letter-spacing:.18em;
-}
+.admin-password{width:100%;border:1px solid #dedee3;background:#fafafa;border-radius:15px;padding:15px 17px;outline:none;text-align:center;letter-spacing:.18em}
 .admin-password:focus{border-color:var(--red);background:#fff;box-shadow:0 0 0 4px rgba(215,25,63,.08)}
 .admin-login-actions{display:flex;gap:10px;margin-top:14px}
-.admin-login-actions button{flex:1;padding:11px;border-radius:12px;font-family:'Mitr',sans-serif;font-weight:700;font-size:13px}
+.admin-login-actions button{flex:1;padding:13px;border-radius:14px;font-family:'Mitr',sans-serif;font-weight:700}
 .admin-login-cancel{border:1px solid #e2e2e5;background:#fff}
 .admin-login-submit{border:0;background:var(--red);color:#fff}
 .login-error{color:var(--red);font-size:13px;margin-top:12px;display:none}
 
-/* ===== ADMIN DASHBOARD MODAL ===== */
-.admin-dashboard-modal{
-  position:fixed;inset:0;background:#fffaf6;display:none;z-index:110;overflow:auto;
-}
+.admin-dashboard-modal{position:fixed;inset:0;background:#fffaf6;display:none;z-index:110;overflow:auto}
 .admin-dashboard-modal.show{display:block}
-.admin-dashboard{
-  min-height:100vh;padding:30px 3.5vw 42px;
-  background:radial-gradient(circle at 5% 0%,rgba(215,25,63,.07),transparent 28%),#fffaf6;
-}
-.dashboard-actions{display:flex;gap:9px}
-.dashboard-btn{
-  border:1px solid #e8ded8;background:#fff;border-radius:10px;padding:6px 11px;
-  font-family:'Mitr',sans-serif;font-weight:700;color:#4b4745;font-size:12px;
-}
+.admin-dashboard{min-height:100vh;padding:30px 3.5vw 42px;background:radial-gradient(circle at 5% 0%,rgba(215,25,63,.07),transparent 28%),#fffaf6}
+.dashboard-btn{border:1px solid #e8ded8;background:#fff;border-radius:13px;padding:10px 15px;font-family:'Mitr',sans-serif;font-weight:700;color:#4b4745}
 .dashboard-btn:hover{border-color:var(--red);color:#d7193f}
 .dashboard-btn.danger{background:var(--red);color:#fff;border-color:var(--red)}
-
-/* DROPDOWN SETTINGS */
-.dropdown-container {
-  position: relative;
-  display: inline-block;
-}
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  right: 0;
-  top: calc(100% + 6px);
-  background: #fff;
-  min-width: 170px;
-  box-shadow: 0 10px 30px rgba(0,0,0,.12);
-  border: 1px solid #eadfd9;
-  border-radius: 12px;
-  z-index: 20;
-  overflow: hidden;
-}
-.dropdown-menu.show {
-  display: block;
-}
-.dropdown-item {
-  width: 100%;
-  padding: 10px 16px;
-  text-align: left;
-  background: #fff;
-  border: 0;
-  font-family: 'Mitr', sans-serif;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--ink);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: .15s;
-}
-.dropdown-item:hover {
-  background: #fff5f6;
-  color: var(--red);
-}
-
 .dashboard-title{margin:15px 0 20px}
 .dashboard-title h1{font-size:clamp(28px,3vw,42px);line-height:1.1;margin:0 0 5px}
 .dashboard-title p{color:var(--muted);margin:0;font-size:14px}
-.dashboard-stats{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:28px;
-}
-.dashboard-stat{
-  min-height:108px;background:#fff;border:1px solid #eadfd9;border-top:4px solid transparent;
-  border-radius:22px;padding:18px 22px;box-shadow:0 12px 32px rgba(80,40,20,.07);
-  cursor:pointer;transition:.2s;
-}
+.dashboard-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:28px}
+.dashboard-stat{min-height:108px;background:#fff;border:1px solid #eadfd9;border-top:4px solid var(--red);border-radius:22px;padding:18px 22px;box-shadow:0 12px 32px rgba(80,40,20,.07);cursor:pointer;transition:.2s}
 .dashboard-stat:hover{transform:translateY(-2px);box-shadow:0 15px 40px rgba(215,25,63,.12)}
-.dashboard-stat.active-filter{
-  background:linear-gradient(145deg,#d7193f,#b70829);color:#fff;border-color:#9f071f;border-top:4px solid #9f071f;
-  box-shadow:0 15px 35px rgba(215,25,63,.24);
-}
-.dashboard-stat.active-filter .label{opacity:.95}
+.dashboard-stat.active-filter{border-color:var(--red);background:#fff5f6;box-shadow:0 10px 30px rgba(215,25,63,.18)}
 .dashboard-stat .num{font-size:34px;font-weight:800;line-height:1;margin-bottom:8px}
 .dashboard-stat .label{font-size:13px;font-weight:700;opacity:.72}
-.dashboard-panel{
-  background:#fff;border:1px solid #eadfd9;border-radius:28px;padding:25px 26px;
-  box-shadow:0 15px 45px rgba(80,40,20,.06);
-}
-.dashboard-panel-head{
-  display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;margin-bottom:18px;
-}
+.dashboard-panel{background:#fff;border:1px solid #eadfd9;border-radius:28px;padding:25px 26px;box-shadow:0 15px 45px rgba(80,40,20,.06)}
+.dashboard-panel-head{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;margin-bottom:18px}
 .dashboard-panel-head h2{margin:0;color:var(--red);font-size:20px}
 .dashboard-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.dashboard-search{
-  width:290px;border:1px solid #eadfd9;background:#fff;border-radius:13px;padding:11px 14px;
-  outline:none;font-family:'Mitr',sans-serif;
-}
+.dashboard-search{width:290px;border:1px solid #eadfd9;background:#fff;border-radius:13px;padding:11px 14px;outline:none;font-family:'Mitr',sans-serif}
 .dashboard-search:focus{border-color:var(--red);box-shadow:0 0 0 4px rgba(215,25,63,.07)}
-.page-btn{
-  border:1px solid #eadfd9;background:#fff;border-radius:10px;padding:8px 12px;font-weight:700;
-  font-family:'Mitr',sans-serif;
-}
-.page-btn.active,.page-btn:hover{background:var(--red);color:#fff;border-color:#d7193f}
+.page-btn{border:1px solid #eadfd9;background:#fff;border-radius:10px;padding:8px 12px;font-weight:700;font-family:'Mitr',sans-serif}
+.page-btn.active,.page-btn:hover{background:var(--red);color:#fff;border-color:var(--red)}
 .dashboard-table-wrap{overflow:auto}
 .dashboard-table{width:100%;border-collapse:collapse;min-width:1050px}
-.dashboard-table th{
-  padding:13px 14px;text-align:left;font-size:12px;color:#756b66;
-  background:#fffcfa;border-bottom:2px solid #eadfd9;white-space:nowrap;
-}
-.dashboard-table td{
-  padding:17px 14px;border-bottom:1px solid #eee4df;font-size:14px;vertical-align:middle;
-}
+.dashboard-table th{padding:13px 14px;text-align:left;font-size:12px;color:#756b66;background:#fffcfa;border-bottom:2px solid #eadfd9;white-space:nowrap}
+.dashboard-table td{padding:17px 14px;border-bottom:1px solid #eee4df;font-size:14px;vertical-align:middle}
 .dashboard-table tbody tr:hover{background:#fffaf8}
 .dashboard-id{font-weight:800}
 .dashboard-dept small{display:block;color:#8b817c;font-size:11px;margin-bottom:2px}
-.dashboard-dept span{font-size:13px;font-weight:normal;}
+.dashboard-dept span{font-size:13px;font-weight:normal}
 
-/* Blue Eye preview button */
-.view-marker-btn{
-  border:1px solid #bae6fd;background:#e0f2fe;color:#0284c7;font-size:15px;padding:8px 10px;border-radius:10px;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;justify-content:center;margin-right:8px;vertical-align:middle;
-}
-.view-marker-btn:hover{background:#0284c7;color:#fff;border-color:#bae6fd}
+.view-marker-btn{border:1px solid #bae6fd;background:#e0f2fe;color:#0284c7;font-size:15px;padding:8px 10px;border-radius:10px;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;justify-content:center;margin-right:8px;vertical-align:middle}
+.view-marker-btn:hover{background:#0284c7;color:#fff;border-color:#0284c7}
 
-/* Status Badges */
-.dashboard-status{
-  display:inline-flex;align-items:center;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:800;cursor:pointer;user-select:none;transition:.15s;
-}
+.dashboard-status{display:inline-flex;align-items:center;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:800;cursor:pointer;user-select:none;transition:.15s}
 .dashboard-status.repair{background:#fff0bf;color:#d27b00;border:1px solid #ffe69c}
 .dashboard-status.repair:hover{filter:brightness(0.95)}
 .dashboard-status.repaired{background:#e0f2fe;color:#0369a1;border:1px solid #bae6fd}
 .dashboard-status.repaired:hover{filter:brightness(0.95)}
 .dashboard-status.delivered{background:#dff5ec;color:#176b52;border:1px solid #bbf7d0;cursor:default}
 
-.dashboard-delete{
-  border:1px solid #e3e3e7;background:#fff;font-size:15px;color:#999;padding:8px 10px;border-radius:10px;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;
-}
-.dashboard-delete:hover{background:#fff0f2;border-color:#ffd0d8;color:var(--red)}
-
-.dashboard-edit-btn{
-  border:1px solid #e3e3e7;background:#fff;font-size:15px;color:#999;padding:8px 10px;border-radius:10px;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;justify-content:center;
-}
-.dashboard-edit-btn:hover{background:#fff0f2;border-color:#ffd0d8;color:var(--red)}
-.dashboard-edit-btn.active-edit{background:var(--red);border-color:var(--red);color:#fff}
-
+.dashboard-delete{border:0;background:transparent;font-size:18px;color:#756b66;padding:6px 10px;border-radius:10px;cursor:pointer;transition:.2s}
+.dashboard-delete:hover{background:#fff0f2;color:var(--red)}
 .dashboard-footer{margin-top:16px;color:#918681;font-size:12px}
 
-/* Custom Modal Styles */
-.custom-modal{
-  position:fixed;inset:0;background:rgba(17,19,24,.48);backdrop-filter:blur(10px);
-  display:none;align-items:center;justify-content:center;padding:24px;z-index:200;
-}
+.custom-modal{position:fixed;inset:0;background:rgba(17,19,24,.52);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:24px;z-index:200}
 .custom-modal.show{display:flex}
-.custom-modal-box{
-  width:min(420px,100%);background:#fff;border-radius:32px;padding:34px 28px;text-align:center;
-  box-shadow:0 30px 90px rgba(0,0,0,.22);border:1px solid #eee;animation:popModal .25s ease-out;
-}
-@keyframes popModal{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
-.custom-modal-icon{
-  width:68px;height:68px;border-radius:50%;background:#fcf6e8;display:grid;place-items:center;margin:0 auto 18px;
-}
-.custom-modal-box h3{margin:0 0 8px;font-size:22px;font-weight:700}
-.custom-modal-box p{margin:0 0 24px;color:var(--muted);font-size:14px;line-height:1.5}
-.custom-modal-actions{display:flex;gap:12px}
-.custom-modal-actions button{flex:1;padding:13px;border-radius:16px;font-family:'Mitr',sans-serif;font-weight:700;font-size:14px;cursor:pointer}
+.custom-modal-box{width:min(420px,100%);background:#fff;border-radius:28px;padding:32px;box-shadow:0 30px 90px rgba(0,0,0,.25);border:1px solid #eee;text-align:center}
+.custom-modal-icon{width:60px;height:60px;border-radius:18px;background:#fff8e6;color:#b7791f;display:grid;place-items:center;margin:0 auto 18px}
+.custom-modal-box h3{margin:0 0 8px;font-size:22px}
+.custom-modal-box p{margin:0 0 24px;color:var(--muted);font-size:14px;line-height:1.6}
+.custom-modal-actions{display:flex;gap:10px}
+.custom-modal-actions button{flex:1;padding:13px;border-radius:14px;font-family:'Mitr',sans-serif;font-weight:700}
 .btn-cancel{border:1px solid #e2e2e5;background:#fff;color:var(--ink)}
-.btn-cancel:hover{background:#fafafa}
-.btn-confirm{border:0;background:var(--red);color:#fff;box-shadow:0 8px 20px rgba(215,25,63,.25)}
-.btn-confirm:hover{background:var(--red2)}
+.btn-confirm{border:0;background:var(--red);color:#fff}
 
-body,
-button,input,select,textarea,
-.nav,
-.admin-modal,
-.admin-btn,
-.admin-tab,
-.admin-table,
-.status,
-.chip,
-.viewer,
-.damage-panel,
-.form-card,
-.footer,
-h1,h2,h3,h4,h5,h6,
-.eyebrow,
-.brand,
-.admin-title strong,
-.section-head h2,
-.hero h1{
-  font-family:'Mitr',sans-serif;
-}
+.dropdown-container{position:relative}
+.dropdown-menu{position:absolute;right:0;top:calc(100% + 8px);background:#fff;border:1px solid #eadfd9;border-radius:16px;box-shadow:0 15px 40px rgba(0,0,0,.12);padding:8px;display:none;flex-direction:column;gap:4px;min-width:180px;z-index:50}
+.dropdown-menu.show{display:flex}
+.dropdown-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border:0;background:transparent;border-radius:10px;font-family:'Mitr',sans-serif;font-size:13px;font-weight:700;color:var(--ink);text-align:left;width:100%}
+.dropdown-item:hover{background:#fff5f6;color:var(--red)}
+
+body,button,input,select,textarea,.nav,.admin-modal,.admin-btn,.admin-table,.status,.chip,.viewer,.damage-panel,.form-card,.footer,h1,h2,h3,h4,h5,h6,.eyebrow,.brand,.admin-title strong,.section-head h2,.hero h1{font-family:'Mitr',sans-serif;}
 </style>
 </head>
 <body>
 <nav class="nav">
-  <div class="brand"><div class="lion">✦</div><div>THAI LION AIR<small data-i18n="navSub">LUGGAGE CARE</small></div></div>
+  <div class="brand">
+    <div class="logo-img-wrap">
+      <img src="https://i.postimg.cc/zfpHWxk5/049ac6ae-4fa0-4fb3-9ca3-609520086cbd-removebg-preview.png" alt="Thai Lion Air Logo" style="mix-blend-mode: multiply;"/>
+    </div>
+    <div>THAI LION AIR<small data-i18n="navSub">BAG CARE • HR Welfare</small></div>
+  </div>
   <div class="nav-actions">
     <button class="admin-btn" onclick="openStatus()" aria-label="Check Status">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#111318" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#111318" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
       <span data-i18n="navStatus">เช็คสถานะ</span>
     </button>
     <button class="admin-btn" onclick="toggleLanguage()" aria-label="Language Toggle">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#111318" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-      <span id="langLabel">EN</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#111318" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+      <span id="langLabel">TH</span>
     </button>
     <button class="admin-btn" onclick="openAdmin()" aria-label="Admin Dashboard">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#111318" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06-.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#111318" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06-.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
       <span>Admin</span>
     </button>
   </div>
@@ -378,7 +226,7 @@ h1,h2,h3,h4,h5,h6,
     </div>
     <div class="hero-card">
       <div class="suitcase">
-        <div class="bag-top-panel"><div class="bag-logo">✦</div></div>
+        <div class="bag-top-panel"><div class="bag-logo"><img src="https://i.postimg.cc/zfpHWxk5/049ac6ae-4fa0-4fb3-9ca3-609520086cbd-removebg-preview.png" alt="Logo" style="mix-blend-mode: multiply;"/></div></div>
         <div class="bag-vertical-pocket"><span></span><span></span></div>
         <div class="wheel w1"></div><div class="wheel w2"></div>
       </div>
@@ -449,8 +297,8 @@ h1,h2,h3,h4,h5,h6,
           <div class="viewer-title"><strong data-i18n="viewerTitle">Interactive 3D Baggage</strong><br><small data-i18n="viewerSub">หมุนและแตะเลือกบนกระเป๋า</small></div>
           <div class="view-buttons">
             <button class="active" onclick="setView('front',this)" data-view="front">Front</button>
-            <button onclick="setView('left',this)" data-view="left">Left</button>
             <button onclick="setView('back',this)" data-view="back">Back</button>
+            <button onclick="setView('left',this)" data-view="left">Left</button>
             <button onclick="setView('right',this)" data-view="right">Right</button>
             <button onclick="setView('top',this)" data-view="top">Top</button>
             <button onclick="setView('bottom',this)" data-view="bottom">Bottom</button>
@@ -460,7 +308,7 @@ h1,h2,h3,h4,h5,h6,
           <div class="cube" id="cube">
             <!-- FRONT FACE -->
             <div class="face front" id="frontFace">
-              <div class="bag-top-panel"><div class="bag-logo">✦</div></div>
+              <div class="bag-top-panel"><div class="bag-logo"><img src="https://i.postimg.cc/zfpHWxk5/049ac6ae-4fa0-4fb3-9ca3-609520086cbd-removebg-preview.png" alt="Logo" style="mix-blend-mode: multiply;"/></div></div>
               <div class="bag-vertical-pocket"><span></span><span></span></div>
               <div class="wheel w1"></div><div class="wheel w2"></div>
               <div class="markers" id="markersFront"></div>
@@ -475,11 +323,29 @@ h1,h2,h3,h4,h5,h6,
               <div class="markers" id="markersBack"></div>
             </div>
             <!-- LEFT FACE -->
-            <div class="face left" id="leftFace"><div class="markers" id="markersLeft"></div></div>
+            <div class="face left" id="leftFace">
+              <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:16px;height:80px;background:#3a3b42;border:1.5px solid #4a4b52;border-radius:8px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:6px 0;">
+                <div style="width:7px;height:7px;border-radius:50%;background:#222328;"></div>
+                <div style="width:7px;height:7px;border-radius:50%;background:#222328;"></div>
+              </div>
+              <div class="markers" id="markersLeft"></div>
+            </div>
             <!-- RIGHT FACE -->
-            <div class="face right" id="rightFace"><div class="markers" id="markersRight"></div></div>
+            <div class="face right" id="rightFace">
+              <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:16px;height:80px;background:#3a3b42;border:1.5px solid #4a4b52;border-radius:8px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:6px 0;">
+                <div style="width:7px;height:7px;border-radius:50%;background:#222328;"></div>
+                <div style="width:7px;height:7px;border-radius:50%;background:#222328;"></div>
+              </div>
+              <div class="markers" id="markersRight"></div>
+            </div>
             <!-- TOP FACE -->
-            <div class="face top" id="topFace"><div class="markers" id="markersTop"></div></div>
+            <div class="face top" id="topFace">
+              <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:80px;height:16px;background:#3a3b42;border:1.5px solid #4a4b52;border-radius:8px;display:flex;justify-content:space-between;align-items:center;padding:0 6px;">
+                <div style="width:7px;height:7px;border-radius:50%;background:#222328;"></div>
+                <div style="width:7px;height:7px;border-radius:50%;background:#222328;"></div>
+              </div>
+              <div class="markers" id="markersTop"></div>
+            </div>
             <!-- BOTTOM FACE -->
             <div class="face bottom" id="bottomFace"><div class="markers" id="markersBottom"></div></div>
           </div>
@@ -492,14 +358,14 @@ h1,h2,h3,h4,h5,h6,
         <p data-i18n="panelSub">เลือกประเภทความเสียหายของจุดที่เลือก</p>
         <div class="selected" id="selectedList"><span class="chip" data-i18n="noPointSelected">ยังไม่ได้เลือกจุด</span></div>
         <div class="damage-grid" id="damageGrid">
-          <button class="damage-option" data-damage-key="wheel">ล้อเสียหาย</button>
-          <button class="damage-option" data-damage-key="trolley">หูลากเสียหาย</button>
-          <button class="damage-option" data-damage-key="handle">หูจับเสียหาย</button>
-          <button class="damage-option" data-damage-key="zipper">ซิปเสียหาย</button>
-          <button class="damage-option" data-damage-key="lock">ตัวล็อกเสียหาย</button>
-          <button class="damage-option" data-damage-key="crack">แตก / บุบ</button>
-          <button class="damage-option" data-damage-key="scratch">เป็นรอย</button>
-          <button class="damage-option" data-damage-key="other">อื่น ๆ</button>
+          <button class="damage-option" data-damage-key="wheel" data-i18n="d_wheel">ล้อ</button>
+          <button class="damage-option" data-damage-key="trolley" data-i18n="d_trolley">หูลาก</button>
+          <button class="damage-option" data-damage-key="handle" data-i18n="d_handle">หูจับ</button>
+          <button class="damage-option" data-damage-key="zipper" data-i18n="d_zipper">ซิป</button>
+          <button class="damage-option" data-damage-key="lock" data-i18n="d_lock">ตัวล็อก</button>
+          <button class="damage-option" data-damage-key="crack" data-i18n="d_crack">แตก / บุบ</button>
+          <button class="damage-option" data-damage-key="scratch" data-i18n="d_scratch">เป็นรอย</button>
+          <button class="damage-option" data-damage-key="other" data-i18n="d_other">อื่น ๆ</button>
         </div>
         
         <div style="margin-top:22px;" class="input-group full">
@@ -527,42 +393,42 @@ h1,h2,h3,h4,h5,h6,
   </div>
 </section>
 
-<!-- ===== 3D PREVIEW MODAL FOR ADMIN ===== -->
 <div class="admin-modal" id="markerPreviewModal" onclick="closeMarkerPreviewByBackdrop(event)">
-  <div class="admin-box" role="dialog" aria-modal="true" style="max-width:720px;padding:0;text-align:left;">
-    <div class="admin-head" style="padding:22px 26px;margin-bottom:0;border-bottom:1px solid #e5e5e8;">
+  <div class="admin-box" role="dialog" aria-modal="true" style="max-width:760px;">
+    <div class="admin-head">
       <div class="admin-title">
         <div class="admin-title-icon" style="background:#0284c7;">👁</div>
         <div>
-          <strong style="font-size:20px" data-i18n="previewTitle">ตำแหน่งจุดเสียหาย (Damage Marker)</strong>
-          <div style="font-size:12px;color:#777" data-i18n="previewSub">แสดงตำแหน่งที่พนักงานระบุบนกระเป๋า</div>
+          <strong style="font-size:20px" id="previewModalTitle">ตำแหน่งจุดเสียหาย</strong>
+          <div style="font-size:12px;color:#777" id="previewModalSub">แสดงจุดความเสียหายที่พนักงานระบุ</div>
         </div>
       </div>
-      <button class="admin-close" style="position:static;" onclick="closeMarkerPreview()">×</button>
+      <button class="admin-close" onclick="closeMarkerPreview()">×</button>
     </div>
     <div class="admin-body" style="padding:20px;">
-      <div class="viewer" style="min-height:480px;background:radial-gradient(circle at 50% 40%,#33363c,#151619 70%);">
+      <div id="previewDetailBox" style="margin-bottom:16px;padding:14px 18px;background:#f0f9ff;border:1px solid #bae6fd;border-radius:16px;font-size:14px;color:#0369a1;">
+        <strong>รายละเอียดอาการที่พนักงานแจ้ง:</strong> <span id="previewDetailText">-</span>
+      </div>
+      <div class="viewer" style="min-height:460px;background:radial-gradient(circle at 50% 40%,#33363c,#151619 70%);">
         <div class="viewer-top">
-          <div class="viewer-title"><strong id="previewFaceLabel">ด้านหน้า (FRONT)</strong><br><small data-i18n="previewRotSub">หมุนกระเป๋าเพื่อตรวจสอบมุมมองอื่นได้</small></div>
+          <div class="viewer-title"><strong id="previewFaceLabel">FRONT</strong><br><small>หมุนและตรวจสอบตำแหน่ง</small></div>
           <div class="view-buttons">
             <button class="active" onclick="setPreviewView('front',this)" data-preview-view="front">Front</button>
-            <button onclick="setPreviewView('left',this)" data-preview-view="left">Left</button>
             <button onclick="setPreviewView('back',this)" data-preview-view="back">Back</button>
+            <button onclick="setPreviewView('left',this)" data-preview-view="left">Left</button>
             <button onclick="setPreviewView('right',this)" data-preview-view="right">Right</button>
             <button onclick="setPreviewView('top',this)" data-preview-view="top">Top</button>
             <button onclick="setPreviewView('bottom',this)" data-preview-view="bottom">Bottom</button>
           </div>
         </div>
-        <div class="stage" id="previewStage" style="height:380px;cursor:grab;touch-action:none;">
+        <div class="stage" id="previewStage" style="height:360px;cursor:grab;touch-action:none;">
           <div class="cube" id="previewCube" style="transform:rotateX(4deg) rotateY(-18deg);">
-            <!-- FRONT FACE -->
             <div class="face front" id="prevFrontFace">
-              <div class="bag-top-panel"><div class="bag-logo">✦</div></div>
+              <div class="bag-top-panel"><div class="bag-logo"><img src="https://i.postimg.cc/zfpHWxk5/049ac6ae-4fa0-4fb3-9ca3-609520086cbd-removebg-preview.png" alt="Logo" style="mix-blend-mode: multiply;"/></div></div>
               <div class="bag-vertical-pocket"><span></span><span></span></div>
               <div class="wheel w1"></div><div class="wheel w2"></div>
               <div class="markers" id="prevMarkersFront"></div>
             </div>
-            <!-- BACK FACE -->
             <div class="face back" id="prevBackFace">
               <div class="bag-handle-assembly" style="position:absolute;top:-42px;left:50%;transform:translateX(-50%);width:70px;height:45px;z-index:5">
                 <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:50px;height:10px;background:#5a5b62;border:2px solid #777880;border-radius:5px"></div>
@@ -571,13 +437,27 @@ h1,h2,h3,h4,h5,h6,
               <div class="wheel w1"></div><div class="wheel w2"></div>
               <div class="markers" id="prevMarkersBack"></div>
             </div>
-            <!-- LEFT FACE -->
-            <div class="face left" id="prevLeftFace"><div class="markers" id="prevMarkersLeft"></div></div>
-            <!-- RIGHT FACE -->
-            <div class="face right" id="prevRightFace"><div class="markers" id="prevMarkersRight"></div></div>
-            <!-- TOP FACE -->
-            <div class="face top" id="prevTopFace"><div class="markers" id="prevMarkersTop"></div></div>
-            <!-- BOTTOM FACE -->
+            <div class="face left" id="prevLeftFace">
+              <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:16px;height:80px;background:#3a3b42;border:1.5px solid #4a4b52;border-radius:8px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:6px 0;">
+                <div style="width:7px;height:7px;border-radius:50%;background:#222328;"></div>
+                <div style="width:7px;height:7px;border-radius:50%;background:#222328;"></div>
+              </div>
+              <div class="markers" id="prevMarkersLeft"></div>
+            </div>
+            <div class="face right" id="prevRightFace">
+              <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:16px;height:80px;background:#3a3b42;border:1.5px solid #4a4b52;border-radius:8px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:6px 0;">
+                <div style="width:7px;height:7px;border-radius:50%;background:#222328;"></div>
+                <div style="width:7px;height:7px;border-radius:50%;background:#222328;"></div>
+              </div>
+              <div class="markers" id="prevMarkersRight"></div>
+            </div>
+            <div class="face top" id="prevTopFace">
+              <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:80px;height:16px;background:#3a3b42;border:1.5px solid #4a4b52;border-radius:8px;display:flex;justify-content:space-between;align-items:center;padding:0 6px;">
+                <div style="width:7px;height:7px;border-radius:50%;background:#222328;"></div>
+                <div style="width:7px;height:7px;border-radius:50%;background:#222328;"></div>
+              </div>
+              <div class="markers" id="prevMarkersTop"></div>
+            </div>
             <div class="face bottom" id="prevBottomFace"><div class="markers" id="prevMarkersBottom"></div></div>
           </div>
         </div>
@@ -586,60 +466,37 @@ h1,h2,h3,h4,h5,h6,
   </div>
 </div>
 
-<!-- ===== STATUS CHECK MODAL (EXACT LAYOUT AS REQUESTED) ===== -->
 <div class="admin-modal" id="statusModal" onclick="closeStatusByBackdrop(event)">
   <div class="admin-box" role="dialog" aria-modal="true">
-    <button class="admin-close" onclick="closeStatus()">×</button>
-    <div style="font-size:26px;font-weight:700;color:var(--red);margin-bottom:6px;" data-i18n="statusModalTitle">เช็คสถานะซ่อมกระเป๋า</div>
-    <div style="font-size:14px;color:var(--muted);margin-bottom:26px;" data-i18n="statusModalSub">สำหรับนักบินและลูกเรือ ไทยไลอ้อนแอร์</div>
-    
-    <div class="input-group" style="text-align:left;margin-bottom:16px;">
-      <span class="icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-      </span>
-      <input id="statusCodeInput" placeholder="รหัสพนักงาน TLxxxxxx" style="padding-left:46px;border-radius:18px;height:54px;" onkeydown="if(event.key==='Enter') checkStatus()">
-    </div>
-    
-    <button class="save-marker" style="width:100%;border-radius:18px;height:54px;font-size:16px;background:var(--red);display:flex;align-items:center;justify-content:center;gap:8px;" onclick="checkStatus()">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-      <span data-i18n="checkStatusBtn">ค้นหา</span>
-    </button>
-    
-    <!-- SUCCESS RESULT CARD -->
-    <div id="statusResultContainer" style="margin-top:22px;display:none;text-align:left;">
-      <div id="statusResultCard" style="border:1px solid #eadfd9;background:#fff;border-radius:22px;padding:22px;box-shadow:0 10px 30px rgba(0,0,0,.04);">
-        <div style="font-size:14px;color:#4b4745;margin-bottom:8px;"><strong data-i18n="resNameLabel">ชื่อ-นามสกุล:</strong> <span id="resName">--</span></div>
-        <div style="font-size:14px;color:#4b4745;margin-bottom:8px;"><strong data-i18n="resIssueLabel">ปัญหา:</strong> <span id="resIssue">--</span></div>
-        <div style="font-size:14px;color:#4b4745;margin-bottom:12px;"><strong data-i18n="resDateLabel">วันที่แจ้ง:</strong> <span id="resDate">--</span></div>
-        <div style="font-size:14px;color:#4b4745;display:flex;align-items:center;gap:8px;">
-          <strong data-i18n="resStatusLabel">สถานะ:</strong> <span id="resStatusBadge" class="status repair">--</span>
+    <div class="admin-head">
+      <div class="admin-title">
+        <div class="admin-title-icon">✓</div>
+        <div>
+          <strong style="font-size:20px" data-i18n="statusModalTitle">เช็คสถานะการซ่อม</strong>
+          <div style="font-size:12px;color:#777" data-i18n="statusModalSub">ตรวจสอบรายการแจ้งซ่อมของคุณ</div>
         </div>
       </div>
+      <button class="admin-close" onclick="closeStatus()">×</button>
     </div>
-    
-    <div style="margin-top:24px;">
-      <button onclick="closeStatus()" style="background:none;border:0;color:var(--muted);font-weight:600;font-size:14px;cursor:pointer;" data-i18n="backToForm">← กลับไปหน้าฟอร์ม</button>
+    <div class="admin-body">
+      <div class="input-group" style="max-width:520px;margin:auto">
+        <input id="statusCodeInput" placeholder="กรอกรหัสแจ้งซ่อม เช่น BG-000241" style="padding-left:16px">
+      </div>
+      <button class="save-marker" style="max-width:520px;display:block;margin:14px auto 0" onclick="checkStatus()" data-i18n="checkStatusBtn">ตรวจสอบสถานะ →</button>
+      <div id="statusResult" style="display:none;max-width:520px;margin:22px auto 0;padding:20px;border:1px solid #e7e7ea;border-radius:18px;background:#fafafa">
+        <strong id="resId">BG-000241</strong>
+        <p style="margin:8px 0;color:#777" data-i18n="currentStatusLabel">สถานะปัจจุบัน</p>
+        <span class="status" id="resStatusBadge">Repairing</span>
+        <p style="margin:14px 0 0;color:#777;font-size:13px" data-i18n="successFlow">Submitted → Inspection → Repair → Completed</p>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- ===== NOT FOUND MODAL (EXACT LAYOUT WITH LINE BREAK) ===== -->
-<div class="custom-modal" id="notFoundModal" onclick="closeNotFoundByBackdrop(event)">
-  <div class="custom-modal-box" style="width:min(420px,100%);border-radius:32px;padding:36px 28px;text-align:center;">
-    <div class="custom-modal-icon" style="width:64px;height:64px;border-radius:50%;background:#fff4d8;margin:0 auto 18px;display:grid;place-items:center;color:#d27b00;font-size:28px;">
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-    </div>
-    <h3 style="font-size:24px;font-weight:700;margin:0 0 8px;" data-i18n="notFoundTitle">ไม่พบข้อมูล</h3>
-    <p style="font-size:14px;color:var(--muted);margin:0 0 24px;line-height:1.6;" data-i18n="notFoundDesc">ไม่พบข้อมูลการแจ้งซ่อมของรหัสพนักงานนี้<br>กรุณาตรวจสอบใหม่อีกครั้ง</p>
-    <button class="btn-confirm" onclick="closeNotFound()" style="width:100%;border-radius:16px;padding:14px;background:var(--red);color:#fff;border:0;font-weight:700;font-size:15px;" data-i18n="notFoundBtn">ตกลง</button>
-  </div>
-</div>
-
-<!-- ===== ADMIN LOGIN MODAL ===== -->
 <div class="admin-login-modal" id="adminLoginModal" onclick="closeAdminLoginByBackdrop(event)">
   <div class="admin-login-box" role="dialog" aria-modal="true">
     <div class="admin-login-icon">⚙</div>
-    <h2>Admin Login</h2>
+    <h2 data-i18n="adminLoginTitle">Admin Login</h2>
     <p data-i18n="adminLoginSub">กรุณากรอกรหัสผ่านเพื่อเข้าสู่ระบบผู้ดูแล</p>
     <input id="adminPassword" class="admin-password" type="password" placeholder="รหัสผ่าน" maxlength="20"
            onkeydown="if(event.key==='Enter') verifyAdmin()">
@@ -651,12 +508,13 @@ h1,h2,h3,h4,h5,h6,
   </div>
 </div>
 
-<!-- ===== ADMIN DASHBOARD MODAL ===== -->
 <div class="admin-dashboard-modal" id="adminDashboard">
   <nav class="nav">
-    <div class="brand"><div class="lion">✦</div><div>THAI LION AIR<small data-i18n="navSub">LUGGAGE CARE</small></div></div>
+    <div class="brand">
+      <div class="logo-img-wrap"><img src="https://i.postimg.cc/zfpHWxk5/049ac6ae-4fa0-4fb3-9ca3-609520086cbd-removebg-preview.png" alt="Logo" style="mix-blend-mode: multiply;"/></div>
+      <div>THAI LION AIR<small data-i18n="navSub">BAG CARE • HR Welfare</small></div>
+    </div>
     <div class="nav-actions">
-      <!-- DROPDOWN SETTINGS BUTTON -->
       <div class="dropdown-container">
         <button class="dashboard-btn" onclick="toggleSettingsDropdown(event)" style="border-color:var(--red);color:var(--red);display:flex;align-items:center;gap:5px;">
           <span data-i18n="btnSettings">⚙ ตั้งค่า</span>
@@ -665,11 +523,11 @@ h1,h2,h3,h4,h5,h6,
         <div class="dropdown-menu" id="settingsDropdown">
           <button class="dropdown-item" onclick="openDeptSettings(); closeSettingsDropdown();">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-            <span data-i18n="menuDept">การตั้งค่าแผนก</span>
+            <span data-i18n="dropdownDept">การตั้งค่าแผนก</span>
           </button>
           <button class="dropdown-item" onclick="openPasswordSettings(); closeSettingsDropdown();">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-            <span data-i18n="menuPass">การตั้งค่ารหัสผ่าน</span>
+            <span data-i18n="dropdownPass">การตั้งค่ารหัสผ่าน</span>
           </button>
         </div>
       </div>
@@ -679,7 +537,7 @@ h1,h2,h3,h4,h5,h6,
 
   <div class="admin-dashboard">
     <div class="dashboard-title">
-      <h1 data-i18n="dashTitle">Admin Dashboard</h1>
+      <h1>Admin Dashboard</h1>
       <p data-i18n="dashSub">จัดการและติดตามรายการแจ้งซ่อมกระเป๋าของนักบินและลูกเรือ</p>
     </div>
 
@@ -713,9 +571,7 @@ h1,h2,h3,h4,h5,h6,
               <th data-i18n="thAction">จัดการ</th>
             </tr>
           </thead>
-          <tbody id="adminTableBody">
-            <!-- Dynamic rows injected via JS -->
-          </tbody>
+          <tbody id="adminTableBody"></tbody>
         </table>
       </div>
       <div class="dashboard-footer" data-i18n="dashFooter">Internal Service • 2026 • Bag Care Administration</div>
@@ -723,49 +579,25 @@ h1,h2,h3,h4,h5,h6,
   </div>
 </div>
 
-<!-- ===== DEPARTMENT SETTINGS PAGE MODAL ===== -->
-<div class="admin-dashboard-modal" id="deptModal">
-  <nav class="nav">
-    <div class="brand"><div class="lion">✦</div><div>THAI LION AIR<small>LUGGAGE CARE</small></div></div>
-    <div class="nav-actions">
-      <button class="dashboard-btn" onclick="closeDeptSettings()" style="border-color:var(--red);color:var(--red)" data-i18n="btnBackDash">← กลับหน้าแดชบอร์ด</button>
-    </div>
-  </nav>
-
-  <div class="admin-dashboard">
-    <div class="dashboard-title">
-      <h1 style="color:var(--red);" data-i18n="deptSettingsTitle">แผนกและตำแหน่ง</h1>
-      <p data-i18n="deptSettingsSub">จัดการแผนก และกำหนดตำแหน่งที่มีในแต่ละแผนก (ลากวางเพื่อสลับลำดับ)</p>
-    </div>
-
-    <div class="dashboard-panel">
-      <div id="deptListContainer" style="display:flex;flex-direction:column;gap:16px;margin-bottom:24px;">
-        <!-- Dynamic Department Cards -->
-      </div>
-
-      <div style="display:flex;gap:12px;align-items:center;background:#fafafa;padding:16px;border:1px solid #eadfd9;border-radius:20px;">
-        <input id="newDeptInput" placeholder="Add new department name..." style="flex:1;border:1px solid #dedee3;background:#fff;border-radius:16px;padding:14px 16px;outline:none;font-family:'Mitr',sans-serif;"/>
-        <button onclick="addNewDept()" style="border:0;background:var(--ink);color:#fff;border-radius:16px;padding:14px 26px;font-weight:700;font-family:'Mitr',sans-serif;white-space:nowrap;" data-i18n="btnAddDept">+ เพิ่มแผนก</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ===== PASSWORD SETTINGS FULL-SCREEN MODAL ===== -->
 <div class="admin-dashboard-modal" id="passwordModal">
   <nav class="nav">
-    <div class="brand"><div class="lion">✦</div><div>THAI LION AIR<small>LUGGAGE CARE</small></div></div>
+    <div class="brand">
+      <div class="logo-img-wrap"><img src="https://i.postimg.cc/zfpHWxk5/049ac6ae-4fa0-4fb3-9ca3-609520086cbd-removebg-preview.png" alt="Logo" style="mix-blend-mode: multiply;"/></div>
+      <div>THAI LION AIR<small>LUGGAGE CARE</small></div>
+    </div>
     <div class="nav-actions">
       <button class="dashboard-btn" onclick="closePasswordSettings()" style="border-color:var(--red);color:var(--red)" data-i18n="btnBackDash">← กลับหน้าแดชบอร์ด</button>
     </div>
   </nav>
 
   <div class="admin-dashboard">
-    <div class="dashboard-panel" style="max-width:680px;margin:30px auto 0;padding:40px;border-radius:32px;">
-      <h2 style="color:var(--red);font-size:26px;margin:0 0 6px;" data-i18n="passModalTitle">การตั้งค่ารหัสผ่าน</h2>
-      <p style="color:var(--muted);font-size:14px;margin:0 0 30px;" data-i18n="passModalSub">เปลี่ยนรหัสผ่านสำหรับเข้าใช้งานระบบแอดมิน</p>
-      
-      <div style="display:flex;flex-direction:column;gap:20px;">
+    <div class="dashboard-title">
+      <h1 style="color:var(--red);" data-i18n="passTitle">การตั้งค่ารหัสผ่าน</h1>
+      <p data-i18n="passSub">เปลี่ยนรหัสผ่านสำหรับเข้าใช้งานระบบแอดมิน</p>
+    </div>
+
+    <div class="dashboard-panel" style="max-width:680px;margin:auto;">
+      <div style="display:flex;flex-direction:column;gap:18px;">
         <div>
           <label style="font-size:14px;font-weight:700;display:block;margin-bottom:8px;" data-i18n="lblCurrPass">รหัสผ่านเดิม</label>
           <input id="currentPassInput" type="password" class="admin-password" placeholder="กรอกรหัสผ่านเดิม" style="text-align:left;letter-spacing:normal;padding:15px 17px;border-radius:15px;">
@@ -778,41 +610,68 @@ h1,h2,h3,h4,h5,h6,
           <label style="font-size:14px;font-weight:700;display:block;margin-bottom:8px;" data-i18n="lblConfPass">ยืนยันรหัสผ่านใหม่</label>
           <input id="confirmPassInput" type="password" class="admin-password" placeholder="ยืนยันรหัสผ่านใหม่" style="text-align:left;letter-spacing:normal;padding:15px 17px;border-radius:15px;">
         </div>
-        <div id="passErrorMsg" style="color:var(--red);font-size:13px;display:none;" data-i18n="passErrorMsg">รหัสผ่านเดิมไม่ถูกต้อง หรือรหัสผ่านใหม่ไม่ตรงกัน</div>
+        <div id="passErrorMsg" style="color:var(--red);font-size:13px;display:none;" data-i18n="passErrorTxt">รหัสผ่านเดิมไม่ถูกต้อง หรือรหัสผ่านใหม่ไม่ตรงกัน</div>
         <button class="save-marker" onclick="saveNewPassword()" style="margin-top:10px;padding:16px;border-radius:16px;font-size:16px;" data-i18n="savePassBtn">บันทึกรหัสผ่านใหม่ →</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ===== CUSTOM CONFIRMATION MODAL ===== -->
+<div class="admin-dashboard-modal" id="deptModal">
+  <nav class="nav">
+    <div class="brand">
+      <div class="logo-img-wrap"><img src="https://i.postimg.cc/zfpHWxk5/049ac6ae-4fa0-4fb3-9ca3-609520086cbd-removebg-preview.png" alt="Logo" style="mix-blend-mode: multiply;"/></div>
+      <div>THAI LION AIR<small>BAG CARE • HR Welfare</small></div>
+    </div>
+    <div class="nav-actions">
+      <button class="dashboard-btn" onclick="closeDeptSettings()" style="border-color:var(--red);color:var(--red)" data-i18n="btnBackDash">← กลับหน้าแดชบอร์ด</button>
+    </div>
+  </nav>
+
+  <div class="admin-dashboard">
+    <div class="dashboard-title">
+      <h1 style="color:var(--red);" data-i18n="deptSettingsTitle">แผนกและตำแหน่ง</h1>
+      <p data-i18n="deptSettingsSub">จัดการแผนก และกำหนดตำแหน่งที่มีในแต่ละแผนก (ลากวางเพื่อสลับลำดับ)</p>
+    </div>
+
+    <div class="dashboard-panel">
+      <div id="deptListContainer" style="display:flex;flex-direction:column;gap:16px;margin-bottom:24px;"></div>
+      <div style="display:flex;gap:12px;align-items:center;background:#fafafa;padding:16px;border:1px solid #eadfd9;border-radius:20px;">
+        <input id="newDeptInput" placeholder="เพิ่มชื่อแผนกใหม่..." style="flex:1;border:1px solid #dedee3;background:#fff;border-radius:16px;padding:14px 16px;outline:none;font-family:'Mitr',sans-serif;"/>
+        <button onclick="addNewDept()" style="border:0;background:var(--ink);color:#fff;border-radius:16px;padding:14px 26px;font-weight:700;font-family:'Mitr',sans-serif;white-space:nowrap;" data-i18n="btnAddDept">+ เพิ่มแผนก</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="custom-modal" id="customModal">
   <div class="custom-modal-box">
     <div class="custom-modal-icon">
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b7791f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
     </div>
-    <h3 id="modalTitle">ยืนยันการลบแผนก</h3>
-    <p id="modalDesc">คุณแน่ใจหรือไม่ที่จะลบแผนกนี้?<br>ตำแหน่งทั้งหมดในแผนกจะถูกลบไปด้วย</p>
+    <h3 id="modalTitle">แจ้งเตือน</h3>
+    <p id="modalDesc">ยืนยันการดำเนินการ</p>
     <div class="custom-modal-actions">
-      <button class="btn-cancel" id="modalCancelBtn" onclick="closeCustomModal()" data-i18n="cancelBtn">ยกเลิก</button>
-      <button class="btn-confirm" id="modalConfirmBtn" data-i18n="confirmBtn">ยืนยัน</button>
+      <button class="btn-cancel" id="modalCancelBtn" onclick="closeCustomModal()">ยกเลิก</button>
+      <button class="btn-confirm" id="modalConfirmBtn">ตกลง</button>
     </div>
   </div>
 </div>
 
 <footer class="footer">
   <div class="footer-inner">
-    <div><strong>THAI LION AIR</strong><br><small data-i18n="footerSub">LUGGAGE CARE</small></div>
+    <div><strong>THAI LION AIR</strong><br><small data-i18n="footerSub">BAG CARE • HR Welfare</small></div>
     <small data-i18n="footerCopy">Internal Service Prototype • 2026</small>
   </div>
 </footer>
 
 <script>
 const API_URL = "";
+let adminPasswordVal = "123456";
 
 const translations = {
   en: {
-    navSub: "LUGGAGE CARE",
+    navSub: "BAG CARE • HR Welfare",
     navStatus: "Check Status",
     heroEyebrow: "Your luggage care journey starts here.",
     heroTitle: 'PICK.<br><span style="color:var(--red)">KA.</span><br>CREW.',
@@ -832,11 +691,11 @@ const translations = {
     panelTitle: "What's damaged?",
     panelSub: "Select the damage type for the chosen location.",
     noPointSelected: "No point selected yet",
-    d_wheel: "Damaged Wheel",
-    d_trolley: "Damaged Trolley Handle",
-    d_handle: "Damaged Carry Handle",
-    d_zipper: "Damaged Zipper",
-    d_lock: "Damaged Lock",
+    d_wheel: "Wheel",
+    d_trolley: "Trolley Handle",
+    d_handle: "Carry Handle",
+    d_zipper: "Zipper",
+    d_lock: "Lock",
     d_crack: "Cracked / Dented",
     d_scratch: "Scratched",
     d_other: "Other",
@@ -846,41 +705,24 @@ const translations = {
     successSub: "Your repair request has been successfully received.",
     successFlow: "Submitted → Inspection → Repair → Completed",
     statusModalTitle: "Check Repair Status",
-    statusModalSub: "For Thai Lion Air pilots & cabin crew",
-    statusCodeInput: "Employee ID TLxxxxxx",
-    checkStatusBtn: "Search",
-    resNameLabel: "Full Name:",
-    resIssueLabel: "Issue:",
-    resDateLabel: "Request Date:",
-    resStatusLabel: "Status:",
-    backToForm: "← Back to Form",
-    notFoundTitle: "Not Found",
-    notFoundDesc: "No repair request found for this employee ID.<br>Please check again.",
-    notFoundBtn: "OK",
-    statusRepairing: "Repairing",
-    statusRepaired: "Repaired",
-    statusDelivered: "Delivered to Crew",
+    statusModalSub: "Track your repair request item",
+    statusCodeInput: "Enter request ID e.g. BG-000241",
+    checkStatusBtn: "Check Status →",
+    currentStatusLabel: "Current Status",
+    statusInspecting: "Repairing",
+    adminLoginTitle: "Admin Login",
     adminLoginSub: "Please enter password to access admin system",
     cancelBtn: "Cancel",
     loginBtn: "Login →",
     loginErrorMsg: "Incorrect password. Please try again.",
     logoutBtn: "Logout",
     btnSettings: "⚙ Settings",
-    menuDept: "Department Settings",
-    menuPass: "Password Settings",
+    dropdownDept: "Department Settings",
+    dropdownPass: "Password Settings",
     btnBackDash: "← Back to Dashboard",
-    passModalTitle: "Password Settings",
-    passModalSub: "Change administrator login password",
-    lblCurrPass: "Current Password",
-    lblNewPass: "New Password",
-    lblConfPass: "Confirm New Password",
-    passErrorMsg: "Incorrect current password or new passwords do not match.",
-    savePassBtn: "Save New Password →",
-    confirmBtn: "Confirm",
     deptSettingsTitle: "Departments & Positions",
     deptSettingsSub: "Manage departments and their available positions (Drag & Drop to reorder)",
     btnAddDept: "+ Add Department",
-    dashTitle: "Admin Dashboard",
     dashSub: "Manage and track pilot and cabin crew baggage repair requests",
     statTotal: "Total Requests",
     statRepairing: "Repairing",
@@ -898,14 +740,18 @@ const translations = {
     thStatus: "STATUS",
     thAction: "ACTION",
     dashFooter: "Internal Service • 2026 • Bag Care Administration",
-    footerSub: "LUGGAGE CARE",
+    footerSub: "BAG CARE • HR Welfare",
     footerCopy: "Internal Service Prototype • 2026",
-    previewTitle: "Damage Marker Position",
-    previewSub: "Showing damage point marked by employee",
-    previewRotSub: "Rotate baggage to inspect other angles"
+    passTitle: "Password Settings",
+    passSub: "Change administrator access password",
+    lblCurrPass: "Current Password",
+    lblNewPass: "New Password",
+    lblConfPass: "Confirm New Password",
+    passErrorTxt: "Current password is incorrect or new passwords do not match",
+    savePassBtn: "Save New Password →"
   },
   th: {
-    navSub: "LUGGAGE CARE",
+    navSub: "BAG CARE • HR Welfare",
     navStatus: "เช็คสถานะ",
     heroEyebrow: "จุดเริ่มต้นการดูแลกระเป๋าเดินทางของคุณ",
     heroTitle: 'PICK.<br><span style="color:var(--red)">KA.</span><br>CREW.',
@@ -925,11 +771,11 @@ const translations = {
     panelTitle: "กระเป๋าเสียหายส่วนไหน?",
     panelSub: "เลือกประเภทความเสียหายของจุดที่เลือก",
     noPointSelected: "ยังไม่ได้เลือกจุด",
-    d_wheel: "ล้อเสียหาย",
-    d_trolley: "หูลากเสียหาย",
-    d_handle: "หูจับเสียหาย",
-    d_zipper: "ซิปเสียหาย",
-    d_lock: "ตัวล็อกเสียหาย",
+    d_wheel: "ล้อ",
+    d_trolley: "หูลาก",
+    d_handle: "หูจับ",
+    d_zipper: "ซิป",
+    d_lock: "ตัวล็อก",
     d_crack: "แตก / บุบ",
     d_scratch: "เป็นรอย",
     d_other: "อื่น ๆ",
@@ -938,42 +784,25 @@ const translations = {
     successTitle: "ส่งคำขอสำเร็จ",
     successSub: "ระบบได้รับรายการแจ้งซ่อมของคุณแล้ว",
     successFlow: "Submitted → Inspection → Repair → Completed",
-    statusModalTitle: "เช็คสถานะซ่อมกระเป๋า",
-    statusModalSub: "สำหรับนักบินและลูกเรือ ไทยไลอ้อนแอร์",
-    statusCodeInput: "รหัสพนักงาน TLxxxxxx",
-    checkStatusBtn: "ค้นหา",
-    resNameLabel: "ชื่อ-นามสกุล:",
-    resIssueLabel: "ปัญหา:",
-    resDateLabel: "วันที่แจ้ง:",
-    resStatusLabel: "สถานะ:",
-    backToForm: "← กลับไปหน้าฟอร์ม",
-    notFoundTitle: "ไม่พบข้อมูล",
-    notFoundDesc: "ไม่พบข้อมูลการแจ้งซ่อมของรหัสพนักงานนี้<br>กรุณาตรวจสอบใหม่อีกครั้ง",
-    notFoundBtn: "ตกลง",
-    statusRepairing: "กำลังซ่อมแซม",
-    statusRepaired: "ซ่อมเสร็จแล้ว",
-    statusDelivered: "พนักงานได้รับกระเป๋าแล้ว",
+    statusModalTitle: "เช็คสถานะการซ่อม",
+    statusModalSub: "ตรวจสอบรายการแจ้งซ่อมของคุณ",
+    statusCodeInput: "กรอกรหัสแจ้งซ่อม เช่น BG-000241",
+    checkStatusBtn: "ตรวจสอบสถานะ →",
+    currentStatusLabel: "สถานะปัจจุบัน",
+    statusInspecting: "กำลังซ่อมแซม",
+    adminLoginTitle: "Admin Login",
     adminLoginSub: "กรุณากรอกรหัสผ่านเพื่อเข้าสู่ระบบผู้ดูแล",
     cancelBtn: "ยกเลิก",
     loginBtn: "เข้าสู่ระบบ →",
     loginErrorMsg: "รหัสผ่านไม่ถูกต้อง กรุณาลองใหม่",
     logoutBtn: "ออกจากระบบ",
     btnSettings: "⚙ ตั้งค่า",
-    menuDept: "การตั้งค่าแผนก",
-    menuPass: "การตั้งค่ารหัสผ่าน",
+    dropdownDept: "การตั้งค่าแผนก",
+    dropdownPass: "การตั้งค่ารหัสผ่าน",
     btnBackDash: "← กลับหน้าแดชบอร์ด",
-    passModalTitle: "การตั้งค่ารหัสผ่าน",
-    passModalSub: "เปลี่ยนรหัสผ่านสำหรับเข้าใช้งานระบบแอดมิน",
-    lblCurrPass: "รหัสผ่านเดิม",
-    lblNewPass: "รหัสผ่านใหม่",
-    lblConfPass: "ยืนยันรหัสผ่านใหม่",
-    passErrorMsg: "รหัสผ่านเดิมไม่ถูกต้อง หรือรหัสผ่านใหม่ไม่ตรงกัน",
-    savePassBtn: "บันทึกรหัสผ่านใหม่ →",
-    confirmBtn: "ยืนยัน",
     deptSettingsTitle: "แผนกและตำแหน่ง",
     deptSettingsSub: "จัดการแผนก และกำหนดตำแหน่งที่มีในแต่ละแผนก (ลากวางเพื่อสลับลำดับ)",
     btnAddDept: "+ เพิ่มแผนก",
-    dashTitle: "Admin Dashboard",
     dashSub: "จัดการและติดตามรายการแจ้งซ่อมกระเป๋าของนักบินและลูกเรือ",
     statTotal: "Total Requests",
     statRepairing: "Repairing",
@@ -991,38 +820,53 @@ const translations = {
     thStatus: "สถานะ",
     thAction: "จัดการ",
     dashFooter: "Internal Service • 2026 • Bag Care Administration",
-    footerSub: "LUGGAGE CARE",
+    footerSub: "BAG CARE • HR Welfare",
     footerCopy: "Internal Service Prototype • 2026",
-    previewTitle: "ตำแหน่งจุดเสียหาย (Damage Marker)",
-    previewSub: "แสดงตำแหน่งที่พนักงานระบุบนกระเป๋า",
-    previewRotSub: "หมุนกระเป๋าเพื่อตรวจสอบมุมมองอื่นได้"
+    passTitle: "การตั้งค่ารหัสผ่าน",
+    passSub: "เปลี่ยนรหัสผ่านสำหรับเข้าใช้งานระบบแอดมิน",
+    lblCurrPass: "รหัสผ่านเดิม",
+    lblNewPass: "รหัสผ่านใหม่",
+    lblConfPass: "ยืนยันรหัสผ่านใหม่",
+    passErrorTxt: "รหัสผ่านเดิมไม่ถูกต้อง หรือรหัสผ่านใหม่ไม่ตรงกัน",
+    savePassBtn: "บันทึกรหัสผ่านใหม่ →"
   }
 };
 
 let currentLang = 'th';
-let adminPasswordVal = '123456';
-
-// ===== DEPARTMENT & POSITION DATA =====
 let departmentsData = [
   { name: 'Pilot', positions: ['Captain', 'First Officer'] },
-  { name: 'Cabin Crew', positions: ['Purser', 'Flight Attendant', 'Senior Cabin Crew Member', 'Cabin Crew (Batch 7)', 'Cabin Crew (Batch 10)', 'Cabin Crew (Batch 11)', 'Cabin Crew (Batch 12)', 'Cabin Crew (Batch 14)', 'Cabin Crew (Batch 15)', 'Cabin Crew (Batch 16)', 'Cabin Crew (Batch 19)', 'Cabin Crew (Batch 24)', 'Cabin Crew (Batch 27)', 'Cabin Crew (Batch 28)', 'Cabin Crew (Batch 31)', 'Cabin Crew (Batch 34)', 'Cabin Crew (Batch 35)', 'Cabin Crew (Batch 36)', 'Cabin Crew (Batch 38)', 'Cabin Crew (Batch 39)', 'Cabin Crew (Batch 40)', 'Cabin Crew (Batch 43)', 'Cabin Crew (Batch 44)', 'Cabin Crew (Batch 45)', 'Cabin Crew (Batch 46)', 'Cabin Crew (Batch 47)', 'Cabin Crew (Batch 48)', 'Cabin Crew (Batch 49)', 'Cabin Crew (Batch 50)', 'Cabin Crew (Batch 51)', 'Cabin Crew (Batch 52)', 'Cabin Crew (Batch 53)', 'Cabin Crew (Batch 54)', 'Cabin Crew (Batch 55)', 'Cabin Crew (Batch 56)', 'Cabin Crew (Batch 57)', 'Cabin Crew (Batch 58)', 'Cabin Crew (Batch 59)', 'Cabin Crew (Batch 60)', 'Cabin Crew (Batch 61)', 'Cabin Crew (Batch 62)', 'Cabin Crew (Batch 63)', 'Cabin Crew (Batch 64)', 'Cabin Crew (Batch 65)', 'Cabin Crew (Batch 66)', 'Cabin Crew (Batch 67)', 'Cabin Crew (Batch 68)', 'Cabin Crew (Batch 69)', 'Cabin Crew (Batch 70)', 'Cabin Crew (Batch 71)', 'Cabin Crew (Batch 72)'] },
+  { name: 'Cabin Crew', positions: ['Purser', 'Flight Attendant', 'Senior Cabin Crew Member', 'Cabin Crew (Batch 60)'] },
   { name: 'Ground Services', positions: ['Ground Supervisor', 'Customer Service Agent'] }
 ];
 
-// ===== REQUESTS DATA =====
 let requestsData = [
-  { id: 'TL678900', name: 'Apichaya L', email: 'apichayalhts@gmail.com', dept: 'Cabin Crew', pos: 'Cabin Crew (Batch 60)', issue: 'Handle broken', date: '14/09/2026', status: 'repair', marker: { x: 50, y: 35, face: 'front' } },
-  { id: 'TL111111', name: '1', email: 'somchai@gmail.com', dept: 'Pilot', pos: 'Captain', issue: '1', date: '12/09/2026', status: 'delivered', marker: { x: 20, y: 88, face: 'front' } },
-  { id: 'TL464564', name: 'Juthamas S', email: 'juthamas35653@gmail.com', dept: 'Pilot', pos: 'Captain', issue: 'Zipper broken', date: '11/09/2026', status: 'delivered', marker: { x: 50, y: 15, face: 'front' } },
-  { id: 'TL565656', name: 'Narong K', email: 'narong@gmail.com', dept: 'Pilot', pos: 'Captain', issue: 'Cracked case', date: '11/09/2026', status: 'repair', marker: { x: 50, y: 50, face: 'back' } },
-  { id: 'TL989898', name: 'Chanya M', email: 'chanya@gmail.com', dept: 'Cabin Crew', pos: 'Cabin Crew (Batch 39)', issue: 'Trolley handle jammed', date: '11/09/2026', status: 'repair', marker: { x: 50, y: 10, face: 'back' } },
-  { id: 'TL484848', name: 'Kanya W', email: 'kanya@gmail.com', dept: 'Cabin Crew', pos: 'Cabin Crew (Batch 39)', issue: 'Scratched badly', date: '11/09/2026', status: 'repair', marker: { x: 30, y: 60, face: 'left' } },
-  { id: 'TL565789', name: 'Anurak T', email: 'anurak@gmail.com', dept: 'Pilot', pos: 'First Officer', issue: 'Lock broken', date: '11/09/2026', status: 'repair', marker: { x: 50, y: 45, face: 'front' } }
+  { id: 'TL678900', name: 'Apichaya L', email: 'apichayalhts@gmail.com', dept: 'Cabin Crew', pos: 'Cabin Crew (Batch 60)', issue: 'Carry Handle', detail: 'หูจับด้านบนชำรุด หลุดออกเวลาดึง', date: '14/09/2026', status: 'repair', marker: { x: 50, y: 35, face: 'front' } },
+  { id: 'TL111111', name: 'Somchai P', email: 'somchai@gmail.com', dept: 'Pilot', pos: 'Captain', issue: 'Wheel', detail: 'ล้อฝั่งซ้ายติดหมุนไม่ได้ สะดุดเวลาลาก', date: '12/09/2026', status: 'delivered', marker: { x: 20, y: 88, face: 'front' } },
+  { id: 'TL464564', name: 'Juthamas S', email: 'juthamas35653@gmail.com', dept: 'Pilot', pos: 'Captain', issue: 'Zipper', detail: 'ซิปแตกรูดไม่ขึ้นตรงมุมขวา', date: '11/09/2026', status: 'delivered', marker: { x: 50, y: 15, face: 'front' } },
+  { id: 'TL565656', name: 'Narong K', email: 'narong@gmail.com', dept: 'Pilot', pos: 'Captain', issue: 'Cracked / Dented', detail: 'ตัวกระเป๋าด้านหลังยุบและร้าวจากการกระแทก', date: '11/09/2026', status: 'repair', marker: { x: 50, y: 50, face: 'back' } },
+  { id: 'TL989898', name: 'Chanya M', email: 'chanya@gmail.com', dept: 'Cabin Crew', pos: 'Cabin Crew (Batch 39)', issue: 'Trolley Handle', detail: 'หูลากติดขัดดึงไม่ขึ้น', date: '11/09/2026', status: 'repair', marker: { x: 50, y: 10, face: 'back' } }
 ];
+
+function showCustomModal(title, desc, onConfirm) {
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalDesc').innerHTML = desc;
+  const confirmBtn = document.getElementById('modalConfirmBtn');
+  const newBtn = confirmBtn.cloneNode(true);
+  confirmBtn.parentNode.replaceChild(newBtn, confirmBtn);
+  newBtn.addEventListener('click', () => {
+    closeCustomModal();
+    if(typeof onConfirm === 'function') onConfirm();
+  });
+  document.getElementById('customModal').classList.add('show');
+}
+function closeCustomModal() {
+  document.getElementById('customModal').classList.remove('show');
+}
 
 function updateDepartmentDropdowns() {
   const selDept = document.getElementById('selDept');
   const selPos = document.getElementById('selPos');
+  if(!selDept || !selPos) return;
   const currentVal = selDept.value;
   selDept.innerHTML = `<option value="" disabled selected data-i18n="optDept">${translations[currentLang].optDept}</option>`;
   departmentsData.forEach(dept => {
@@ -1042,8 +886,8 @@ function updateDepartmentDropdowns() {
 function onDepartmentChange() {
   const selDept = document.getElementById('selDept').value;
   const selPos = document.getElementById('selPos');
+  if(!selPos) return;
   selPos.innerHTML = `<option value="" disabled selected data-i18n="optPos">${translations[currentLang].optPos}</option>`;
-  
   const foundDept = departmentsData.find(d => d.name === selDept);
   if (foundDept && foundDept.positions.length > 0) {
     selPos.removeAttribute('disabled');
@@ -1061,7 +905,8 @@ function onDepartmentChange() {
 function setLanguage(lang) {
   currentLang = lang;
   document.documentElement.lang = lang;
-  document.getElementById('langLabel').textContent = lang === 'en' ? 'TH' : 'EN';
+  const langLabel = document.getElementById('langLabel');
+  if(langLabel) langLabel.textContent = lang === 'en' ? 'TH' : 'EN';
 
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
@@ -1070,16 +915,24 @@ function setLanguage(lang) {
     }
   });
 
-  document.getElementById('inpEmpId').placeholder = translations[lang].inpEmpId;
-  document.getElementById('inpName').placeholder = translations[lang].inpName;
-  document.getElementById('inpEmail').placeholder = translations[lang].inpEmail;
-  document.getElementById('statusCodeInput').placeholder = translations[lang].statusCodeInput;
-  document.getElementById('adminPassword').placeholder = lang === 'en' ? 'Password' : 'รหัสผ่าน';
-  document.getElementById('adminSearch').placeholder = lang === 'en' ? '⌕ Search ID TLxxxxxx / Name' : '⌕ ค้นหารหัส TLxxxxxx / ชื่อ';
-  document.getElementById('inpDetail').placeholder = translations[lang].inpDetail;
+  const inpEmp = document.getElementById('inpEmpId');
+  const inpName = document.getElementById('inpName');
+  const inpEmail = document.getElementById('inpEmail');
+  const statusInput = document.getElementById('statusCodeInput');
+  const adminPass = document.getElementById('adminPassword');
+  const adminSearch = document.getElementById('adminSearch');
+  const inpDetail = document.getElementById('inpDetail');
+
+  if(inpEmp) inpEmp.placeholder = translations[lang].inpEmpId;
+  if(inpName) inpName.placeholder = translations[lang].inpName;
+  if(inpEmail) inpEmail.placeholder = translations[lang].inpEmail;
+  if(statusInput) statusInput.placeholder = translations[lang].statusCodeInput;
+  if(adminPass) adminPass.placeholder = lang === 'en' ? 'Password' : 'รหัสผ่าน';
+  if(adminSearch) adminSearch.placeholder = lang === 'en' ? '⌕ Search ID / Name' : '⌕ ค้นหารหัสพนักงาน / ชื่อ';
+  if(inpDetail) inpDetail.placeholder = translations[lang].inpDetail;
 
   updateDepartmentDropdowns();
-  if(document.getElementById('selDept').value) {
+  if(document.getElementById('selDept') && document.getElementById('selDept').value) {
     onDepartmentChange();
   }
 
@@ -1110,18 +963,19 @@ const viewerHint = document.getElementById('viewerHint');
 let currentView = 'front', activePoint = null;
 let rotX = 4, rotY = -18;
 let isDragging = false, startX = 0, startY = 0;
-
 const stage = document.getElementById('stage');
 
-stage.addEventListener('mousedown', (e) => {
-  if (e.target.closest('.marker') || e.target.tagName === 'BUTTON') return;
-  isDragging = true;
-  startX = e.clientX;
-  startY = e.clientY;
-});
+if(stage) {
+  stage.addEventListener('mousedown', (e) => {
+    if (e.target.closest('.marker') || e.target.tagName === 'BUTTON') return;
+    isDragging = true;
+    startX = e.clientX;
+    startY = e.clientY;
+  });
+}
 
 window.addEventListener('mousemove', (e) => {
-  if (!isDragging) return;
+  if (!isDragging || !cube) return;
   const dx = e.clientX - startX;
   const dy = e.clientY - startY;
   startX = e.clientX;
@@ -1131,19 +985,19 @@ window.addEventListener('mousemove', (e) => {
   cube.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
 });
 
-window.addEventListener('mouseup', () => {
-  isDragging = false;
-});
+window.addEventListener('mouseup', () => { isDragging = false; });
 
-stage.addEventListener('touchstart', (e) => {
-  if (e.target.closest('.marker') || e.target.tagName === 'BUTTON') return;
-  isDragging = true;
-  startX = e.touches[0].clientX;
-  startY = e.touches[0].clientY;
-});
+if(stage) {
+  stage.addEventListener('touchstart', (e) => {
+    if (e.target.closest('.marker') || e.target.tagName === 'BUTTON') return;
+    isDragging = true;
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+  });
+}
 
 window.addEventListener('touchmove', (e) => {
-  if (!isDragging) return;
+  if (!isDragging || !cube) return;
   const dx = e.touches[0].clientX - startX;
   const dy = e.touches[0].clientY - startY;
   startX = e.touches[0].clientX;
@@ -1153,9 +1007,7 @@ window.addEventListener('touchmove', (e) => {
   cube.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
 });
 
-window.addEventListener('touchend', () => {
-  isDragging = false;
-});
+window.addEventListener('touchend', () => { isDragging = false; });
 
 function setView(v, btn) {
   currentView = v; 
@@ -1164,19 +1016,20 @@ function setView(v, btn) {
   
   const map = {
     front: {x: 4, y: -18},
-    left: {x: 4, y: 72},
     back: {x: 4, y: 162},
+    left: {x: 4, y: 72},
     right: {x: 4, y: -108},
     top: {x: -90, y: 0},
     bottom: {x: 90, y: 0}
   }; 
   rotX = map[v].x;
   rotY = map[v].y;
-  cube.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+  if(cube) cube.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
   updateViewerHint();
 }
 
 function updateViewerHint() {
+  if(!viewerHint) return;
   const faceName = currentLang === 'en' ? currentView.toUpperCase() : (currentView === 'front' ? 'ด้านหน้า' : currentView === 'back' ? 'ด้านหลัง' : currentView === 'left' ? 'ด้านซ้าย' : currentView === 'right' ? 'ด้านขวา' : currentView === 'top' ? 'ด้านบน' : 'ด้านล่าง');
   if (currentLang === 'en') {
     viewerHint.textContent = '● Click anywhere on the visible ' + currentView.toUpperCase() + ' face to place/change damage marker';
@@ -1199,31 +1052,30 @@ function handleFaceClick(e, faceEl, faceName) {
   const y = ((e.clientY - r.top) / r.height) * 100;
   
   activePoint = {x, y, face: faceName, damageKey: null};
-  
   clearAllMarkers();
+  
   const markerContainer = document.getElementById('markers' + faceName.charAt(0).toUpperCase() + faceName.slice(1));
   if(markerContainer) {
     const m = document.createElement('div');
     m.className = 'marker';
     m.style.left = x + '%';
     m.style.top = y + '%';
-    m.textContent = '1';
     markerContainer.appendChild(m);
   }
 
   renderSelected();
 }
 
-front.addEventListener('click', e => handleFaceClick(e, front, 'front'));
-back.addEventListener('click', e => handleFaceClick(e, back, 'back'));
-left.addEventListener('click', e => handleFaceClick(e, left, 'left'));
-right.addEventListener('click', e => handleFaceClick(e, right, 'right'));
-topFace.addEventListener('click', e => handleFaceClick(e, topFace, 'top'));
-bottomFace.addEventListener('click', e => handleFaceClick(e, bottomFace, 'bottom'));
+if(front) front.addEventListener('click', e => handleFaceClick(e, front, 'front'));
+if(back) back.addEventListener('click', e => handleFaceClick(e, back, 'back'));
+if(left) left.addEventListener('click', e => handleFaceClick(e, left, 'left'));
+if(right) right.addEventListener('click', e => handleFaceClick(e, right, 'right'));
+if(topFace) topFace.addEventListener('click', e => handleFaceClick(e, topFace, 'top'));
+if(bottomFace) bottomFace.addEventListener('click', e => handleFaceClick(e, bottomFace, 'bottom'));
 
 document.querySelectorAll('.damage-option').forEach(b => b.addEventListener('click', () => {
   if (!activePoint) {
-    alert(currentLang === 'en' ? 'Please tap on the suitcase to select a damage point first' : 'แตะบนกระเป๋าเพื่อเลือกจุดเสียหายก่อน');
+    showCustomModal(currentLang === 'en' ? 'Notice' : 'แจ้งเตือน', currentLang === 'en' ? 'Please tap on the suitcase to select a damage point first' : 'แตะบนกระเป๋าเพื่อเลือกจุดเสียหายก่อน');
     return;
   }
   document.querySelectorAll('.damage-option').forEach(opt => opt.classList.remove('selected-option'));
@@ -1240,25 +1092,34 @@ function removePoint() {
 }
 
 function renderSelected() {
+  if(!selectedList) return;
   if (!activePoint) {
     selectedList.innerHTML = `<span class="chip" data-i18n="noPointSelected">${translations[currentLang].noPointSelected}</span>`;
     return;
   } 
   const damageText = activePoint.damageKey ? translations[currentLang]['d_' + activePoint.damageKey] : (currentLang === 'en' ? 'Select damage type' : 'เลือกความเสียหาย');
-  selectedList.innerHTML = `<span class="chip">#1 (${activePoint.face.toUpperCase()}) • ${damageText} <button onclick="removePoint()" title="Remove">×</button></span>`;
+  selectedList.innerHTML = `<span class="chip">(${activePoint.face.toUpperCase()}) • ${damageText} <button onclick="removePoint()" title="Remove">×</button></span>`;
 }
 
 function submitDemo() {
   if(!activePoint) {
-    alert(currentLang === 'en' ? 'Please select a damage point on the suitcase' : 'กรุณาแตะเลือกจุดเสียหายบนกระเป๋าก่อน');
+    showCustomModal(currentLang === 'en' ? 'Notice' : 'แจ้งเตือน', currentLang === 'en' ? 'Please select a damage point on the suitcase' : 'กรุณาแตะเลือกจุดเสียหายบนกระเป๋าก่อน');
     return;
   }
-  const empId = document.getElementById('inpEmpId').value.trim() || 'TL' + Math.floor(100000 + Math.random() * 900000);
-  const name = document.getElementById('inpName').value.trim() || 'Crew Member';
-  const email = document.getElementById('inpEmail').value.trim() || 'crew@lionair.com';
-  const dept = document.getElementById('selDept').value || 'Cabin Crew';
-  const pos = document.getElementById('selPos').value || 'Flight Attendant';
-  const issue = activePoint.damageKey;
+  const empIdInput = document.getElementById('inpEmpId');
+  const nameInput = document.getElementById('inpName');
+  const emailInput = document.getElementById('inpEmail');
+  const deptInput = document.getElementById('selDept');
+  const posInput = document.getElementById('selPos');
+  const detailInput = document.getElementById('inpDetail');
+
+  const empId = empIdInput && empIdInput.value.trim() ? empIdInput.value.trim() : 'TL' + Math.floor(100000 + Math.random() * 900000);
+  const name = nameInput && nameInput.value.trim() ? nameInput.value.trim() : 'Crew Member';
+  const email = emailInput && emailInput.value.trim() ? emailInput.value.trim() : 'crew@lionair.com';
+  const dept = deptInput && deptInput.value ? deptInput.value : 'Cabin Crew';
+  const pos = posInput && posInput.value ? posInput.value : 'Flight Attendant';
+  const issue = activePoint.damageKey ? translations[currentLang]['d_' + activePoint.damageKey] : 'General';
+  const detail = detailInput && detailInput.value.trim() ? detailInput.value.trim() : '-';
 
   const newReq = {
     id: empId,
@@ -1267,6 +1128,7 @@ function submitDemo() {
     dept: dept,
     pos: pos,
     issue: issue,
+    detail: detail,
     date: new Date().toLocaleDateString('en-GB'),
     status: 'repair',
     marker: { x: activePoint.x, y: activePoint.y, face: activePoint.face }
@@ -1276,24 +1138,29 @@ function submitDemo() {
   updateDashboardStats();
   renderAdminTable();
 
-  document.getElementById('successCodeDisplay').textContent = empId;
-  document.getElementById('success').style.display = 'block';
-  document.getElementById('success').scrollIntoView({behavior:'smooth', block:'center'});
+  const codeDisplay = document.getElementById('successCodeDisplay');
+  const successBox = document.getElementById('success');
+  if(codeDisplay) codeDisplay.textContent = empId;
+  if(successBox) {
+    successBox.style.display = 'block';
+    successBox.scrollIntoView({behavior:'smooth', block:'center'});
+  }
 }
 
-// ===== ADMIN MARKER PREVIEW LOGIC =====
 let previewRotX = 4, previewRotY = -18;
 let isPreviewDragging = false, previewStartX = 0, previewStartY = 0;
 const previewStage = document.getElementById('previewStage');
 const previewCube = document.getElementById('previewCube');
 
-previewStage.addEventListener('mousedown', (e) => {
-  isPreviewDragging = true;
-  previewStartX = e.clientX;
-  previewStartY = e.clientY;
-});
+if(previewStage) {
+  previewStage.addEventListener('mousedown', (e) => {
+    isPreviewDragging = true;
+    previewStartX = e.clientX;
+    previewStartY = e.clientY;
+  });
+}
 window.addEventListener('mousemove', (e) => {
-  if (!isPreviewDragging) return;
+  if (!isPreviewDragging || !previewCube) return;
   const dx = e.clientX - previewStartX;
   const dy = e.clientY - previewStartY;
   previewStartX = e.clientX;
@@ -1304,15 +1171,17 @@ window.addEventListener('mousemove', (e) => {
 });
 window.addEventListener('mouseup', () => { isPreviewDragging = false; });
 
-previewStage.addEventListener('touchstart', (e) => {
-  isPreviewDragging = true;
-  previewStartX = e.touches[0].clientX;
-  previewStartY = e.touches[0].clientY;
-});
+if(previewStage) {
+  previewStage.addEventListener('touchstart', (e) => {
+    isPreviewDragging = true;
+    previewStartX = e.touches[0].clientX;
+    previewStartY = e.touches[0].clientY;
+  });
+}
 window.addEventListener('touchmove', (e) => {
-  if (!isPreviewDragging) return;
+  if (!isPreviewDragging || !previewCube) return;
   const dx = e.touches[0].clientX - previewStartX;
-  const dy = e.touches[0].clientY - startY;
+  const dy = e.touches[0].clientY - previewStartY;
   previewStartX = e.touches[0].clientX;
   previewStartY = e.touches[0].clientY;
   previewRotY += dx * 0.6;
@@ -1326,27 +1195,29 @@ function setPreviewView(v, btn) {
   if (btn) btn.classList.add('active');
   const map = {
     front: {x: 4, y: -18},
-    left: {x: 4, y: 72},
     back: {x: 4, y: 162},
+    left: {x: 4, y: 72},
     right: {x: 4, y: -108},
     top: {x: -90, y: 0},
     bottom: {x: 90, y: 0}
   };
   previewRotX = map[v].x;
   previewRotY = map[v].y;
-  previewCube.style.transform = `rotateX(${previewRotX}deg) rotateY(${previewRotY}deg)`;
-  document.getElementById('previewFaceLabel').textContent = 'ด้าน ' + v.toUpperCase();
+  if(previewCube) previewCube.style.transform = `rotateX(${previewRotX}deg) rotateY(${previewRotY}deg)`;
+  const faceLbl = document.getElementById('previewFaceLabel');
+  if(faceLbl) faceLbl.textContent = v.toUpperCase();
 }
 
 function openMarkerPreview(id) {
   const req = requestsData.find(r => r.id === id);
   if (!req || !req.marker) {
-    alert('ไม่พบข้อมูลตำแหน่งจุดเสียหายสำหรับรายการนี้');
+    showCustomModal('แจ้งเตือน', 'ไม่พบข้อมูลตำแหน่งจุดเสียหายสำหรับรายการนี้');
     return;
   }
   
   ['prevMarkersFront', 'prevMarkersBack', 'prevMarkersLeft', 'prevMarkersRight', 'prevMarkersTop', 'prevMarkersBottom'].forEach(elId => {
-    document.getElementById(elId).innerHTML = '';
+    const el = document.getElementById(elId);
+    if(el) el.innerHTML = '';
   });
 
   const faceName = req.marker.face || 'front';
@@ -1356,21 +1227,29 @@ function openMarkerPreview(id) {
     m.className = 'marker';
     m.style.left = req.marker.x + '%';
     m.style.top = req.marker.y + '%';
-    m.textContent = '1';
     container.appendChild(m);
   }
 
   const faceBtn = document.querySelector(`[data-preview-view="${faceName}"]`);
   setPreviewView(faceName, faceBtn);
 
-  document.getElementById('previewModalSub').textContent = `รหัสคำขอ: ${req.id} • ผู้แจ้ง: ${req.name} • ปัญหา: ${req.issue}`;
-  document.getElementById('markerPreviewModal').classList.add('show');
+  const subEl = document.getElementById('previewModalSub');
+  if(subEl) subEl.textContent = `Request ID: ${req.id} • Name: ${req.name} • Issue: ${req.issue}`;
+
+  const detailTextEl = document.getElementById('previewDetailText');
+  if(detailTextEl) {
+    detailTextEl.textContent = req.detail || req.issue || 'ไม่มีรายละเอียดเพิ่มเติม';
+  }
+  
+  const modal = document.getElementById('markerPreviewModal');
+  if(modal) modal.classList.add('show');
   document.body.style.overflow = 'hidden';
 }
 
 function closeMarkerPreview() {
-  document.getElementById('markerPreviewModal').classList.remove('show');
-  if (!document.getElementById('adminDashboard').classList.contains('show')) {
+  const modal = document.getElementById('markerPreviewModal');
+  if(modal) modal.classList.remove('show');
+  if (!document.getElementById('adminDashboard') || !document.getElementById('adminDashboard').classList.contains('show')) {
     document.body.style.overflow = '';
   }
 }
@@ -1378,109 +1257,106 @@ function closeMarkerPreviewByBackdrop(e) {
   if (e.target.id === 'markerPreviewModal') closeMarkerPreview();
 }
 
-// ===== STATUS CHECK & NOT FOUND MODAL LOGIC (FLEXIBLE ID MATCHING) =====
 function openStatus() {
-  document.getElementById('statusCodeInput').value = '';
-  document.getElementById('statusResultContainer').style.display = 'none';
-  document.getElementById('statusModal').classList.add('show');
+  const modal = document.getElementById('statusModal');
+  if(modal) modal.classList.add('show');
   document.body.style.overflow = 'hidden';
 }
 function closeStatus() {
-  document.getElementById('statusModal').classList.remove('show');
+  const modal = document.getElementById('statusModal');
+  if(modal) modal.classList.remove('show');
   document.body.style.overflow = '';
 }
 function closeStatusByBackdrop(e) {
   if (e.target.id === 'statusModal') closeStatus();
 }
 
-function openNotFoundModal() {
-  document.getElementById('notFoundModal').classList.add('show');
-}
-function closeNotFound() {
-  document.getElementById('notFoundModal').classList.remove('show');
-}
-function closeNotFoundByBackdrop(e) {
-  if (e.target.id === 'notFoundModal') closeNotFound();
-}
-
 function checkStatus() {
-  const codeInput = document.getElementById('statusCodeInput').value.trim().toLowerCase();
-  const cleanInput = codeInput.replace(/^tl/, '');
-  
-  if (!cleanInput) {
-    alert(currentLang === 'en' ? 'Please enter employee ID' : 'กรุณากรอกรหัสพนักงาน');
+  const codeInput = document.getElementById('statusCodeInput');
+  const code = codeInput ? codeInput.value.trim() : '';
+  const statusRes = document.getElementById('statusResult');
+  const resId = document.getElementById('resId');
+  const badge = document.getElementById('resStatusBadge');
+
+  if (!code) {
+    showCustomModal(currentLang === 'en' ? 'Notice' : 'แจ้งเตือน', currentLang === 'en' ? 'Please enter repair request ID' : 'กรุณากรอกรหัสแจ้งซ่อม');
     return;
   }
   
-  const found = requestsData.find(r => {
-    const rId = r.id.toLowerCase();
-    const rCleanId = rId.replace(/^tl/, '');
-    return rId === codeInput || rCleanId === cleanInput || rCleanId === cleanInput.padStart(6, '0');
-  });
-  
-  const resultContainer = document.getElementById('statusResultContainer');
-  
-  if (found) {
-    resultContainer.style.display = 'block';
-    document.getElementById('resName').textContent = found.name;
-    
-    let issueText = found.issue;
-    if(translations[currentLang]['d_' + found.issue]) {
-      issueText = translations[currentLang]['d_' + found.issue];
-    }
-    document.getElementById('resIssue').textContent = issueText;
-    document.getElementById('resDate').textContent = found.date;
-    
-    const badge = document.getElementById('resStatusBadge');
-    if(found.status === 'repair') {
-      badge.textContent = translations[currentLang].statusRepairing;
-      badge.className = 'status repair';
-    } else if(found.status === 'repaired') {
-      badge.textContent = translations[currentLang].statusRepaired;
-      badge.className = 'status repaired';
-    } else {
-      badge.textContent = translations[currentLang].statusDelivered;
-      badge.className = 'status done';
+  const found = requestsData.find(r => r.id.toLowerCase() === code.toLowerCase());
+  if(statusRes) statusRes.style.display = 'block';
+  if(resId) resId.textContent = code;
+
+  if(found) {
+    if(badge) {
+      if(found.status === 'repair') {
+        badge.textContent = 'Repairing';
+        badge.className = 'status repair';
+      } else if(found.status === 'repaired') {
+        badge.textContent = 'Repaired';
+        badge.className = 'status repaired';
+      } else {
+        badge.textContent = 'Delivered';
+        badge.className = 'status done';
+      }
     }
   } else {
-    resultContainer.style.display = 'none';
-    openNotFoundModal();
+    showCustomModal(
+      currentLang === 'en' ? 'Not Found' : 'ไม่พบข้อมูล',
+      currentLang === 'en' ? 'No repair request found for this employee ID.<br>Please check again.' : 'ไม่พบข้อมูลการแจ้งซ่อมของรหัสพนักงานนี้<br>กรุณาตรวจสอบใหม่อีกครั้ง',
+      () => {}
+    );
+    if(statusRes) statusRes.style.display = 'none';
   }
 }
 
 function openAdmin() {
-  document.getElementById('adminLoginModal').classList.add('show');
-  document.getElementById('adminPassword').value = '';
-  document.getElementById('loginError').style.display = 'none';
+  const modal = document.getElementById('adminLoginModal');
+  const pass = document.getElementById('adminPassword');
+  const err = document.getElementById('loginError');
+  if(modal) modal.classList.add('show');
+  if(pass) pass.value = '';
+  if(err) err.style.display = 'none';
   document.body.style.overflow = 'hidden';
-  setTimeout(() => document.getElementById('adminPassword').focus(), 120);
+  setTimeout(() => { if(pass) pass.focus(); }, 120);
 }
 function closeAdminLogin() {
-  document.getElementById('adminLoginModal').classList.remove('show');
-  if (!document.getElementById('adminDashboard').classList.contains('show')) document.body.style.overflow = '';
+  const modal = document.getElementById('adminLoginModal');
+  if(modal) modal.classList.remove('show');
+  const dash = document.getElementById('adminDashboard');
+  if (!dash || !dash.classList.contains('show')) document.body.style.overflow = '';
 }
 function closeAdminLoginByBackdrop(e) {
   if (e.target.id === 'adminLoginModal') closeAdminLogin();
 }
+
 function verifyAdmin() {
-  const pass = document.getElementById('adminPassword').value;
+  const passInput = document.getElementById('adminPassword');
+  const pass = passInput ? passInput.value : '';
   const error = document.getElementById('loginError');
+  const loginModal = document.getElementById('adminLoginModal');
+  const dashModal = document.getElementById('adminDashboard');
+
   if (pass === adminPasswordVal) {
-    error.style.display = 'none';
-    document.getElementById('adminLoginModal').classList.remove('show');
-    document.getElementById('adminDashboard').classList.add('show');
+    if(error) error.style.display = 'none';
+    if(loginModal) loginModal.classList.remove('show');
+    if(dashModal) dashModal.classList.add('show');
     document.body.style.overflow = 'hidden';
     updateDashboardStats();
     currentPage = 1;
     renderAdminTable();
   } else {
-    error.style.display = 'block';
-    document.getElementById('adminPassword').value = '';
-    document.getElementById('adminPassword').focus();
+    if(error) error.style.display = 'block';
+    if(passInput) {
+      passInput.value = '';
+      passInput.focus();
+    }
   }
 }
+
 function logoutAdmin() {
-  document.getElementById('adminDashboard').classList.remove('show');
+  const dash = document.getElementById('adminDashboard');
+  if(dash) dash.classList.remove('show');
   document.body.style.overflow = '';
 }
 
@@ -1492,7 +1368,8 @@ function filterByStatus(status) {
   currentFilterStatus = status;
   currentPage = 1;
   document.querySelectorAll('.dashboard-stat').forEach(card => card.classList.remove('active-filter'));
-  document.getElementById('statCard-' + status).classList.add('active-filter');
+  const card = document.getElementById('statCard-' + status);
+  if(card) card.classList.add('active-filter');
   renderAdminTable();
 }
 
@@ -1506,9 +1383,28 @@ function changePage(page) {
   renderAdminTable();
 }
 
+function updateDashboardStats() {
+  const allCount = requestsData.length;
+  const repairCount = requestsData.filter(r => r.status === 'repair').length;
+  const repairedCount = requestsData.filter(r => r.status === 'repaired').length;
+  const deliveredCount = requestsData.filter(r => r.status === 'delivered').length;
+
+  const nAll = document.getElementById('statNum-all');
+  const nRepair = document.getElementById('statNum-repair');
+  const nRepaired = document.getElementById('statNum-repaired');
+  const nDelivered = document.getElementById('statNum-delivered');
+
+  if(nAll) nAll.textContent = allCount;
+  if(nRepair) nRepair.textContent = repairCount;
+  if(nRepaired) nRepaired.textContent = repairedCount;
+  if(nDelivered) nDelivered.textContent = deliveredCount;
+}
+
 function renderAdminTable() {
   const tbody = document.getElementById('adminTableBody');
-  const q = document.getElementById('adminSearch') ? document.getElementById('adminSearch').value.toLowerCase().trim() : '';
+  if(!tbody) return;
+  const searchInput = document.getElementById('adminSearch');
+  const q = searchInput ? searchInput.value.toLowerCase().trim() : '';
   tbody.innerHTML = '';
 
   const filtered = requestsData.filter(r => {
@@ -1516,7 +1412,6 @@ function renderAdminTable() {
     const cleanId = r.id.toLowerCase();
     const cleanNumId = cleanId.replace(/^tl/, '');
     const nameLower = r.name.toLowerCase();
-    
     const matchesSearch = !q || cleanId.startsWith(q) || cleanNumId.startsWith(q) || nameLower.startsWith(q);
     return matchesStatus && matchesSearch;
   });
@@ -1529,14 +1424,12 @@ function renderAdminTable() {
 
   paginatedItems.forEach((r) => {
     let statusBadgeHTML = '';
-    let statusText = r.status === 'repair' ? translations[currentLang].statusRepairing : (r.status === 'repaired' ? translations[currentLang].statusRepaired : translations[currentLang].statusDelivered);
-    
     if(r.status === 'repair') {
-      statusBadgeHTML = `<span class="dashboard-status repair" onclick="cycleStatus('${r.id}')">${statusText}</span>`;
+      statusBadgeHTML = `<span class="dashboard-status repair" onclick="cycleStatus('${r.id}')">Repairing</span>`;
     } else if(r.status === 'repaired') {
-      statusBadgeHTML = `<span class="dashboard-status repaired" onclick="cycleStatus('${r.id}')">${statusText}</span>`;
+      statusBadgeHTML = `<span class="dashboard-status repaired" onclick="cycleStatus('${r.id}')">Repaired</span>`;
     } else {
-      statusBadgeHTML = `<span class="dashboard-status delivered">${statusText}</span>`;
+      statusBadgeHTML = `<span class="dashboard-status delivered">Delivered</span>`;
     }
 
     const tr = document.createElement('tr');
@@ -1546,7 +1439,7 @@ function renderAdminTable() {
       <td>${r.email}</td>
       <td class="dashboard-dept"><small>${r.dept}</small><span>${r.pos}</span></td>
       <td>
-        <button class="view-marker-btn" onclick="openMarkerPreview('${r.id}')" title="ตรวจสอบตำแหน่งจุดเสียหายบนกระเป๋า 3D">
+        <button type="button" class="view-marker-btn" onclick="openMarkerPreview('${r.id}')" title="Inspect 3D damage marker">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
         </button>
         ${r.issue}
@@ -1554,16 +1447,14 @@ function renderAdminTable() {
       <td>${r.date}</td>
       <td>${statusBadgeHTML}</td>
       <td>
-        <button class="dashboard-delete" onclick="confirmDeleteRequest('${r.id}')" title="Delete">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-        </button>
+        <button type="button" class="dashboard-delete" onclick="confirmDeleteRequest('${r.id}')" title="Delete">🗑️</button>
       </td>
     `;
     tbody.appendChild(tr);
   });
 
   const paginationContainer = document.getElementById('paginationContainer');
-  if(filtered.length > itemsPerPage) {
+  if(paginationContainer && filtered.length > itemsPerPage) {
     let pagHTML = `<button class="page-btn" ${currentPage === 1 ? 'disabled style="opacity:0.5"' : ''} onclick="changePage(${currentPage - 1})">${translations[currentLang].prevBtn}</button>`;
     for(let i = 1; i <= totalPages; i++) {
       pagHTML += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</button>`;
@@ -1571,7 +1462,7 @@ function renderAdminTable() {
     pagHTML += `<button class="page-btn" ${currentPage === totalPages ? 'disabled style="opacity:0.5"' : ''} onclick="changePage(${currentPage + 1})">${translations[currentLang].nextBtn}</button>`;
     paginationContainer.innerHTML = pagHTML;
     paginationContainer.style.display = 'flex';
-  } else {
+  } else if(paginationContainer) {
     paginationContainer.innerHTML = '';
     paginationContainer.style.display = 'none';
   }
@@ -1589,111 +1480,88 @@ function cycleStatus(id) {
   renderAdminTable();
 }
 
-// ===== CUSTOM MODAL CONTROLS =====
-function showCustomModal(title, desc, confirmCallback) {
-  document.getElementById('modalTitle').textContent = title;
-  document.getElementById('modalDesc').innerHTML = desc;
-  const confirmBtn = document.getElementById('modalConfirmBtn');
-  const newBtn = confirmBtn.cloneNode(true);
-  confirmBtn.parentNode.replaceChild(newBtn, confirmBtn);
-  newBtn.addEventListener('click', () => {
-    closeCustomModal();
-    confirmCallback();
-  });
-  document.getElementById('customModal').classList.add('show');
-}
-function closeCustomModal() {
-  document.getElementById('customModal').classList.remove('show');
-}
-
 function confirmDeleteRequest(id) {
-  showCustomModal('ยืนยันการลบรายการ', `คุณแน่ใจหรือไม่ที่จะลบรายการแจ้งซ่อมรหัส ${id}?`, () => {
-    requestsData = requestsData.filter(r => r.id !== id);
-    updateDashboardStats();
-    renderAdminTable();
-  });
+  showCustomModal(
+    currentLang === 'en' ? 'Confirm Delete' : 'ยืนยันการลบ',
+    currentLang === 'en' ? `Are you sure you want to delete request ID <b>${id}</b>?` : `คุณแน่ใจหรือไม่ว่าต้องการลบรายการแจ้งซ่อมรหัส <b>${id}</b>?`,
+    () => {
+      requestsData = requestsData.filter(r => r.id !== id);
+      updateDashboardStats();
+      renderAdminTable();
+    }
+  );
 }
 
-function updateDashboardStats() {
-  let total = requestsData.length;
-  let repair = 0;
-  let repaired = 0;
-  let delivered = 0;
-
-  requestsData.forEach(r => {
-    if (r.status === 'repair') repair++;
-    else if (r.status === 'repaired') repaired++;
-    else if (r.status === 'delivered') delivered++;
-  });
-
-  document.getElementById('statNum-all').textContent = total;
-  document.getElementById('statNum-repair').textContent = repair;
-  document.getElementById('statNum-repaired').textContent = repaired;
-  document.getElementById('statNum-delivered').textContent = delivered;
-}
-
-// ===== SETTINGS DROPDOWN LOGIC =====
 function toggleSettingsDropdown(e) {
   e.stopPropagation();
   const menu = document.getElementById('settingsDropdown');
-  menu.classList.toggle('show');
+  if(menu) menu.classList.toggle('show');
 }
 window.addEventListener('click', () => {
   const menu = document.getElementById('settingsDropdown');
-  if(menu && menu.classList.contains('show')) {
-    menu.classList.remove('show');
-  }
+  if(menu && menu.classList.contains('show')) menu.classList.remove('show');
 });
 function closeSettingsDropdown() {
   const menu = document.getElementById('settingsDropdown');
   if(menu) menu.classList.remove('show');
 }
 
-// ===== PASSWORD SETTINGS FULL-SCREEN LOGIC =====
 function openPasswordSettings() {
-  document.getElementById('currentPassInput').value = '';
-  document.getElementById('newPassInput').value = '';
-  document.getElementById('confirmPassInput').value = '';
-  document.getElementById('passErrorMsg').style.display = 'none';
-  document.getElementById('passwordModal').classList.add('show');
-  document.body.style.overflow = 'hidden';
+  const curr = document.getElementById('currentPassInput');
+  const newP = document.getElementById('newPassInput');
+  const confP = document.getElementById('confirmPassInput');
+  const err = document.getElementById('passErrorMsg');
+  if(curr) curr.value = '';
+  if(newP) newP.value = '';
+  if(confP) confP.value = '';
+  if(err) err.style.display = 'none';
+  const modal = document.getElementById('passwordModal');
+  if(modal) modal.classList.add('show');
 }
 function closePasswordSettings() {
-  document.getElementById('passwordModal').classList.remove('show');
-  if (!document.getElementById('adminDashboard').classList.contains('show')) {
-    document.body.style.overflow = '';
-  }
+  const modal = document.getElementById('passwordModal');
+  if(modal) modal.classList.remove('show');
 }
+
 function saveNewPassword() {
-  const curr = document.getElementById('currentPassInput').value;
-  const newP = document.getElementById('newPassInput').value;
-  const confP = document.getElementById('confirmPassInput').value;
+  const currInput = document.getElementById('currentPassInput');
+  const newInput = document.getElementById('newPassInput');
+  const confInput = document.getElementById('confirmPassInput');
   const errEl = document.getElementById('passErrorMsg');
 
+  const curr = currInput ? currInput.value : '';
+  const newP = newInput ? newInput.value : '';
+  const confP = confInput ? confInput.value : '';
+
   if (curr !== adminPasswordVal || !newP || newP !== confP) {
-    errEl.style.display = 'block';
+    if(errEl) errEl.style.display = 'block';
     return;
   }
   adminPasswordVal = newP;
-  errEl.style.display = 'none';
-  alert(currentLang === 'en' ? 'Password updated successfully!' : 'เปลี่ยนรหัสผ่านแอดมินสำเร็จเรียบร้อยแล้ว!');
+  if(errEl) errEl.style.display = 'none';
   closePasswordSettings();
+  showCustomModal(
+    currentLang === 'en' ? 'Success' : 'สำเร็จ',
+    currentLang === 'en' ? 'Password updated successfully!' : 'เปลี่ยนรหัสผ่านแอดมินสำเร็จเรียบร้อยแล้ว!',
+    () => {}
+  );
 }
 
-// ===== DEPARTMENT & POSITION MANAGEMENT LOGIC =====
 let expandedDeptIndex = null;
-
 function openDeptSettings() {
-  document.getElementById('deptModal').classList.add('show');
+  const modal = document.getElementById('deptModal');
+  if(modal) modal.classList.add('show');
   renderDeptSettings();
 }
 function closeDeptSettings() {
-  document.getElementById('deptModal').classList.remove('show');
+  const modal = document.getElementById('deptModal');
+  if(modal) modal.classList.remove('show');
   updateDepartmentDropdowns();
 }
 
 function renderDeptSettings() {
   const container = document.getElementById('deptListContainer');
+  if(!container) return;
   container.innerHTML = '';
   departmentsData.forEach((dept, dIndex) => {
     const isExpanded = (expandedDeptIndex === dIndex);
@@ -1716,11 +1584,11 @@ function renderDeptSettings() {
       posHTML = `
         <div style="margin-top:16px;padding-top:16px;border-top:1px solid #eadfd9;">
           <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;">
-            ${tagsHTML || '<span style="color:#777;font-size:13px;">ยังไม่มีตำแหน่งในแผนกนี้ (ลากวางเพื่อสลับลำดับได้)</span>'}
+            ${tagsHTML || '<span style="color:#777;font-size:13px;">No positions in this department yet</span>'}
           </div>
           <div style="display:flex;gap:12px;align-items:center;background:#fff;padding:16px;border:1px solid #dedee3;border-radius:20px;">
-            <input id="newPosInput_${dIndex}" placeholder="พิมพ์ชื่อตำแหน่งใหม่ แล้วกดเพิ่ม" style="flex:1;border:0;outline:none;font-family:'Mitr',sans-serif;font-size:14px;background:transparent;" onkeydown="if(event.key==='Enter') addPosition(${dIndex})"/>
-            <button onclick="addPosition(${dIndex})" style="border:0;background:var(--ink);color:#fff;border-radius:16px;padding:14px 26px;font-weight:700;font-family:'Mitr',sans-serif;font-size:14px;white-space:nowrap;" data-i18n="btnAddDept">+ เพิ่มแผนก</button>
+            <input id="newPosInput_${dIndex}" placeholder="Type new position name..." style="flex:1;border:0;outline:none;font-family:'Mitr',sans-serif;font-size:14px;background:transparent;" onkeydown="if(event.key==='Enter') addPosition(${dIndex})"/>
+            <button onclick="addPosition(${dIndex})" style="border:0;background:var(--ink);color:#fff;border-radius:16px;padding:14px 26px;font-weight:700;font-family:'Mitr',sans-serif;font-size:14px;white-space:nowrap;">+ Add Position</button>
           </div>
         </div>
       `;
@@ -1733,12 +1601,8 @@ function renderDeptSettings() {
           <span style="background:#fff1f3;color:var(--red);border:1px solid #ffd0d8;border-radius:999px;padding:2px 10px;font-size:12px;font-weight:700;">${dept.positions.length}</span>
         </div>
         <div style="display:flex;gap:8px;">
-          <button class="dashboard-edit-btn ${isExpanded ? 'active-edit' : ''}" onclick="toggleExpandDept(${dIndex})" title="Edit Positions">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
-          </button>
-          <button class="dashboard-delete" onclick="confirmDeleteDept(${dIndex})" title="Delete Department">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-          </button>
+          <button class="dashboard-btn" style="padding:6px 12px;font-size:12px;" onclick="toggleExpandDept(${dIndex})">${isExpanded ? '▲ Hide' : '▼ Manage Positions'}</button>
+          <button class="dashboard-btn danger" style="padding:6px 12px;font-size:12px;" onclick="confirmDeleteDept(${dIndex})">🗑 Delete</button>
         </div>
       </div>
       ${posHTML}
@@ -1748,18 +1612,16 @@ function renderDeptSettings() {
 }
 
 function toggleExpandDept(dIndex) {
-  if (expandedDeptIndex === dIndex) {
-    expandedDeptIndex = null;
-  } else {
-    expandedDeptIndex = dIndex;
-  }
+  if (expandedDeptIndex === dIndex) expandedDeptIndex = null;
+  else expandedDeptIndex = dIndex;
   renderDeptSettings();
 }
 
 function addNewDept() {
   const input = document.getElementById('newDeptInput');
+  if(!input) return;
   const name = input.value.trim();
-  if(!name) return alert('กรุณากรอกชื่อแผนก');
+  if(!name) return showCustomModal('แจ้งเตือน', 'กรุณากรอกชื่อแผนก');
   departmentsData.push({ name, positions: [] });
   input.value = '';
   renderDeptSettings();
@@ -1767,7 +1629,7 @@ function addNewDept() {
 
 function confirmDeleteDept(dIndex) {
   const deptName = departmentsData[dIndex].name;
-  showCustomModal('ยืนยันการลบแผนก', `คุณแน่ใจหรือไม่ที่จะลบแผนก "${deptName}"?<br>ตำแหน่งทั้งหมดในแผนกจะถูกลบไปด้วย`, () => {
+  showCustomModal('Confirm Delete Department', `Are you sure you want to delete department "${deptName}"?`, () => {
     departmentsData.splice(dIndex, 1);
     if(expandedDeptIndex === dIndex) expandedDeptIndex = null;
     renderDeptSettings();
@@ -1778,7 +1640,7 @@ function addPosition(dIndex) {
   const input = document.getElementById('newPosInput_' + dIndex);
   if(!input) return;
   const posName = input.value.trim();
-  if(!posName) return alert('กรุณากรอกชื่อตำแหน่ง');
+  if(!posName) return showCustomModal('แจ้งเตือน', 'กรุณากรอกชื่อตำแหน่ง');
   departmentsData[dIndex].positions.push(posName);
   renderDeptSettings();
 }
@@ -1789,12 +1651,8 @@ function removePosition(dIndex, pIndex) {
 }
 
 let draggedPos = null;
-function dragStart(e, dIndex, pIndex) {
-  draggedPos = { dIndex, pIndex };
-}
-function allowDrop(e) {
-  e.preventDefault();
-}
+function dragStart(e, dIndex, pIndex) { draggedPos = { dIndex, pIndex }; }
+function allowDrop(e) { e.preventDefault(); }
 function dropPos(e, targetDIndex, targetPIndex) {
   e.preventDefault();
   if(draggedPos.dIndex !== targetDIndex) return;
@@ -1806,10 +1664,12 @@ function dropPos(e, targetDIndex, targetPIndex) {
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
-    if (document.getElementById('deptModal').classList.contains('show')) closeDeptSettings();
-    else if (document.getElementById('passwordModal').classList.contains('show')) closePasswordSettings();
-    else if (document.getElementById('adminDashboard').classList.contains('show')) logoutAdmin();
-    else closeAdminLogin();
+    const deptModal = document.getElementById('deptModal');
+    const adminDash = document.getElementById('adminDashboard');
+    const adminLogin = document.getElementById('adminLoginModal');
+    if (deptModal && deptModal.classList.contains('show')) closeDeptSettings();
+    else if (adminDash && adminDash.classList.contains('show')) logoutAdmin();
+    else if (adminLogin) closeAdminLogin();
   }
 });
 
@@ -1817,7 +1677,8 @@ window.onload = function() {
   setLanguage('th');
   updateDashboardStats();
   renderAdminTable();
-  document.getElementById('statCard-all').classList.add('active-filter');
+  const statCardAll = document.getElementById('statCard-all');
+  if(statCardAll) statCardAll.classList.add('active-filter');
 };
 </script>
 </body>
