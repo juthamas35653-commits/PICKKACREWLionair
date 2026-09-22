@@ -126,18 +126,15 @@ textarea{min-height:120px;resize:vertical}
 }
 .admin-modal.show{display:flex}
 .admin-box{
-  width:min(1080px,100%);max-height:min(760px,calc(100vh - 48px));overflow:auto;
-  background:#fff;border:1px solid #e5e5e8;border-radius:28px;box-shadow:0 30px 90px rgba(0,0,0,.20);
+  width:min(520px,100%);background:#fff;border:1px solid #e5e5e8;border-radius:32px;box-shadow:0 30px 90px rgba(0,0,0,.22);padding:36px;text-align:center;position:relative;
 }
 .admin-head{
-  padding:22px 26px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:16px;position:sticky;top:0;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);z-index:2;
+  display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;
 }
-.admin-title{display:flex;align-items:center;gap:12px}
-.admin-title-icon{width:40px;height:40px;border-radius:12px;background:var(--red);color:#fff;display:grid;place-items:center}
-.admin-close{width:40px;height:40px;border:1px solid #e6e6e8;background:#fff;border-radius:12px;font-size:20px}
-.admin-body{padding:26px}
-.status{display:inline-flex;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:700;background:#fff4d8;color:#9a6a00}
-.status.done{background:#eaf8f1;color:var(--green)}
+.admin-close{position:absolute;top:22px;right:22px;width:36px;height:36px;border:1px solid #e6e6e8;background:#fff;border-radius:12px;font-size:18px;cursor:pointer}
+.status{display:inline-flex;padding:5px 12px;border-radius:999px;font-size:12px;font-weight:700;background:#fff4d8;color:#9a6a00}
+.status.done{background:#dff5ec;color:var(--green)}
+.status.repaired{background:#e0f2fe;color:#0369a1}
 
 /* ===== ADMIN LOGIN MODAL ===== */
 .admin-login-modal{
@@ -262,7 +259,7 @@ textarea{min-height:120px;resize:vertical}
   border:1px solid #eadfd9;background:#fff;border-radius:10px;padding:8px 12px;font-weight:700;
   font-family:'Mitr',sans-serif;
 }
-.page-btn.active,.page-btn:hover{background:var(--red);color:#fff;border-color:var(--red)}
+.page-btn.active,.page-btn:hover{background:var(--red);color:#fff;border-color:#d7193f}
 .dashboard-table-wrap{overflow:auto}
 .dashboard-table{width:100%;border-collapse:collapse;min-width:1050px}
 .dashboard-table th{
@@ -532,21 +529,21 @@ h1,h2,h3,h4,h5,h6,
 
 <!-- ===== 3D PREVIEW MODAL FOR ADMIN ===== -->
 <div class="admin-modal" id="markerPreviewModal" onclick="closeMarkerPreviewByBackdrop(event)">
-  <div class="admin-box" role="dialog" aria-modal="true" style="max-width:720px;">
-    <div class="admin-head">
+  <div class="admin-box" role="dialog" aria-modal="true" style="max-width:720px;padding:0;text-align:left;">
+    <div class="admin-head" style="padding:22px 26px;margin-bottom:0;border-bottom:1px solid #e5e5e8;">
       <div class="admin-title">
         <div class="admin-title-icon" style="background:#0284c7;">👁</div>
         <div>
-          <strong style="font-size:20px" id="previewModalTitle">ตำแหน่งจุดเสียหาย (Damage Marker)</strong>
-          <div style="font-size:12px;color:#777" id="previewModalSub">แสดงตำแหน่งที่พนักงานระบุบนกระเป๋า</div>
+          <strong style="font-size:20px" data-i18n="previewTitle">ตำแหน่งจุดเสียหาย (Damage Marker)</strong>
+          <div style="font-size:12px;color:#777" data-i18n="previewSub">แสดงตำแหน่งที่พนักงานระบุบนกระเป๋า</div>
         </div>
       </div>
-      <button class="admin-close" onclick="closeMarkerPreview()">×</button>
+      <button class="admin-close" style="position:static;" onclick="closeMarkerPreview()">×</button>
     </div>
     <div class="admin-body" style="padding:20px;">
       <div class="viewer" style="min-height:480px;background:radial-gradient(circle at 50% 40%,#33363c,#151619 70%);">
         <div class="viewer-top">
-          <div class="viewer-title"><strong id="previewFaceLabel">ด้านหน้า (FRONT)</strong><br><small>หมุนกระเป๋าเพื่อตรวจสอบมุมมองอื่นได้</small></div>
+          <div class="viewer-title"><strong id="previewFaceLabel">ด้านหน้า (FRONT)</strong><br><small data-i18n="previewRotSub">หมุนกระเป๋าเพื่อตรวจสอบมุมมองอื่นได้</small></div>
           <div class="view-buttons">
             <button class="active" onclick="setPreviewView('front',this)" data-preview-view="front">Front</button>
             <button onclick="setPreviewView('left',this)" data-preview-view="left">Left</button>
@@ -589,31 +586,52 @@ h1,h2,h3,h4,h5,h6,
   </div>
 </div>
 
-<!-- ===== STATUS CHECK MODAL ===== -->
+<!-- ===== STATUS CHECK MODAL (EXACT LAYOUT AS REQUESTED) ===== -->
 <div class="admin-modal" id="statusModal" onclick="closeStatusByBackdrop(event)">
   <div class="admin-box" role="dialog" aria-modal="true">
-    <div class="admin-head">
-      <div class="admin-title">
-        <div class="admin-title-icon">✓</div>
-        <div>
-          <strong style="font-size:20px" data-i18n="statusModalTitle">เช็คสถานะการซ่อม</strong>
-          <div style="font-size:12px;color:#777" data-i18n="statusModalSub">ตรวจสอบรายการแจ้งซ่อมของคุณ</div>
+    <button class="admin-close" onclick="closeStatus()">×</button>
+    <div style="font-size:26px;font-weight:700;color:var(--red);margin-bottom:6px;" data-i18n="statusModalTitle">เช็คสถานะซ่อมกระเป๋า</div>
+    <div style="font-size:14px;color:var(--muted);margin-bottom:26px;" data-i18n="statusModalSub">สำหรับนักบินและลูกเรือ ไทยไลอ้อนแอร์</div>
+    
+    <div class="input-group" style="text-align:left;margin-bottom:16px;">
+      <span class="icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      </span>
+      <input id="statusCodeInput" placeholder="รหัสพนักงาน TLxxxxxx" style="padding-left:46px;border-radius:18px;height:54px;" onkeydown="if(event.key==='Enter') checkStatus()">
+    </div>
+    
+    <button class="save-marker" style="width:100%;border-radius:18px;height:54px;font-size:16px;background:var(--red);display:flex;align-items:center;justify-content:center;gap:8px;" onclick="checkStatus()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <span data-i18n="checkStatusBtn">ค้นหา</span>
+    </button>
+    
+    <!-- SUCCESS RESULT CARD -->
+    <div id="statusResultContainer" style="margin-top:22px;display:none;text-align:left;">
+      <div id="statusResultCard" style="border:1px solid #eadfd9;background:#fff;border-radius:22px;padding:22px;box-shadow:0 10px 30px rgba(0,0,0,.04);">
+        <div style="font-size:14px;color:#4b4745;margin-bottom:8px;"><strong data-i18n="resNameLabel">ชื่อ-นามสกุล:</strong> <span id="resName">--</span></div>
+        <div style="font-size:14px;color:#4b4745;margin-bottom:8px;"><strong data-i18n="resIssueLabel">ปัญหา:</strong> <span id="resIssue">--</span></div>
+        <div style="font-size:14px;color:#4b4745;margin-bottom:12px;"><strong data-i18n="resDateLabel">วันที่แจ้ง:</strong> <span id="resDate">--</span></div>
+        <div style="font-size:14px;color:#4b4745;display:flex;align-items:center;gap:8px;">
+          <strong data-i18n="resStatusLabel">สถานะ:</strong> <span id="resStatusBadge" class="status repair">--</span>
         </div>
       </div>
-      <button class="admin-close" onclick="closeStatus()">×</button>
     </div>
-    <div class="admin-body">
-      <div class="input-group" style="max-width:520px;margin:auto">
-        <input id="statusCodeInput" placeholder="กรอกรหัสแจ้งซ่อม เช่น BG-000241" style="padding-left:16px">
-      </div>
-      <button class="save-marker" style="max-width:520px;display:block;margin:14px auto 0" onclick="checkStatus()" data-i18n="checkStatusBtn">ตรวจสอบสถานะ →</button>
-      <div id="statusResult" style="display:none;max-width:520px;margin:22px auto 0;padding:20px;border:1px solid #e7e7ea;border-radius:18px;background:#fafafa">
-        <strong id="resId">BG-000241</strong>
-        <p style="margin:8px 0;color:#777" data-i18n="currentStatusLabel">สถานะปัจจุบัน</p>
-        <span class="status" id="resStatusBadge">Repairing</span>
-        <p style="margin:14px 0 0;color:#777;font-size:13px" data-i18n="successFlow">Submitted → Inspection → Repair → Completed</p>
-      </div>
+    
+    <div style="margin-top:24px;">
+      <button onclick="closeStatus()" style="background:none;border:0;color:var(--muted);font-weight:600;font-size:14px;cursor:pointer;" data-i18n="backToForm">← กลับไปหน้าฟอร์ม</button>
     </div>
+  </div>
+</div>
+
+<!-- ===== NOT FOUND MODAL (EXACT LAYOUT WITH LINE BREAK) ===== -->
+<div class="custom-modal" id="notFoundModal" onclick="closeNotFoundByBackdrop(event)">
+  <div class="custom-modal-box" style="width:min(420px,100%);border-radius:32px;padding:36px 28px;text-align:center;">
+    <div class="custom-modal-icon" style="width:64px;height:64px;border-radius:50%;background:#fff4d8;margin:0 auto 18px;display:grid;place-items:center;color:#d27b00;font-size:28px;">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+    </div>
+    <h3 style="font-size:24px;font-weight:700;margin:0 0 8px;" data-i18n="notFoundTitle">ไม่พบข้อมูล</h3>
+    <p style="font-size:14px;color:var(--muted);margin:0 0 24px;line-height:1.6;" data-i18n="notFoundDesc">ไม่พบข้อมูลการแจ้งซ่อมของรหัสพนักงานนี้<br>กรุณาตรวจสอบใหม่อีกครั้ง</p>
+    <button class="btn-confirm" onclick="closeNotFound()" style="width:100%;border-radius:16px;padding:14px;background:var(--red);color:#fff;border:0;font-weight:700;font-size:15px;" data-i18n="notFoundBtn">ตกลง</button>
   </div>
 </div>
 
@@ -641,17 +659,17 @@ h1,h2,h3,h4,h5,h6,
       <!-- DROPDOWN SETTINGS BUTTON -->
       <div class="dropdown-container">
         <button class="dashboard-btn" onclick="toggleSettingsDropdown(event)" style="border-color:var(--red);color:var(--red);display:flex;align-items:center;gap:5px;">
-          <span>⚙ ตั้งค่า</span>
+          <span data-i18n="btnSettings">⚙ ตั้งค่า</span>
           <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </button>
         <div class="dropdown-menu" id="settingsDropdown">
           <button class="dropdown-item" onclick="openDeptSettings(); closeSettingsDropdown();">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-            การตั้งค่าแผนก
+            <span data-i18n="menuDept">การตั้งค่าแผนก</span>
           </button>
           <button class="dropdown-item" onclick="openPasswordSettings(); closeSettingsDropdown();">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-            การตั้งค่ารหัสผ่าน
+            <span data-i18n="menuPass">การตั้งค่ารหัสผ่าน</span>
           </button>
         </div>
       </div>
@@ -661,7 +679,7 @@ h1,h2,h3,h4,h5,h6,
 
   <div class="admin-dashboard">
     <div class="dashboard-title">
-      <h1>Admin Dashboard</h1>
+      <h1 data-i18n="dashTitle">Admin Dashboard</h1>
       <p data-i18n="dashSub">จัดการและติดตามรายการแจ้งซ่อมกระเป๋าของนักบินและลูกเรือ</p>
     </div>
 
@@ -733,35 +751,35 @@ h1,h2,h3,h4,h5,h6,
   </div>
 </div>
 
-<!-- ===== PASSWORD SETTINGS MODAL ===== -->
-<div class="admin-modal" id="passwordModal" onclick="closePasswordSettingsByBackdrop(event)">
-  <div class="admin-box" role="dialog" aria-modal="true" style="width:min(440px,100%);">
-    <div class="admin-head">
-      <div class="admin-title">
-        <div class="admin-title-icon" style="background:var(--red);">🔒</div>
-        <div>
-          <strong style="font-size:20px">เปลี่ยนรหัสผ่านแอดมิน</strong>
-          <div style="font-size:12px;color:#777">ตั้งค่ารหัสผ่านใหม่สำหรับเข้าสู่ระบบ</div>
-        </div>
-      </div>
-      <button class="admin-close" onclick="closePasswordSettings()">×</button>
+<!-- ===== PASSWORD SETTINGS FULL-SCREEN MODAL ===== -->
+<div class="admin-dashboard-modal" id="passwordModal">
+  <nav class="nav">
+    <div class="brand"><div class="lion">✦</div><div>THAI LION AIR<small>LUGGAGE CARE</small></div></div>
+    <div class="nav-actions">
+      <button class="dashboard-btn" onclick="closePasswordSettings()" style="border-color:var(--red);color:var(--red)" data-i18n="btnBackDash">← กลับหน้าแดชบอร์ด</button>
     </div>
-    <div class="admin-body">
-      <div style="display:flex;flex-direction:column;gap:14px;">
+  </nav>
+
+  <div class="admin-dashboard">
+    <div class="dashboard-panel" style="max-width:680px;margin:30px auto 0;padding:40px;border-radius:32px;">
+      <h2 style="color:var(--red);font-size:26px;margin:0 0 6px;" data-i18n="passModalTitle">การตั้งค่ารหัสผ่าน</h2>
+      <p style="color:var(--muted);font-size:14px;margin:0 0 30px;" data-i18n="passModalSub">เปลี่ยนรหัสผ่านสำหรับเข้าใช้งานระบบแอดมิน</p>
+      
+      <div style="display:flex;flex-direction:column;gap:20px;">
         <div>
-          <label style="font-size:13px;font-weight:700;display:block;margin-bottom:6px;">รหัสผ่านเดิม</label>
-          <input id="currentPassInput" type="password" class="admin-password" placeholder="กรอกรหัสผ่านเดิม" style="text-align:left;letter-spacing:normal;">
+          <label style="font-size:14px;font-weight:700;display:block;margin-bottom:8px;" data-i18n="lblCurrPass">รหัสผ่านเดิม</label>
+          <input id="currentPassInput" type="password" class="admin-password" placeholder="กรอกรหัสผ่านเดิม" style="text-align:left;letter-spacing:normal;padding:15px 17px;border-radius:15px;">
         </div>
         <div>
-          <label style="font-size:13px;font-weight:700;display:block;margin-bottom:6px;">รหัสผ่านใหม่</label>
-          <input id="newPassInput" type="password" class="admin-password" placeholder="กรอกรหัสผ่านใหม่" style="text-align:left;letter-spacing:normal;">
+          <label style="font-size:14px;font-weight:700;display:block;margin-bottom:8px;" data-i18n="lblNewPass">รหัสผ่านใหม่</label>
+          <input id="newPassInput" type="password" class="admin-password" placeholder="กรอกรหัสผ่านใหม่" style="text-align:left;letter-spacing:normal;padding:15px 17px;border-radius:15px;">
         </div>
         <div>
-          <label style="font-size:13px;font-weight:700;display:block;margin-bottom:6px;">ยืนยันรหัสผ่านใหม่</label>
-          <input id="confirmPassInput" type="password" class="admin-password" placeholder="ยืนยันรหัสผ่านใหม่" style="text-align:left;letter-spacing:normal;">
+          <label style="font-size:14px;font-weight:700;display:block;margin-bottom:8px;" data-i18n="lblConfPass">ยืนยันรหัสผ่านใหม่</label>
+          <input id="confirmPassInput" type="password" class="admin-password" placeholder="ยืนยันรหัสผ่านใหม่" style="text-align:left;letter-spacing:normal;padding:15px 17px;border-radius:15px;">
         </div>
-        <div id="passErrorMsg" style="color:var(--red);font-size:13px;display:none;">รหัสผ่านเดิมไม่ถูกต้อง หรือรหัสผ่านใหม่ไม่ตรงกัน</div>
-        <button class="save-marker" onclick="saveNewPassword()" style="margin-top:6px;">บันทึกรหัสผ่านใหม่ →</button>
+        <div id="passErrorMsg" style="color:var(--red);font-size:13px;display:none;" data-i18n="passErrorMsg">รหัสผ่านเดิมไม่ถูกต้อง หรือรหัสผ่านใหม่ไม่ตรงกัน</div>
+        <button class="save-marker" onclick="saveNewPassword()" style="margin-top:10px;padding:16px;border-radius:16px;font-size:16px;" data-i18n="savePassBtn">บันทึกรหัสผ่านใหม่ →</button>
       </div>
     </div>
   </div>
@@ -776,8 +794,8 @@ h1,h2,h3,h4,h5,h6,
     <h3 id="modalTitle">ยืนยันการลบแผนก</h3>
     <p id="modalDesc">คุณแน่ใจหรือไม่ที่จะลบแผนกนี้?<br>ตำแหน่งทั้งหมดในแผนกจะถูกลบไปด้วย</p>
     <div class="custom-modal-actions">
-      <button class="btn-cancel" id="modalCancelBtn" onclick="closeCustomModal()">ยกเลิก</button>
-      <button class="btn-confirm" id="modalConfirmBtn">ยืนยัน</button>
+      <button class="btn-cancel" id="modalCancelBtn" onclick="closeCustomModal()" data-i18n="cancelBtn">ยกเลิก</button>
+      <button class="btn-confirm" id="modalConfirmBtn" data-i18n="confirmBtn">ยืนยัน</button>
     </div>
   </div>
 </div>
@@ -828,21 +846,41 @@ const translations = {
     successSub: "Your repair request has been successfully received.",
     successFlow: "Submitted → Inspection → Repair → Completed",
     statusModalTitle: "Check Repair Status",
-    statusModalSub: "Track your repair request item",
-    statusCodeInput: "Enter request ID e.g. BG-000241",
-    checkStatusBtn: "Check Status →",
-    currentStatusLabel: "Current Status",
-    statusInspecting: "Repairing",
+    statusModalSub: "For Thai Lion Air pilots & cabin crew",
+    statusCodeInput: "Employee ID TLxxxxxx",
+    checkStatusBtn: "Search",
+    resNameLabel: "Full Name:",
+    resIssueLabel: "Issue:",
+    resDateLabel: "Request Date:",
+    resStatusLabel: "Status:",
+    backToForm: "← Back to Form",
+    notFoundTitle: "Not Found",
+    notFoundDesc: "No repair request found for this employee ID.<br>Please check again.",
+    notFoundBtn: "OK",
+    statusRepairing: "Repairing",
+    statusRepaired: "Repaired",
+    statusDelivered: "Delivered to Crew",
     adminLoginSub: "Please enter password to access admin system",
     cancelBtn: "Cancel",
     loginBtn: "Login →",
     loginErrorMsg: "Incorrect password. Please try again.",
     logoutBtn: "Logout",
-    btnDeptSettings: "⚙ ตั้งค่า",
+    btnSettings: "⚙ Settings",
+    menuDept: "Department Settings",
+    menuPass: "Password Settings",
     btnBackDash: "← Back to Dashboard",
+    passModalTitle: "Password Settings",
+    passModalSub: "Change administrator login password",
+    lblCurrPass: "Current Password",
+    lblNewPass: "New Password",
+    lblConfPass: "Confirm New Password",
+    passErrorMsg: "Incorrect current password or new passwords do not match.",
+    savePassBtn: "Save New Password →",
+    confirmBtn: "Confirm",
     deptSettingsTitle: "Departments & Positions",
     deptSettingsSub: "Manage departments and their available positions (Drag & Drop to reorder)",
     btnAddDept: "+ Add Department",
+    dashTitle: "Admin Dashboard",
     dashSub: "Manage and track pilot and cabin crew baggage repair requests",
     statTotal: "Total Requests",
     statRepairing: "Repairing",
@@ -861,7 +899,10 @@ const translations = {
     thAction: "ACTION",
     dashFooter: "Internal Service • 2026 • Bag Care Administration",
     footerSub: "LUGGAGE CARE",
-    footerCopy: "Internal Service Prototype • 2026"
+    footerCopy: "Internal Service Prototype • 2026",
+    previewTitle: "Damage Marker Position",
+    previewSub: "Showing damage point marked by employee",
+    previewRotSub: "Rotate baggage to inspect other angles"
   },
   th: {
     navSub: "LUGGAGE CARE",
@@ -897,22 +938,42 @@ const translations = {
     successTitle: "ส่งคำขอสำเร็จ",
     successSub: "ระบบได้รับรายการแจ้งซ่อมของคุณแล้ว",
     successFlow: "Submitted → Inspection → Repair → Completed",
-    statusModalTitle: "เช็คสถานะการซ่อม",
-    statusModalSub: "ตรวจสอบรายการแจ้งซ่อมของคุณ",
-    statusCodeInput: "กรอกรหัสแจ้งซ่อม เช่น BG-000241",
-    checkStatusBtn: "ตรวจสอบสถานะ →",
-    currentStatusLabel: "สถานะปัจจุบัน",
-    statusInspecting: "กำลังซ่อมแซม",
+    statusModalTitle: "เช็คสถานะซ่อมกระเป๋า",
+    statusModalSub: "สำหรับนักบินและลูกเรือ ไทยไลอ้อนแอร์",
+    statusCodeInput: "รหัสพนักงาน TLxxxxxx",
+    checkStatusBtn: "ค้นหา",
+    resNameLabel: "ชื่อ-นามสกุล:",
+    resIssueLabel: "ปัญหา:",
+    resDateLabel: "วันที่แจ้ง:",
+    resStatusLabel: "สถานะ:",
+    backToForm: "← กลับไปหน้าฟอร์ม",
+    notFoundTitle: "ไม่พบข้อมูล",
+    notFoundDesc: "ไม่พบข้อมูลการแจ้งซ่อมของรหัสพนักงานนี้<br>กรุณาตรวจสอบใหม่อีกครั้ง",
+    notFoundBtn: "ตกลง",
+    statusRepairing: "กำลังซ่อมแซม",
+    statusRepaired: "ซ่อมเสร็จแล้ว",
+    statusDelivered: "พนักงานได้รับกระเป๋าแล้ว",
     adminLoginSub: "กรุณากรอกรหัสผ่านเพื่อเข้าสู่ระบบผู้ดูแล",
     cancelBtn: "ยกเลิก",
     loginBtn: "เข้าสู่ระบบ →",
     loginErrorMsg: "รหัสผ่านไม่ถูกต้อง กรุณาลองใหม่",
     logoutBtn: "ออกจากระบบ",
-    btnDeptSettings: "⚙ ตั้งค่า",
+    btnSettings: "⚙ ตั้งค่า",
+    menuDept: "การตั้งค่าแผนก",
+    menuPass: "การตั้งค่ารหัสผ่าน",
     btnBackDash: "← กลับหน้าแดชบอร์ด",
+    passModalTitle: "การตั้งค่ารหัสผ่าน",
+    passModalSub: "เปลี่ยนรหัสผ่านสำหรับเข้าใช้งานระบบแอดมิน",
+    lblCurrPass: "รหัสผ่านเดิม",
+    lblNewPass: "รหัสผ่านใหม่",
+    lblConfPass: "ยืนยันรหัสผ่านใหม่",
+    passErrorMsg: "รหัสผ่านเดิมไม่ถูกต้อง หรือรหัสผ่านใหม่ไม่ตรงกัน",
+    savePassBtn: "บันทึกรหัสผ่านใหม่ →",
+    confirmBtn: "ยืนยัน",
     deptSettingsTitle: "แผนกและตำแหน่ง",
     deptSettingsSub: "จัดการแผนก และกำหนดตำแหน่งที่มีในแต่ละแผนก (ลากวางเพื่อสลับลำดับ)",
     btnAddDept: "+ เพิ่มแผนก",
+    dashTitle: "Admin Dashboard",
     dashSub: "จัดการและติดตามรายการแจ้งซ่อมกระเป๋าของนักบินและลูกเรือ",
     statTotal: "Total Requests",
     statRepairing: "Repairing",
@@ -931,7 +992,10 @@ const translations = {
     thAction: "จัดการ",
     dashFooter: "Internal Service • 2026 • Bag Care Administration",
     footerSub: "LUGGAGE CARE",
-    footerCopy: "Internal Service Prototype • 2026"
+    footerCopy: "Internal Service Prototype • 2026",
+    previewTitle: "ตำแหน่งจุดเสียหาย (Damage Marker)",
+    previewSub: "แสดงตำแหน่งที่พนักงานระบุบนกระเป๋า",
+    previewRotSub: "หมุนกระเป๋าเพื่อตรวจสอบมุมมองอื่นได้"
   }
 };
 
@@ -948,7 +1012,7 @@ let departmentsData = [
 // ===== REQUESTS DATA =====
 let requestsData = [
   { id: 'TL678900', name: 'Apichaya L', email: 'apichayalhts@gmail.com', dept: 'Cabin Crew', pos: 'Cabin Crew (Batch 60)', issue: 'Handle broken', date: '14/09/2026', status: 'repair', marker: { x: 50, y: 35, face: 'front' } },
-  { id: 'TL111111', name: 'Somchai P', email: 'somchai@gmail.com', dept: 'Pilot', pos: 'Captain', issue: 'Wheel stuck', date: '12/09/2026', status: 'delivered', marker: { x: 20, y: 88, face: 'front' } },
+  { id: 'TL111111', name: '1', email: 'somchai@gmail.com', dept: 'Pilot', pos: 'Captain', issue: '1', date: '12/09/2026', status: 'delivered', marker: { x: 20, y: 88, face: 'front' } },
   { id: 'TL464564', name: 'Juthamas S', email: 'juthamas35653@gmail.com', dept: 'Pilot', pos: 'Captain', issue: 'Zipper broken', date: '11/09/2026', status: 'delivered', marker: { x: 50, y: 15, face: 'front' } },
   { id: 'TL565656', name: 'Narong K', email: 'narong@gmail.com', dept: 'Pilot', pos: 'Captain', issue: 'Cracked case', date: '11/09/2026', status: 'repair', marker: { x: 50, y: 50, face: 'back' } },
   { id: 'TL989898', name: 'Chanya M', email: 'chanya@gmail.com', dept: 'Cabin Crew', pos: 'Cabin Crew (Batch 39)', issue: 'Trolley handle jammed', date: '11/09/2026', status: 'repair', marker: { x: 50, y: 10, face: 'back' } },
@@ -1248,7 +1312,7 @@ previewStage.addEventListener('touchstart', (e) => {
 window.addEventListener('touchmove', (e) => {
   if (!isPreviewDragging) return;
   const dx = e.touches[0].clientX - previewStartX;
-  const dy = e.touches[0].clientY - previewStartY;
+  const dy = e.touches[0].clientY - startY;
   previewStartX = e.touches[0].clientX;
   previewStartY = e.touches[0].clientY;
   previewRotY += dx * 0.6;
@@ -1314,7 +1378,10 @@ function closeMarkerPreviewByBackdrop(e) {
   if (e.target.id === 'markerPreviewModal') closeMarkerPreview();
 }
 
+// ===== STATUS CHECK & NOT FOUND MODAL LOGIC (FLEXIBLE ID MATCHING) =====
 function openStatus() {
+  document.getElementById('statusCodeInput').value = '';
+  document.getElementById('statusResultContainer').style.display = 'none';
   document.getElementById('statusModal').classList.add('show');
   document.body.style.overflow = 'hidden';
 }
@@ -1325,30 +1392,59 @@ function closeStatus() {
 function closeStatusByBackdrop(e) {
   if (e.target.id === 'statusModal') closeStatus();
 }
+
+function openNotFoundModal() {
+  document.getElementById('notFoundModal').classList.add('show');
+}
+function closeNotFound() {
+  document.getElementById('notFoundModal').classList.remove('show');
+}
+function closeNotFoundByBackdrop(e) {
+  if (e.target.id === 'notFoundModal') closeNotFound();
+}
+
 function checkStatus() {
-  const code = document.getElementById('statusCodeInput').value.trim();
-  if (!code) {
-    alert(currentLang === 'en' ? 'Please enter repair request ID' : 'กรุณากรอกรหัสแจ้งซ่อม');
+  const codeInput = document.getElementById('statusCodeInput').value.trim().toLowerCase();
+  const cleanInput = codeInput.replace(/^tl/, '');
+  
+  if (!cleanInput) {
+    alert(currentLang === 'en' ? 'Please enter employee ID' : 'กรุณากรอกรหัสพนักงาน');
     return;
   }
-  const found = requestsData.find(r => r.id.toLowerCase() === code.toLowerCase());
-  document.getElementById('statusResult').style.display = 'block';
-  document.getElementById('resId').textContent = code;
-  const badge = document.getElementById('resStatusBadge');
-  if(found) {
+  
+  const found = requestsData.find(r => {
+    const rId = r.id.toLowerCase();
+    const rCleanId = rId.replace(/^tl/, '');
+    return rId === codeInput || rCleanId === cleanInput || rCleanId === cleanInput.padStart(6, '0');
+  });
+  
+  const resultContainer = document.getElementById('statusResultContainer');
+  
+  if (found) {
+    resultContainer.style.display = 'block';
+    document.getElementById('resName').textContent = found.name;
+    
+    let issueText = found.issue;
+    if(translations[currentLang]['d_' + found.issue]) {
+      issueText = translations[currentLang]['d_' + found.issue];
+    }
+    document.getElementById('resIssue').textContent = issueText;
+    document.getElementById('resDate').textContent = found.date;
+    
+    const badge = document.getElementById('resStatusBadge');
     if(found.status === 'repair') {
-      badge.textContent = 'Repairing';
+      badge.textContent = translations[currentLang].statusRepairing;
       badge.className = 'status repair';
     } else if(found.status === 'repaired') {
-      badge.textContent = 'Repaired';
+      badge.textContent = translations[currentLang].statusRepaired;
       badge.className = 'status repaired';
     } else {
-      badge.textContent = 'Delivered';
+      badge.textContent = translations[currentLang].statusDelivered;
       badge.className = 'status done';
     }
   } else {
-    badge.textContent = 'Repairing';
-    badge.className = 'status repair';
+    resultContainer.style.display = 'none';
+    openNotFoundModal();
   }
 }
 
@@ -1433,12 +1529,14 @@ function renderAdminTable() {
 
   paginatedItems.forEach((r) => {
     let statusBadgeHTML = '';
+    let statusText = r.status === 'repair' ? translations[currentLang].statusRepairing : (r.status === 'repaired' ? translations[currentLang].statusRepaired : translations[currentLang].statusDelivered);
+    
     if(r.status === 'repair') {
-      statusBadgeHTML = `<span class="dashboard-status repair" onclick="cycleStatus('${r.id}')">Repairing</span>`;
+      statusBadgeHTML = `<span class="dashboard-status repair" onclick="cycleStatus('${r.id}')">${statusText}</span>`;
     } else if(r.status === 'repaired') {
-      statusBadgeHTML = `<span class="dashboard-status repaired" onclick="cycleStatus('${r.id}')">Repaired</span>`;
+      statusBadgeHTML = `<span class="dashboard-status repaired" onclick="cycleStatus('${r.id}')">${statusText}</span>`;
     } else {
-      statusBadgeHTML = `<span class="dashboard-status delivered">Delivered</span>`;
+      statusBadgeHTML = `<span class="dashboard-status delivered">${statusText}</span>`;
     }
 
     const tr = document.createElement('tr');
@@ -1551,7 +1649,7 @@ function closeSettingsDropdown() {
   if(menu) menu.classList.remove('show');
 }
 
-// ===== PASSWORD SETTINGS LOGIC =====
+// ===== PASSWORD SETTINGS FULL-SCREEN LOGIC =====
 function openPasswordSettings() {
   document.getElementById('currentPassInput').value = '';
   document.getElementById('newPassInput').value = '';
@@ -1566,9 +1664,6 @@ function closePasswordSettings() {
     document.body.style.overflow = '';
   }
 }
-function closePasswordSettingsByBackdrop(e) {
-  if (e.target.id === 'passwordModal') closePasswordSettings();
-}
 function saveNewPassword() {
   const curr = document.getElementById('currentPassInput').value;
   const newP = document.getElementById('newPassInput').value;
@@ -1581,7 +1676,7 @@ function saveNewPassword() {
   }
   adminPasswordVal = newP;
   errEl.style.display = 'none';
-  alert('เปลี่ยนรหัสผ่านแอดมินสำเร็จเรียบร้อยแล้ว!');
+  alert(currentLang === 'en' ? 'Password updated successfully!' : 'เปลี่ยนรหัสผ่านแอดมินสำเร็จเรียบร้อยแล้ว!');
   closePasswordSettings();
 }
 
@@ -1625,7 +1720,7 @@ function renderDeptSettings() {
           </div>
           <div style="display:flex;gap:12px;align-items:center;background:#fff;padding:16px;border:1px solid #dedee3;border-radius:20px;">
             <input id="newPosInput_${dIndex}" placeholder="พิมพ์ชื่อตำแหน่งใหม่ แล้วกดเพิ่ม" style="flex:1;border:0;outline:none;font-family:'Mitr',sans-serif;font-size:14px;background:transparent;" onkeydown="if(event.key==='Enter') addPosition(${dIndex})"/>
-            <button onclick="addPosition(${dIndex})" style="border:0;background:var(--ink);color:#fff;border-radius:16px;padding:14px 26px;font-weight:700;font-family:'Mitr',sans-serif;font-size:14px;white-space:nowrap;">+ เพิ่มตำแหน่ง</button>
+            <button onclick="addPosition(${dIndex})" style="border:0;background:var(--ink);color:#fff;border-radius:16px;padding:14px 26px;font-weight:700;font-family:'Mitr',sans-serif;font-size:14px;white-space:nowrap;" data-i18n="btnAddDept">+ เพิ่มแผนก</button>
           </div>
         </div>
       `;
