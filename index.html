@@ -300,6 +300,19 @@ textarea{min-height:120px;resize:vertical}
 body,button,input,select,textarea,.nav,.admin-modal,.admin-btn,.admin-table,.status,.chip,.viewer,.damage-panel,.form-card,.footer,h1,h2,h3,h4,h5,h6,.eyebrow,.brand,.admin-title strong,.section-head h2,.hero h1{
   font-family:'Mitr',sans-serif;
 }
+  /* --- Apple-style Entry Animation --- */
+@keyframes smoothEntry {
+  0% { opacity: 0; transform: translateY(30px); filter: blur(6px); }
+  100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+.entry-anim {
+  opacity: 0;
+  animation: smoothEntry 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
 </style>
 </head>
 <body>
@@ -329,20 +342,23 @@ body,button,input,select,textarea,.nav,.admin-modal,.admin-btn,.admin-table,.sta
 <section class="hero">
   <div class="hero-inner">
     <div>
-      <div class="eyebrow" data-i18n="heroEyebrow">จุดเริ่มต้นการดูแลกระเป๋าเดินทางของคุณ</div>
-      <h1 data-i18n="heroTitle">PICK.<br><span style="color:var(--red)">KA.</span><br>CREW.</h1>
-      <p data-i18n="heroDesc">แจ้งซ่อมกระเป๋าเดินทางสำหรับนักบินและลูกเรือได้ง่าย รวดเร็ว พร้อมระบุตำแหน่งความเสียหายบนกระเป๋าแบบ Interactive</p>
-      <button class="cta" onclick="document.getElementById('repair').scrollIntoView()" data-i18n="heroCta">เริ่มแจ้งซ่อม →</button>
+      <div class="eyebrow entry-anim" data-i18n="heroEyebrow">จุดเริ่มต้นการดูแลกระเป๋าเดินทางของคุณ</div>
+      <h1 class="entry-anim delay-1" data-i18n="heroTitle">PICK.<br><span style="color:var(--red)">KA.</span><br>CREW.</h1>
+      <p class="entry-anim delay-2" data-i18n="heroDesc">แจ้งซ่อมกระเป๋าเดินทางสำหรับนักบินและลูกเรือได้ง่าย รวดเร็ว พร้อมระบุตำแหน่งความเสียหายบนกระเป๋าแบบ Interactive</p>
+      <div class="entry-anim delay-3">
+        <button class="cta" onclick="document.getElementById('repair').scrollIntoView()" data-i18n="heroCta">เริ่มแจ้งซ่อม →</button>
+      </div>
     </div>
-    <div class="hero-card">
+    <div class="hero-card entry-anim delay-4">
       <div class="suitcase">
+        <!-- โครงสร้างกระเป๋า 3D ของคุณตามเดิม -->
         <div class="bag-handle-assembly" style="position:absolute;top:-42px;left:50%;transform:translateX(-50%);width:70px;height:45px;z-index:5">
           <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:50px;height:10px;background:#5a5b62;border:2px solid #777880;border-radius:5px"></div>
           <div style="position:absolute;bottom:0;width:100%;height:35px;display:flex;justify-content:space-between;padding:0 10px"><span style="width:4px;height:100%;background:linear-gradient(90deg,#777,#aaa,#555);border-radius:2px"></span><span style="width:4px;height:100%;background:linear-gradient(90deg,#777,#aaa,#555);border-radius:2px"></span></div>
         </div>
         <div class="bag-top-panel">
           <div class="bag-logo" style="background: transparent; border: none; box-shadow: none;">
-            <img src="https://i.postimg.cc/zfpHWxk5/049ac6ae-4fa0-4fb3-9ca3-609520086cbd-removebg-preview.png" alt="Logo" style="width:100%;height:100%;object-fit:cover;" onerror="this.onerror=null;this.src='https://placehold.co/28x28/d7193f/ffffff?text=TL';">
+            <img src="https://i.postimg.cc/zfpHWxk5/049ac6ae-4fa0-4fb3-9ca3-609520086cbd-removebg-preview.png" alt="Logo" style="width:100%;height:100%;object-fit:cover;">
           </div>
         </div>
         <div class="bag-vertical-pocket"><span></span><span></span></div>
