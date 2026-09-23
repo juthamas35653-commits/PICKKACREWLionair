@@ -1347,7 +1347,6 @@ function renderSelected() {
 
 function validateAndProceedToDamage() {
   if (!checkFormValidation()) {
-    alert(currentLang === 'en' ? 'Please fill in all required fields correctly.' : 'กรุณากรอกข้อมูลให้ครบถ้วนและถูกต้อง');
     return;
   }
   document.getElementById('damage').scrollIntoView({behavior:'smooth'});
