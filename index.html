@@ -37,7 +37,6 @@ h1{font-size:clamp(38px,6vw,76px);line-height:1.1;font-weight:700;margin:0 0 24p
 .bag-vertical-pocket{position:absolute;left:34px;top:100px;width:12px;height:130px;border:1.5px solid #3a3b42;border-radius:6px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:6px 0}
 .bag-vertical-pocket span{width:6px;height:2px;background:#3a3b42;border-radius:1px}
 
-/* Side Handle Styling for 3D Suitcase */
 .handle-side-graphic {
   position: absolute;
   top: 50%;
@@ -409,7 +408,7 @@ body,button,input,select,textarea,.nav,.admin-modal,.admin-btn,.admin-table,.sta
           <span class="icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
           </span>
-          <input id="inpEmpId" placeholder="รหัสพนักงาน TLxxxxxx *"/>
+          <input id="inpEmpId" value="TL" placeholder="TLxxxxxx *" oninput="formatEmpId(this)"/>
         </div>
         <div class="input-group">
           <span class="icon">
@@ -442,7 +441,7 @@ body,button,input,select,textarea,.nav,.admin-modal,.admin-btn,.admin-table,.sta
       </div>
       <div class="form-actions">
         <span style="font-size:13px;color:#777" data-i18n="formNote">ข้อมูลจะถูกใช้สำหรับงานซ่อมภายในเท่านั้น</span>
-        <button class="next" onclick="document.getElementById('damage').scrollIntoView()" data-i18n="formNext">ถัดไป →</button>
+        <button class="next" onclick="validateAndProceedToDamage()" data-i18n="formNext">ถัดไป →</button>
       </div>
     </div>
   </div>
@@ -545,13 +544,13 @@ body,button,input,select,textarea,.nav,.admin-modal,.admin-btn,.admin-table,.sta
       <div class="success-icon">✓</div>
       <h2 data-i18n="successTitle">ส่งคำขอสำเร็จ</h2>
       <p data-i18n="successSub">ระบบได้รับรายการแจ้งซ่อมของคุณแล้ว</p>
-      <div class="code" id="successCodeDisplay">BG-000241</div>
+      <div class="code" id="successCodeDisplay">TL678900</div>
       <p style="margin-top:22px" data-i18n="successFlow">Submitted → Inspection → Repair → Completed</p>
     </div>
   </div>
 </section>
 
-<!-- ===== 3D PREVIEW MODAL FOR ADMIN ===== -->
+<!-- ===== MARKER PREVIEW MODAL (ADMIN) ===== -->
 <div class="admin-modal" id="markerPreviewModal" onclick="closeMarkerPreviewByBackdrop(event)">
   <div class="admin-box" role="dialog" aria-modal="true" style="max-width:720px;">
     <div class="admin-head">
@@ -559,7 +558,7 @@ body,button,input,select,textarea,.nav,.admin-modal,.admin-btn,.admin-table,.sta
         <div class="admin-title-icon" style="background:#0284c7;">👁</div>
         <div>
           <strong style="font-size:20px" data-i18n="previewTitle">ตำแหน่งจุดเสียหาย (Damage Marker)</strong>
-          <div style="font-size:12px;color:#777" id="previewModalSub" data-i18n="previewSub">แสดงตำแหน่งที่พนักงานระบุบนกระเป๋า</div>
+          <div style="font-size:12px;color:#777" id="previewModalSub">แสดงตำแหน่งที่พนักงานระบุบนกระเป๋า</div>
         </div>
       </div>
       <button class="admin-close" onclick="closeMarkerPreview()">×</button>
@@ -626,7 +625,6 @@ body,button,input,select,textarea,.nav,.admin-modal,.admin-btn,.admin-table,.sta
   </div>
 </div>
 
-<!-- ===== STATUS CHECK MODAL ===== -->
 <div class="admin-modal" id="statusModal" onclick="closeStatusByBackdrop(event)">
   <div class="admin-box" role="dialog" aria-modal="true" style="max-width:540px;padding:36px;text-align:center;border-radius:32px;">
     <button class="admin-close" onclick="closeStatus()" style="position:absolute;right:24px;top:24px;">×</button>
@@ -637,7 +635,7 @@ body,button,input,select,textarea,.nav,.admin-modal,.admin-btn,.admin-table,.sta
       <span class="icon">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
       </span>
-      <input id="statusCodeInput" placeholder="รหัสพนักงาน TLxxxxxx" style="padding-left:46px;border-radius:18px;height:52px;" onkeydown="if(event.key==='Enter') checkStatus()" data-i18n-placeholder="statusInputPlaceholder">
+      <input id="statusCodeInput" value="TL" placeholder="TLxxxxxx" style="padding-left:46px;border-radius:18px;height:52px;" oninput="formatEmpId(this)" onkeydown="if(event.key==='Enter') checkStatus()" data-i18n-placeholder="statusInputPlaceholder">
     </div>
     
     <button class="save-marker" style="width:100%;border-radius:18px;height:52px;font-size:16px;background:var(--red);display:flex;align-items:center;justify-content:center;gap:8px;" onclick="checkStatus()">
@@ -662,7 +660,6 @@ body,button,input,select,textarea,.nav,.admin-modal,.admin-btn,.admin-table,.sta
   </div>
 </div>
 
-<!-- ===== NOT FOUND MODAL ===== -->
 <div class="custom-modal" id="notFoundModal" onclick="closeNotFoundByBackdrop(event)">
   <div class="custom-modal-box" style="width:min(420px,100%);border-radius:32px;padding:36px 28px;text-align:center;">
     <div class="custom-modal-icon">
@@ -674,7 +671,6 @@ body,button,input,select,textarea,.nav,.admin-modal,.admin-btn,.admin-table,.sta
   </div>
 </div>
 
-<!-- ===== ADMIN LOGIN MODAL ===== -->
 <div class="admin-login-modal" id="adminLoginModal" onclick="closeAdminLoginByBackdrop(event)">
   <div class="admin-login-box" role="dialog" aria-modal="true">
     <div class="admin-login-icon">⚙</div>
@@ -690,7 +686,6 @@ body,button,input,select,textarea,.nav,.admin-modal,.admin-btn,.admin-table,.sta
   </div>
 </div>
 
-<!-- ===== ADMIN DASHBOARD MODAL ===== -->
 <div class="admin-dashboard-modal" id="adminDashboard">
   <nav class="nav">
     <div class="brand">
@@ -766,7 +761,6 @@ body,button,input,select,textarea,.nav,.admin-modal,.admin-btn,.admin-table,.sta
   </div>
 </div>
 
-<!-- ===== DEPARTMENT SETTINGS MODAL ===== -->
 <div class="admin-dashboard-modal" id="deptModal">
   <nav class="nav">
     <div class="brand">
@@ -797,7 +791,6 @@ body,button,input,select,textarea,.nav,.admin-modal,.admin-btn,.admin-table,.sta
   </div>
 </div>
 
-<!-- ===== PASSWORD SETTINGS PAGE ===== -->
 <div class="admin-dashboard-modal" id="passwordModal">
   <nav class="nav">
     <div class="brand">
@@ -836,7 +829,6 @@ body,button,input,select,textarea,.nav,.admin-modal,.admin-btn,.admin-table,.sta
   </div>
 </div>
 
-<!-- ===== CUSTOM CONFIRMATION MODAL ===== -->
 <div class="custom-modal" id="customModal">
   <div class="custom-modal-box">
     <div class="custom-modal-icon">
@@ -896,7 +888,7 @@ const translations = {
     successFlow: "Submitted → Inspection → Repair → Completed",
     statusModalTitle: "Check Repair Status",
     statusModalSub: "For pilots and cabin crew Thai Lion Air",
-    statusInputPlaceholder: "Employee ID TLxxxxxx",
+    statusInputPlaceholder: "TLxxxxxx",
     checkStatusBtn: "Search",
     resNameLabel: "Full Name:",
     resIssueLabel: "Issue:",
@@ -996,7 +988,7 @@ const translations = {
     successFlow: "Submitted → Inspection → Repair → Completed",
     statusModalTitle: "เช็คสถานะซ่อมกระเป๋า",
     statusModalSub: "สำหรับนักบินและลูกเรือ ไทยไลอ้อนแอร์",
-    statusInputPlaceholder: "รหัสพนักงาน TLxxxxxx",
+    statusInputPlaceholder: "TLxxxxxx",
     checkStatusBtn: "ค้นหา",
     resNameLabel: "ชื่อ-นามสกุล:",
     resIssueLabel: "ปัญหา:",
@@ -1081,6 +1073,18 @@ let requestsData = [
   { id: 'TL565789', name: 'Anurak T', email: 'anurak@gmail.com', dept: 'Pilot', pos: 'First Officer', issue: 'lock', issueText: 'แม่กุญแจ TSA เสียหาย', date: '11/09/2026', status: 'repair', marker: { x: 50, y: 45, face: 'front' } }
 ];
 
+function formatEmpId(input) {
+  let val = input.value;
+  if (!val.startsWith('TL')) {
+    val = 'TL' + val.replace(/^tl/i, '').replace(/[^0-9]/g, '');
+  } else {
+    let numPart = val.slice(2).replace(/[^0-9]/g, '');
+    if (numPart.length > 6) numPart = numPart.slice(0, 6);
+    val = 'TL' + numPart;
+  }
+  input.value = val;
+}
+
 function updateDepartmentDropdowns() {
   const selDept = document.getElementById('selDept');
   const selPos = document.getElementById('selPos');
@@ -1140,8 +1144,6 @@ function setLanguage(lang) {
     }
   });
 
-  const inpEmpId = document.getElementById('inpEmpId');
-  if(inpEmpId) inpEmpId.placeholder = translations[lang].inpEmpId;
   const inpName = document.getElementById('inpName');
   if(inpName) inpName.placeholder = translations[lang].inpName;
   const inpEmail = document.getElementById('inpEmail');
@@ -1318,6 +1320,60 @@ function renderSelected() {
   selectedList.innerHTML = `<span class="chip">(${activePoint.face.toUpperCase()}) • ${damageText} <button onclick="removePoint()" title="Remove">×</button></span>`;
 }
 
+function validateAndProceedToDamage() {
+  const empIdEl = document.getElementById('inpEmpId');
+  const nameEl = document.getElementById('inpName');
+  const deptEl = document.getElementById('selDept');
+  const posEl = document.getElementById('selPos');
+  const emailEl = document.getElementById('inpEmail');
+
+  const empIdVal = empIdEl ? empIdEl.value.trim() : '';
+  const nameVal = nameEl ? nameEl.value.trim() : '';
+  const deptVal = deptEl ? deptEl.value : '';
+  const posVal = posEl ? posEl.value : '';
+  const emailVal = emailEl ? emailEl.value.trim() : '';
+
+  // ตรวจสอบรหัสพนักงาน: ต้องขึ้นต้นด้วย TL และตามด้วยตัวเลข 6 ตัวพอดี (รวมเป็น TLxxxxxx ความยาว 8 ตัว)
+  const empIdRegex = /^TL\d{6}$/;
+  if (!empIdRegex.test(empIdVal)) {
+    alert(currentLang === 'en' ? 'Please enter a valid Employee ID with exactly 6 digits (e.g. TL123456)' : 'กรุณากรอกรหัสพนักงานให้ถูกต้อง โดยต้องมีตัวเลขหลัง TL ครบ 6 ตัว (เช่น TL123456)');
+    if(empIdEl) { empIdEl.focus(); empIdEl.scrollIntoView({behavior:'smooth', block:'center'}); }
+    return;
+  }
+
+  // ตรวจสอบชื่อ
+  if (!nameVal) {
+    alert(currentLang === 'en' ? 'Please enter your full name' : 'กรุณากรอกชื่อ-นามสกุล');
+    if(nameEl) { nameEl.focus(); nameEl.scrollIntoView({behavior:'smooth', block:'center'}); }
+    return;
+  }
+
+  // ตรวจสอบแผนก
+  if (!deptVal) {
+    alert(currentLang === 'en' ? 'Please select a department' : 'กรุณาเลือกแผนก');
+    if(deptEl) { deptEl.focus(); deptEl.scrollIntoView({behavior:'smooth', block:'center'}); }
+    return;
+  }
+
+  // ตรวจสอบตำแหน่ง
+  if (!posVal) {
+    alert(currentLang === 'en' ? 'Please select a position' : 'กรุณาเลือกตำแหน่ง');
+    if(posEl) { posEl.focus(); posEl.scrollIntoView({behavior:'smooth', block:'center'}); }
+    return;
+  }
+
+  // ตรวจสอบรูปแบบอีเมล
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(emailVal)) {
+    alert(currentLang === 'en' ? 'Please enter a valid email address' : 'กรุณากรอกอีเมลให้ถูกต้องตามรูปแบบ');
+    if(emailEl) { emailEl.focus(); emailEl.scrollIntoView({behavior:'smooth', block:'center'}); }
+    return;
+  }
+
+  // หากผ่านทุกเงื่อนไข เลื่อนไปหน้าเลือกจุดเสียหาย
+  document.getElementById('damage').scrollIntoView({behavior:'smooth'});
+}
+
 function submitDemo() {
   if(!activePoint) {
     alert(currentLang === 'en' ? 'Please select a damage point on the suitcase' : 'กรุณาแตะเลือกจุดเสียหายบนกระเป๋าก่อน');
@@ -1330,7 +1386,7 @@ function submitDemo() {
   const posEl = document.getElementById('selPos');
   const detailEl = document.getElementById('inpDetail');
 
-  const empId = empIdEl && empIdEl.value.trim() ? empIdEl.value.trim() : 'TL' + Math.floor(100000 + Math.random() * 900000);
+  let empIdVal = empIdEl ? empIdEl.value.trim().toUpperCase() : 'TL678900';
   const name = nameEl && nameEl.value.trim() ? nameEl.value.trim() : 'Crew Member';
   const email = emailEl && emailEl.value.trim() ? emailEl.value.trim() : 'crew@lionair.com';
   const dept = deptEl && deptEl.value ? deptEl.value : 'Cabin Crew';
@@ -1339,7 +1395,7 @@ function submitDemo() {
   const issueText = detailEl && detailEl.value.trim() ? detailEl.value.trim() : (translations[currentLang]['d_' + issueKey] || issueKey);
 
   const newReq = {
-    id: empId,
+    id: empIdVal,
     name: name,
     email: email,
     dept: dept,
@@ -1356,7 +1412,7 @@ function submitDemo() {
   renderAdminTable();
 
   const successCodeDisplay = document.getElementById('successCodeDisplay');
-  if(successCodeDisplay) successCodeDisplay.textContent = empId;
+  if(successCodeDisplay) successCodeDisplay.textContent = empIdVal;
   const successBox = document.getElementById('success');
   if(successBox) {
     successBox.style.display = 'block';
@@ -1428,9 +1484,10 @@ function setPreviewView(v, btn) {
 function openMarkerPreview(id) {
   const req = requestsData.find(r => r.id === id);
   if (!req || !req.marker) {
-    alert('ไม่พบข้อมูลตำแหน่งจุดเสียหายสำหรับรายการนี้');
+    alert(currentLang === 'en' ? 'Damage marker location not found for this request' : 'ไม่พบข้อมูลตำแหน่งจุดเสียหายสำหรับรายการนี้');
     return;
   }
+  
   ['prevMarkersFront', 'prevMarkersBack', 'prevMarkersLeft', 'prevMarkersRight', 'prevMarkersTop', 'prevMarkersBottom'].forEach(elId => {
     const el = document.getElementById(elId);
     if(el) el.innerHTML = '';
@@ -1450,21 +1507,24 @@ function openMarkerPreview(id) {
   setPreviewView(faceName, faceBtn);
 
   const sub = document.getElementById('previewModalSub');
-  if(sub) sub.textContent = `รหัสคำขอ: ${req.id} • ผู้แจ้ง: ${req.name}`;
+  if(sub) sub.textContent = (currentLang === 'en' ? `Request ID: ${req.id} • Name: ${req.name}` : `รหัสคำขอ: ${req.id} • ผู้แจ้ง: ${req.name}`);
   
   const issueTextEl = document.getElementById('previewIssueText');
   if(issueTextEl) issueTextEl.textContent = req.issueText || translations[currentLang]['d_' + req.issue] || req.issue;
 
   const modal = document.getElementById('markerPreviewModal');
-  if(modal) modal.classList.add('show');
-  document.body.style.overflow = 'hidden';
+  if(modal) {
+    modal.classList.add('show');
+    modal.style.display = 'flex';
+  }
 }
 
 function closeMarkerPreview() {
   const modal = document.getElementById('markerPreviewModal');
-  if(modal) modal.classList.remove('show');
-  const dash = document.getElementById('adminDashboard');
-  if (!dash || !dash.classList.contains('show')) document.body.style.overflow = '';
+  if(modal) {
+    modal.classList.remove('show');
+    modal.style.display = 'none';
+  }
 }
 function closeMarkerPreviewByBackdrop(e) {
   if (e.target.id === 'markerPreviewModal') closeMarkerPreview();
@@ -1472,7 +1532,7 @@ function closeMarkerPreviewByBackdrop(e) {
 
 function openStatus() {
   const codeInp = document.getElementById('statusCodeInput');
-  if(codeInp) codeInp.value = '';
+  if(codeInp) codeInp.value = 'TL';
   const resContainer = document.getElementById('statusResultContainer');
   if(resContainer) resContainer.style.display = 'none';
   const statusModal = document.getElementById('statusModal');
@@ -1503,19 +1563,14 @@ function closeNotFoundByBackdrop(e) {
 function checkStatus() {
   const codeInputEl = document.getElementById('statusCodeInput');
   if(!codeInputEl) return;
-  const codeInput = codeInputEl.value.trim().toLowerCase();
-  const cleanInput = codeInput.replace(/^tl/, '');
+  const codeInput = codeInputEl.value.trim().toUpperCase();
   
-  if (!cleanInput) {
+  if (codeInput.length < 3) {
     alert(currentLang === 'en' ? 'Please enter employee ID' : 'กรุณากรอกรหัสพนักงาน');
     return;
   }
   
-  const found = requestsData.find(r => {
-    const rId = r.id.toLowerCase();
-    const rCleanId = rId.replace(/^tl/, '');
-    return rId === codeInput || rCleanId === cleanInput || rCleanId === cleanInput.padStart(6, '0');
-  });
+  const found = requestsData.find(r => r.id.toUpperCase() === codeInput);
   
   const resultContainer = document.getElementById('statusResultContainer');
   if (found) {
@@ -1625,9 +1680,8 @@ function renderAdminTable() {
   const filtered = requestsData.filter(r => {
     const matchesStatus = currentFilterStatus === 'all' || r.status === currentFilterStatus;
     const cleanId = r.id ? r.id.toLowerCase() : '';
-    const cleanNumId = cleanId.replace(/^tl/, '');
     const nameLower = r.name ? r.name.toLowerCase() : '';
-    const matchesSearch = !q || cleanId.startsWith(q) || cleanNumId.startsWith(q) || nameLower.startsWith(q);
+    const matchesSearch = !q || cleanId.startsWith(q) || nameLower.startsWith(q);
     return matchesStatus && matchesSearch;
   });
 
@@ -1769,20 +1823,12 @@ function closeSettingsDropdown() {
 }
 
 function openPasswordSettings() {
-  const currPass = document.getElementById('currentPassInput');
-  if(currPass) currPass.value = '';
-  const newPass = document.getElementById('newPassInput');
-  if(newPass) newPass.value = '';
-  const confPass = document.getElementById('confirmPassInput');
-  if(confPass) confPass.value = '';
-  const passError = document.getElementById('passErrorMsg');
-  if(passError) passError.style.display = 'none';
-  const passwordModal = document.getElementById('passwordModal');
-  if(passwordModal) passwordModal.classList.add('show');
+  const modal = document.getElementById('passwordModal');
+  if(modal) modal.classList.add('show');
 }
 function closePasswordSettings() {
-  const passwordModal = document.getElementById('passwordModal');
-  if(passwordModal) passwordModal.classList.remove('show');
+  const modal = document.getElementById('passwordModal');
+  if(modal) modal.classList.remove('show');
 }
 function saveNewPassword() {
   const curr = document.getElementById('currentPassInput') ? document.getElementById('currentPassInput').value : '';
@@ -1838,11 +1884,11 @@ function renderDeptSettings() {
       posHTML = `
         <div style="margin-top:16px;padding-top:16px;border-top:1px solid #eadfd9;">
           <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;">
-            ${tagsHTML || '<span style="color:#777;font-size:13px;">ยังไม่มีตำแหน่งในแผนกนี้ (ลากวางเพื่อสลับลำดับได้)</span>'}
+            ${tagsHTML || '<span style="color:#777;font-size:13px;">ยังไม่มีตำแหน่งในแผนกนี้</span>'}
           </div>
           <div style="display:flex;gap:12px;align-items:center;background:#fff;padding:16px;border:1px solid #dedee3;border-radius:20px;">
-            <input id="newPosInput_${dIndex}" placeholder="พิมพ์ชื่อตำแหน่งใหม่ แล้วกดเพิ่ม" style="flex:1;border:0;outline:none;font-family:'Mitr',sans-serif;font-size:14px;background:transparent;" onkeydown="if(event.key==='Enter') addPosition(${dIndex})" data-i18n-placeholder="newPosPlaceholder"/>
-            <button onclick="addPosition(${dIndex})" style="border:0;background:var(--ink);color:#fff;border-radius:16px;padding:14px 26px;font-weight:700;font-family:'Mitr',sans-serif;font-size:14px;white-space:nowrap;" data-i18n="btnAddPos">+ เพิ่มตำแหน่ง</button>
+            <input id="newPosInput_${dIndex}" placeholder="พิมพ์ชื่อตำแหน่งใหม่ แล้วกดเพิ่ม" style="flex:1;border:0;outline:none;font-family:'Mitr',sans-serif;font-size:14px;background:transparent;" onkeydown="if(event.key==='Enter') addPosition(${dIndex})"/>
+            <button onclick="addPosition(${dIndex})" style="border:0;background:var(--ink);color:#fff;border-radius:16px;padding:14px 26px;font-weight:700;font-family:'Mitr',sans-serif;font-size:14px;white-space:nowrap;">+ เพิ่มตำแหน่ง</button>
           </div>
         </div>
       `;
@@ -1859,7 +1905,7 @@ function renderDeptSettings() {
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
           </button>
           <button class="dashboard-delete" onclick="confirmDeleteDept(${dIndex})" title="Delete Department">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2-2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
           </button>
         </div>
       </div>
