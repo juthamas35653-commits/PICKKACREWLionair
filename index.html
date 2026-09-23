@@ -1355,7 +1355,6 @@ function validateAndProceedToDamage() {
 function submitDemo() {
   // ตรวจสอบข้อมูลส่วนตัวอีกครั้งก่อนกดส่งคำขอจริง
   if (!checkFormValidation()) {
-    alert(currentLang === 'en' ? 'Please fill in all required personal information correctly first.' : 'กรุณากรอกข้อมูลส่วนตัวให้ครบถ้วนและถูกต้องก่อนส่งคำขอ');
     document.getElementById('repair').scrollIntoView({behavior:'smooth'});
     return;
   }
