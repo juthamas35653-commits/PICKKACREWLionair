@@ -1283,7 +1283,6 @@ function checkFormValidation() {
 function handleFaceClick(e, faceEl, faceName) {
   // ตรวจสอบข้อมูลส่วนตัวก่อนอนุญาตให้ปักหมุดบนกระเป๋า
   if (!checkFormValidation()) {
-    alert(currentLang === 'en' ? 'Please fill in all required personal information correctly first.' : 'กรุณากรอกข้อมูลส่วนตัวให้ครบถ้วนและถูกต้องก่อนเลือกจุดเสียหาย');
     document.getElementById('repair').scrollIntoView({behavior:'smooth'});
     return;
   }
