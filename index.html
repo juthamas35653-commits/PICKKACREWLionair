@@ -650,7 +650,7 @@ body,button,input,select,textarea,.nav,.admin-modal,.admin-btn,.admin-table,.sta
            onkeydown="if(event.key==='Enter') verifyAdmin()" data-i18n-placeholder="passwordPlaceholder">
     <div class="admin-login-actions">
       <button class="admin-login-cancel" onclick="closeAdminLogin()" data-i18n="cancelBtn">ยกเลิก</button>
-      <button class="admin-login-submit" onclick="verifyAdmin()" data-i18n="loginBtn">เข้าสู่ระบบ →</button>
+      <button class="admin-login-submit" id="loginSubmitBtn" onclick="verifyAdmin()" data-i18n="loginBtn">เข้าสู่ระบบ →</button>
     </div>
     <div class="login-error" id="loginError" data-i18n="loginErrorMsg">รหัสผ่านไม่ถูกต้อง กรุณาลองใหม่</div>
   </div>
@@ -1623,14 +1623,20 @@ async function verifyAdmin() {
   const adminPassword = document.getElementById('adminPassword');
   const pass = adminPassword ? adminPassword.value : '';
   const error = document.getElementById('loginError');
+  const btn = document.getElementById('loginSubmitBtn');
+  const originalBtnText = btn ? btn.textContent : '';
+  if (btn) { btn.disabled = true; btn.textContent = 'กำลังตรวจสอบ...'; }
+
   let ok = false;
   try {
     const result = await apiPost('login', { password: pass });
     ok = result.ok;
   } catch (err) {
     alert('เชื่อมต่อเซิร์ฟเวอร์ไม่สำเร็จ: ' + err.message);
+    if (btn) { btn.disabled = false; btn.textContent = originalBtnText; }
     return;
   }
+  if (btn) { btn.disabled = false; btn.textContent = originalBtnText; }
   if (ok) {
     if(error) error.style.display = 'none';
     const loginModal = document.getElementById('adminLoginModal');
