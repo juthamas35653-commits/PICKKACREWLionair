@@ -1024,8 +1024,27 @@ const translations = {
   }
 };
 
+const API_URL = 'https://script.google.com/macros/s/AKfycbwFarfsObyNe2VenNyj9skszjQLVnwFctCG_EFPMTytLFINli2EXqRKIn9JaE93sV_X/exec';
+
+async function apiGet(action) {
+  const res = await fetch(`${API_URL}?action=${action}`);
+  const json = await res.json();
+  if (json.status !== 'success') throw new Error(json.message);
+  return json.data;
+}
+
+async function apiPost(action, data) {
+  const res = await fetch(API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // กันไม่ให้เบราว์เซอร์ preflight (Apps Script รับไม่ได้)
+    body: JSON.stringify({ action, data })
+  });
+  const json = await res.json();
+  if (json.status !== 'success') throw new Error(json.message);
+  return json.data;
+}
+
 let currentLang = 'th';
-let adminPasswordVal = '123456';
 
 function init3DBag() {
   const cubes = [document.getElementById('cube'), document.getElementById('previewCube')];
@@ -1042,11 +1061,7 @@ function init3DBag() {
   });
 }
 
-let departmentsData = [
-  { name: 'Pilot', positions: ['Captain', 'First Officer'] },
-  { name: 'Cabin Crew', positions: ['Purser', 'Flight Attendant', 'Senior Cabin Crew Member', 'Cabin Crew (Batch 7)', 'Cabin Crew (Batch 10)', 'Cabin Crew (Batch 11)', 'Cabin Crew (Batch 12)', 'Cabin Crew (Batch 14)', 'Cabin Crew (Batch 15)', 'Cabin Crew (Batch 16)', 'Cabin Crew (Batch 19)', 'Cabin Crew (Batch 24)', 'Cabin Crew (Batch 27)', 'Cabin Crew (Batch 28)', 'Cabin Crew (Batch 31)', 'Cabin Crew (Batch 34)', 'Cabin Crew (Batch 35)', 'Cabin Crew (Batch 36)', 'Cabin Crew (Batch 38)', 'Cabin Crew (Batch 39)', 'Cabin Crew (Batch 40)', 'Cabin Crew (Batch 43)', 'Cabin Crew (Batch 44)', 'Cabin Crew (Batch 45)', 'Cabin Crew (Batch 46)', 'Cabin Crew (Batch 47)', 'Cabin Crew (Batch 48)', 'Cabin Crew (Batch 49)', 'Cabin Crew (Batch 50)', 'Cabin Crew (Batch 51)', 'Cabin Crew (Batch 52)', 'Cabin Crew (Batch 53)', 'Cabin Crew (Batch 54)', 'Cabin Crew (Batch 55)', 'Cabin Crew (Batch 56)', 'Cabin Crew (Batch 57)', 'Cabin Crew (Batch 58)', 'Cabin Crew (Batch 59)', 'Cabin Crew (Batch 60)', 'Cabin Crew (Batch 61)', 'Cabin Crew (Batch 62)', 'Cabin Crew (Batch 63)', 'Cabin Crew (Batch 64)', 'Cabin Crew (Batch 65)', 'Cabin Crew (Batch 66)', 'Cabin Crew (Batch 67)', 'Cabin Crew (Batch 68)', 'Cabin Crew (Batch 69)', 'Cabin Crew (Batch 70)', 'Cabin Crew (Batch 71)', 'Cabin Crew (Batch 72)'] },
-  { name: 'Ground Services', positions: ['Ground Supervisor', 'Customer Service Agent'] }
-];
+let departmentsData = [];
 
 let requestsData = [];
 
@@ -1342,7 +1357,7 @@ function validateAndProceedToDamage() {
   document.getElementById('damage').scrollIntoView({behavior:'smooth'});
 }
 
-function submitDemo() {
+async function submitDemo() {
   // ตรวจสอบข้อมูลส่วนตัวอีกครั้งก่อนกดส่งคำขอจริง
   if (!checkFormValidation()) {
     document.getElementById('repair').scrollIntoView({behavior:'smooth'});
@@ -1381,6 +1396,13 @@ function submitDemo() {
     status: 'repair',
     marker: { x: activePoint.x, y: activePoint.y, face: activePoint.face }
   };
+
+  try {
+    await apiPost('addRequest', newReq);
+  } catch (err) {
+    alert('บันทึกข้อมูลไปยังเซิร์ฟเวอร์ไม่สำเร็จ: ' + err.message);
+    return;
+  }
 
   requestsData.unshift(newReq);
   updateDashboardStats();
@@ -1597,11 +1619,19 @@ function closeAdminLogin() {
 function closeAdminLoginByBackdrop(e) {
   if (e.target.id === 'adminLoginModal') closeAdminLogin();
 }
-function verifyAdmin() {
+async function verifyAdmin() {
   const adminPassword = document.getElementById('adminPassword');
   const pass = adminPassword ? adminPassword.value : '';
   const error = document.getElementById('loginError');
-  if (pass === adminPasswordVal) {
+  let ok = false;
+  try {
+    const result = await apiPost('login', { password: pass });
+    ok = result.ok;
+  } catch (err) {
+    alert('เชื่อมต่อเซิร์ฟเวอร์ไม่สำเร็จ: ' + err.message);
+    return;
+  }
+  if (ok) {
     if(error) error.style.display = 'none';
     const loginModal = document.getElementById('adminLoginModal');
     if(loginModal) loginModal.classList.remove('show');
@@ -1719,14 +1749,20 @@ function renderAdminTable() {
   }
 }
 
-function cycleStatus(id) {
+async function cycleStatus(id) {
   const req = requestsData.find(r => r.id === id);
   if(!req) return;
-  if(req.status === 'repair') {
-    req.status = 'repaired';
-  } else if(req.status === 'repaired') {
-    req.status = 'delivered';
+  let newStatus;
+  if(req.status === 'repair') newStatus = 'repaired';
+  else if(req.status === 'repaired') newStatus = 'delivered';
+  else return;
+  try {
+    await apiPost('updateStatus', { id, status: newStatus });
+  } catch (err) {
+    alert('อัปเดตสถานะไม่สำเร็จ: ' + err.message);
+    return;
   }
+  req.status = newStatus;
   updateDashboardStats();
   renderAdminTable();
 }
@@ -1754,7 +1790,13 @@ function closeCustomModal() {
 }
 
 function confirmDeleteRequest(id) {
-  showCustomModal('ยืนยันการลบรายการ', `คุณแน่ใจหรือไม่ที่จะลบรายการแจ้งซ่อมรหัส ${id}?`, () => {
+  showCustomModal('ยืนยันการลบรายการ', `คุณแน่ใจหรือไม่ที่จะลบรายการแจ้งซ่อมรหัส ${id}?`, async () => {
+    try {
+      await apiPost('deleteRequest', { id });
+    } catch (err) {
+      alert('ลบไม่สำเร็จ: ' + err.message);
+      return;
+    }
     requestsData = requestsData.filter(r => r.id !== id);
     updateDashboardStats();
     renderAdminTable();
@@ -1805,17 +1847,22 @@ function closePasswordSettings() {
   const modal = document.getElementById('passwordModal');
   if(modal) modal.classList.remove('show');
 }
-function saveNewPassword() {
+async function saveNewPassword() {
   const curr = document.getElementById('currentPassInput') ? document.getElementById('currentPassInput').value : '';
   const newP = document.getElementById('newPassInput') ? document.getElementById('newPassInput').value : '';
   const confP = document.getElementById('confirmPassInput') ? document.getElementById('confirmPassInput').value : '';
   const errEl = document.getElementById('passErrorMsg');
 
-  if (curr !== adminPasswordVal || !newP || newP !== confP) {
+  if (!newP || newP !== confP) {
     if(errEl) errEl.style.display = 'block';
     return;
   }
-  adminPasswordVal = newP;
+  try {
+    await apiPost('changePassword', { current: curr, newPassword: newP });
+  } catch (err) {
+    if(errEl) errEl.style.display = 'block';
+    return;
+  }
   if(errEl) errEl.style.display = 'none';
   showCustomModal('สำเร็จ', translations[currentLang].passSuccessMsg, () => {});
   closePasswordSettings();
@@ -1896,11 +1943,17 @@ function toggleExpandDept(dIndex) {
   renderDeptSettings();
 }
 
-function addNewDept() {
+async function addNewDept() {
   const input = document.getElementById('newDeptInput');
   if(!input) return;
   const name = input.value.trim();
   if(!name) return alert('กรุณากรอกชื่อแผนก');
+  try {
+    await apiPost('addDept', { name });
+  } catch (err) {
+    alert('เพิ่มแผนกไม่สำเร็จ: ' + err.message);
+    return;
+  }
   departmentsData.push({ name, positions: [] });
   input.value = '';
   renderDeptSettings();
@@ -1908,37 +1961,62 @@ function addNewDept() {
 
 function confirmDeleteDept(dIndex) {
   const deptName = departmentsData[dIndex].name;
-  showCustomModal('ยืนยันการลบแผนก', `คุณแน่ใจหรือไม่ที่จะลบแผนก "${deptName}"?<br>ตำแหน่งทั้งหมดในแผนกจะถูกลบไปด้วย`, () => {
+  showCustomModal('ยืนยันการลบแผนก', `คุณแน่ใจหรือไม่ที่จะลบแผนก "${deptName}"?<br>ตำแหน่งทั้งหมดในแผนกจะถูกลบไปด้วย`, async () => {
+    try {
+      await apiPost('deleteDept', { name: deptName });
+    } catch (err) {
+      alert('ลบแผนกไม่สำเร็จ: ' + err.message);
+      return;
+    }
     departmentsData.splice(dIndex, 1);
     if(expandedDeptIndex === dIndex) expandedDeptIndex = null;
     renderDeptSettings();
   });
 }
 
-function addPosition(dIndex) {
+async function addPosition(dIndex) {
   const input = document.getElementById('newPosInput_' + dIndex);
   if(!input) return;
   const posName = input.value.trim();
   if(!posName) return alert('กรุณากรอกชื่อตำแหน่ง');
-  departmentsData[dIndex].positions.push(posName);
+  const updatedPositions = [...departmentsData[dIndex].positions, posName];
+  try {
+    await apiPost('setPositions', { name: departmentsData[dIndex].name, positions: updatedPositions });
+  } catch (err) {
+    alert('เพิ่มตำแหน่งไม่สำเร็จ: ' + err.message);
+    return;
+  }
+  departmentsData[dIndex].positions = updatedPositions;
   renderDeptSettings();
 }
 
-function removePosition(dIndex, pIndex) {
-  departmentsData[dIndex].positions.splice(pIndex, 1);
+async function removePosition(dIndex, pIndex) {
+  const updatedPositions = departmentsData[dIndex].positions.filter((_, i) => i !== pIndex);
+  try {
+    await apiPost('setPositions', { name: departmentsData[dIndex].name, positions: updatedPositions });
+  } catch (err) {
+    alert('ลบตำแหน่งไม่สำเร็จ: ' + err.message);
+    return;
+  }
+  departmentsData[dIndex].positions = updatedPositions;
   renderDeptSettings();
 }
 
 let draggedPos = null;
 function dragStart(e, dIndex, pIndex) { draggedPos = { dIndex, pIndex }; }
 function allowDrop(e) { e.preventDefault(); }
-function dropPos(e, targetDIndex, targetPIndex) {
+async function dropPos(e, targetDIndex, targetPIndex) {
   e.preventDefault();
   if(!draggedPos || draggedPos.dIndex !== targetDIndex) return;
   const positions = departmentsData[draggedPos.dIndex].positions;
   const [movedItem] = positions.splice(draggedPos.pIndex, 1);
   positions.splice(targetPIndex, 0, movedItem);
   renderDeptSettings();
+  try {
+    await apiPost('setPositions', { name: departmentsData[draggedPos.dIndex].name, positions });
+  } catch (err) {
+    console.error('บันทึกลำดับตำแหน่งไม่สำเร็จ:', err);
+  }
 }
 
 document.addEventListener('keydown', e => {
@@ -1953,9 +2031,18 @@ document.addEventListener('keydown', e => {
   }
 });
 
-window.onload = function() {
+window.onload = async function() {
   init3DBag();
   setLanguage('th');
+  try {
+    const [reqs, depts] = await Promise.all([apiGet('getRequests'), apiGet('getSettings')]);
+    requestsData = reqs;
+    departmentsData = depts;
+  } catch (err) {
+    console.error('โหลดข้อมูลจาก Google Sheet ไม่สำเร็จ:', err);
+    alert('ไม่สามารถเชื่อมต่อฐานข้อมูลได้ กรุณาตรวจสอบอินเทอร์เน็ตแล้วรีเฟรชอีกครั้ง');
+  }
+  updateDepartmentDropdowns();
   updateDashboardStats();
   renderAdminTable();
   const statCardAll = document.getElementById('statCard-all');
