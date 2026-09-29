@@ -176,6 +176,8 @@ textarea{min-height:120px;resize:vertical}
 .admin-login-cancel{border:1px solid #e2e2e5;background:#fff}
 .admin-login-submit{border:0;background:var(--red);color:#fff}
 .login-error{color:var(--red);font-size:13px;margin-top:12px;display:none}
+.btn-spinner{display:inline-block;width:14px;height:14px;border-radius:50%;border:2px solid currentColor;border-right-color:transparent;border-bottom-color:transparent;animation:btnSpin .6s linear infinite;vertical-align:-2px;margin-right:6px}
+@keyframes btnSpin{to{transform:rotate(360deg)}}
 
 .admin-dashboard-modal{
   position:fixed;inset:0;background:#fffaf6;display:none;z-index:110;overflow:auto;
@@ -793,7 +795,7 @@ body,button,input,select,textarea,.nav,.admin-modal,.admin-btn,.admin-table,.sta
           <input id="confirmPassInput" type="password" class="admin-password" placeholder="กรอกรหัสผ่านใหม่ใหม่อีกครั้ง" style="text-align:left;letter-spacing:normal;padding:15px 17px;border-radius:15px;" data-i18n-placeholder="confPassPlaceholder">
         </div>
         <div id="passErrorMsg" style="color:var(--red);font-size:13px;display:none;" data-i18n="passErrorMsg">รหัสผ่านเดิมไม่ถูกต้อง หรือรหัสผ่านใหม่ไม่ตรงกัน</div>
-        <button class="save-marker" onclick="saveNewPassword()" style="margin-top:10px;padding:16px;border-radius:16px;font-size:16px;" data-i18n="savePassBtn">บันทึกรหัสผ่านใหม่ →</button>
+        <button class="save-marker" id="savePassBtn" onclick="saveNewPassword()" style="margin-top:10px;padding:16px;border-radius:16px;font-size:16px;" data-i18n="savePassBtn">บันทึกรหัสผ่านใหม่ →</button>
       </div>
     </div>
   </div>
@@ -1042,6 +1044,21 @@ async function apiPost(action, data) {
   const json = await res.json();
   if (json.status !== 'success') throw new Error(json.message);
   return json.data;
+}
+
+function setButtonLoading(btn, loadingLabel) {
+  if (!btn) return;
+  btn.dataset.originalHtml = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = `<span class="btn-spinner"></span>${loadingLabel}`;
+}
+function clearButtonLoading(btn) {
+  if (!btn) return;
+  btn.disabled = false;
+  if (btn.dataset.originalHtml !== undefined) {
+    btn.innerHTML = btn.dataset.originalHtml;
+    delete btn.dataset.originalHtml;
+  }
 }
 
 let currentLang = 'th';
@@ -1624,8 +1641,7 @@ async function verifyAdmin() {
   const pass = adminPassword ? adminPassword.value : '';
   const error = document.getElementById('loginError');
   const btn = document.getElementById('loginSubmitBtn');
-  const originalBtnText = btn ? btn.textContent : '';
-  if (btn) { btn.disabled = true; btn.textContent = 'กำลังตรวจสอบ...'; }
+  setButtonLoading(btn, 'กำลังตรวจสอบ...');
 
   let ok = false;
   try {
@@ -1633,10 +1649,10 @@ async function verifyAdmin() {
     ok = result.ok;
   } catch (err) {
     alert('เชื่อมต่อเซิร์ฟเวอร์ไม่สำเร็จ: ' + err.message);
-    if (btn) { btn.disabled = false; btn.textContent = originalBtnText; }
+    clearButtonLoading(btn);
     return;
   }
-  if (btn) { btn.disabled = false; btn.textContent = originalBtnText; }
+  clearButtonLoading(btn);
   if (ok) {
     if(error) error.style.display = 'none';
     const loginModal = document.getElementById('adminLoginModal');
@@ -1705,10 +1721,10 @@ function renderAdminTable() {
   paginatedItems.forEach((r) => {
     let statusText = r.status === 'repair' ? translations[currentLang].statusRepairing : (r.status === 'repaired' ? translations[currentLang].statusRepaired : translations[currentLang].statusDelivered);
     let statusBadgeHTML = '';
-    if(r.status === 'repair') {
-      statusBadgeHTML = `<span class="dashboard-status repair" onclick="cycleStatus('${r.id}')">${statusText}</span>`;
+       if(r.status === 'repair') {
+      statusBadgeHTML = `<span class="dashboard-status repair" onclick="cycleStatus('${r.id}', this)">${statusText}</span>`;
     } else if(r.status === 'repaired') {
-      statusBadgeHTML = `<span class="dashboard-status repaired" onclick="cycleStatus('${r.id}')">${statusText}</span>`;
+      statusBadgeHTML = `<span class="dashboard-status repaired" onclick="cycleStatus('${r.id}', this)">${statusText}</span>`;
     } else {
       statusBadgeHTML = `<span class="dashboard-status delivered">${statusText}</span>`;
     }
@@ -1755,17 +1771,19 @@ function renderAdminTable() {
   }
 }
 
-async function cycleStatus(id) {
+async function cycleStatus(id, btn) {
   const req = requestsData.find(r => r.id === id);
   if(!req) return;
   let newStatus;
   if(req.status === 'repair') newStatus = 'repaired';
   else if(req.status === 'repaired') newStatus = 'delivered';
   else return;
+  setButtonLoading(btn, 'กำลังบันทึก...');
   try {
     await apiPost('updateStatus', { id, status: newStatus });
   } catch (err) {
     alert('อัปเดตสถานะไม่สำเร็จ: ' + err.message);
+    clearButtonLoading(btn);
     return;
   }
   req.status = newStatus;
@@ -1858,17 +1876,21 @@ async function saveNewPassword() {
   const newP = document.getElementById('newPassInput') ? document.getElementById('newPassInput').value : '';
   const confP = document.getElementById('confirmPassInput') ? document.getElementById('confirmPassInput').value : '';
   const errEl = document.getElementById('passErrorMsg');
+  const btn = document.getElementById('savePassBtn');
 
   if (!newP || newP !== confP) {
     if(errEl) errEl.style.display = 'block';
     return;
   }
+  setButtonLoading(btn, 'กำลังบันทึก...');
   try {
     await apiPost('changePassword', { current: curr, newPassword: newP });
   } catch (err) {
     if(errEl) errEl.style.display = 'block';
+    clearButtonLoading(btn);
     return;
   }
+  clearButtonLoading(btn);
   if(errEl) errEl.style.display = 'none';
   showCustomModal('สำเร็จ', translations[currentLang].passSuccessMsg, () => {});
   closePasswordSettings();
